@@ -1,6 +1,6 @@
 # Twitter4Holo
 Twitter Oauth Library for Android 4.0.3 and upper
-
+作りかけ
 
 	repositories {
 	    mavenCentral()
@@ -19,5 +19,6 @@ Twitter Oauth Library for Android 4.0.3 and upper
 
 This source is The MIT License.
 
-using okhttp [Apache License, Version 2.0][Apache]
+using [okhttp][okhttp_url] [Apache License, Version 2.0][Apache]
 [Apache]: http://www.apache.org/licenses/LICENSE-2.0
+[okhttp_url]: https://github.com/square/okhttp
