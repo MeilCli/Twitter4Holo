@@ -1,0 +1,170 @@
+package com.twitter.meil_mitu.twitter4holo.data;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
+
+import org.json.JSONObject;
+
+import java.util.Date;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.*;
+
+public class Status implements Parcelable {
+
+    public final Date CreatedAt;
+    public final CurrentUserRetweet CurrentUserRetweet;
+    public final Entities Entities,ExtendedEntities;
+    public final int FavoriteCount,RetweetCount;
+    public final boolean IsFavorited,IsRetweeted;
+    public final long Id,InReplyToStatusId,InReplyToUserId;
+    public final String InReplyToScreenName,Lang,Source,Text;
+    public final Status RetweetedStatus;
+    public final User User;
+    public final EntitySupport EntitySupport;
+
+    public Status(JSONObject obj) throws Twitter4HoloException {
+        CreatedAt = getDate(obj,"created_at");
+        if(obj.isNull("current_user_retweet")){
+            CurrentUserRetweet=null;
+        }else{
+            CurrentUserRetweet=new CurrentUserRetweet(getJSONObject(obj,"current_user_retweet"));
+        }
+        if(obj.isNull("entities")){
+            Entities=null;
+        }else{
+            Entities=new Entities(getJSONObject(obj,"entities"));
+        }
+        if(obj.isNull("extended_entities")){
+            ExtendedEntities=null;
+        }else{
+            ExtendedEntities=new Entities(getJSONObject(obj,"extended_entities"));
+        }
+        FavoriteCount=getInt(obj,"favorite_count",0);
+        IsFavorited=getBoolean(obj,"favorited",false);
+        Id=getLong(obj,"id");
+        InReplyToScreenName=getString(obj,"in_reply_to_screen_name",null);
+        InReplyToStatusId=getLong(obj,"in_reply_to_status_id",-1);
+        InReplyToUserId=getLong(obj,"in_reply_to_user_id",-1);
+        Lang=getString(obj,"lang",null);
+        RetweetCount = getInt(obj,"retweet_count",0);
+        IsRetweeted=getBoolean(obj,"retweeted",false);
+        if(obj.isNull("retweeted_status")){
+            RetweetedStatus=null;
+        }else{
+            RetweetedStatus=new Status(getJSONObject(obj,"retweeted_status"));
+        }
+        Source=getString(obj,"source");
+        Text=getString(obj,"text");
+        if(obj.isNull("user")){
+            User=null;
+        }else{
+            User=new User(getJSONObject(obj,"user"));
+        }
+        EntitySupport=new EntitySupport(Text,Entities);
+    }
+
+    public Status(Parcel in) {
+        long tmpCreatedAt = in.readLong();
+        this.CreatedAt = tmpCreatedAt == -1 ? null : new Date(tmpCreatedAt);
+        this.CurrentUserRetweet = in.readParcelable(com.twitter.meil_mitu.twitter4holo.data.CurrentUserRetweet.class.getClassLoader());
+        this.Entities = in.readParcelable(com.twitter.meil_mitu.twitter4holo.data.Entities.class.getClassLoader());
+        this.ExtendedEntities = in.readParcelable(com.twitter.meil_mitu.twitter4holo.data.Entities.class.getClassLoader());
+        this.FavoriteCount = in.readInt();
+        this.RetweetCount = in.readInt();
+        this.IsFavorited = in.readByte() != 0;
+        this.IsRetweeted = in.readByte() != 0;
+        this.Id = in.readLong();
+        this.InReplyToStatusId = in.readLong();
+        this.InReplyToUserId = in.readLong();
+        this.InReplyToScreenName = in.readString();
+        this.Lang = in.readString();
+        this.Source = in.readString();
+        this.Text = in.readString();
+        this.RetweetedStatus = in.readParcelable(Status.class.getClassLoader());
+        this.User = in.readParcelable(User.class.getClassLoader());
+        EntitySupport=new EntitySupport(Text,Entities);
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(CreatedAt != null ? CreatedAt.getTime() : -1);
+        dest.writeParcelable(this.CurrentUserRetweet, 0);
+        dest.writeParcelable(this.Entities, 0);
+        dest.writeParcelable(this.ExtendedEntities, 0);
+        dest.writeInt(this.FavoriteCount);
+        dest.writeInt(this.RetweetCount);
+        dest.writeByte(IsFavorited ? (byte) 1 : (byte) 0);
+        dest.writeByte(IsRetweeted ? (byte) 1 : (byte) 0);
+        dest.writeLong(this.Id);
+        dest.writeLong(this.InReplyToStatusId);
+        dest.writeLong(this.InReplyToUserId);
+        dest.writeString(this.InReplyToScreenName);
+        dest.writeString(this.Lang);
+        dest.writeString(this.Source);
+        dest.writeString(this.Text);
+        dest.writeParcelable(this.RetweetedStatus, flags);
+        dest.writeParcelable(this.User, flags);
+    }
+
+    @Override
+    public String toString() {
+        return "Status{" +
+                "CreatedAt=" + CreatedAt +
+                ", CurrentUserRetweet=" + CurrentUserRetweet +
+                ", Entities=" + Entities +
+                ", ExtendedEntities=" + ExtendedEntities +
+                ", FavoriteCount=" + FavoriteCount +
+                ", RetweetCount=" + RetweetCount +
+                ", IsFavorited=" + IsFavorited +
+                ", IsRetweeted=" + IsRetweeted +
+                ", Id=" + Id +
+                ", InReplyToStatusId=" + InReplyToStatusId +
+                ", InReplyToUserId=" + InReplyToUserId +
+                ", InReplyToScreenName='" + InReplyToScreenName + '\'' +
+                ", Lang='" + Lang + '\'' +
+                ", Source='" + Source + '\'' +
+                ", Text='" + Text + '\'' +
+                ", RetweetedStatus=" + RetweetedStatus +
+                ", User=" + User +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Status)) return false;
+
+        Status status = (Status) o;
+
+        if (Id != status.Id) return false;
+        if (RetweetedStatus != null ? !RetweetedStatus.equals(status.RetweetedStatus) : status.RetweetedStatus != null)
+            return false;
+        if (!User.equals(status.User)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (Id ^ (Id >>> 32));
+        result = 31 * result + (RetweetedStatus != null ? RetweetedStatus.hashCode() : 0);
+        result = 31 * result + User.hashCode();
+        return result;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Status> CREATOR = new Creator<Status>() {
+        public Status createFromParcel(Parcel source) {
+            return new Status(source);
+        }
+
+        public Status[] newArray(int size) {
+            return new Status[size];
+        }
+    };
+}
