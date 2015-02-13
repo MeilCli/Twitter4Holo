@@ -11,11 +11,17 @@ import com.squareup.okhttp.Response;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 import com.twitter.meil_mitu.twitter4holo.util.Utils;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getInt;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getString;
 
 public abstract class AbsOauth {
     protected static final MediaType MediaText = MediaType.parse("application/x-www-form-urlencoded;charset=UTF-8");
@@ -123,4 +129,31 @@ public abstract class AbsOauth {
         }
         return body;
     }
+
+    protected void checkError(Response res)throws Twitter4HoloException{
+        if(res.isSuccessful()==false){
+            try {
+                JSONObject obj= new JSONObject(res.body().string());
+                if(obj.isNull("errors")==false){
+                    JSONArray ar = obj.getJSONArray("errors");
+                    if(ar.length()==0){
+                        throw  new Twitter4HoloException("errors array size is 0");
+                    }
+                    String message = getString(ar.getJSONObject(0),"message");
+                    message+="\n\n";
+                    message +=res.request().headers().toString();
+                    message+="\n\n";
+                    message+=res.request().toString();
+                    int code = getInt(ar.getJSONObject(0),"code");
+                    throw  new Twitter4HoloException(message,res.code(),code);
+                }else{
+                    throw new Twitter4HoloException("some exception");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new Twitter4HoloException(e.getMessage());
+            }
+        }
+    }
+
 }

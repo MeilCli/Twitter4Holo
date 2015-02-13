@@ -17,6 +17,10 @@ public class Twitter {
     protected SearchAPI Search;
     protected DirectMessagesAPI DirectMessage;
 
+    public Twitter(AbsOauth oauth){
+        this(oauth,new JsonConverter());
+    }
+
     public Twitter(AbsOauth oauth,AbsJsonConverter json){
         this.Oauth=oauth;
         this.Json=json;
@@ -31,9 +35,7 @@ public class Twitter {
 
     public OauthAPI oauth(){return Oauth1;}
 
-    public Oauth2API oauth2(){
-        return Oauth2;
-    }
+    public Oauth2API oauth2(){return Oauth2;}
 
     public StatusesAPI statuses(){return Statuses;}
 

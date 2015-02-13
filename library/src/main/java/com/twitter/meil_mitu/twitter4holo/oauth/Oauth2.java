@@ -7,7 +7,10 @@ import com.twitter.meil_mitu.twitter4holo.AbsGet;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
 import com.twitter.meil_mitu.twitter4holo.AbsPost;
 import com.twitter.meil_mitu.twitter4holo.Config;
+import com.twitter.meil_mitu.twitter4holo.JsonConverter;
 import com.twitter.meil_mitu.twitter4holo.OauthType;
+import com.twitter.meil_mitu.twitter4holo.api.oauth2.InvalidateToken;
+import com.twitter.meil_mitu.twitter4holo.api.oauth2.Token;
 import com.twitter.meil_mitu.twitter4holo.exception.IncorrectException;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 import com.twitter.meil_mitu.twitter4holo.util.Utils;
@@ -32,6 +35,9 @@ public class Oauth2 extends AbsOauth{
         if((param.allowOauthType()&OauthType.Oauth2)==0&&(param.allowOauthType()&OauthType.Oauth2Basic)==0){
             throw new IncorrectException("do not allow OauthType");
         }
+        if(AccessToken==null||TokenType==null){
+            new Token(this,new JsonConverter()).call();// token is post
+        }
         Request.Builder builder = new Request.Builder();
         builder.url(toUrl(param));
         builder.header("User-Agent",Config.getUserAgent());
@@ -44,10 +50,18 @@ public class Oauth2 extends AbsOauth{
         }
         builder.get();
         try {
-            return call(builder.build());
+            Response res= call(builder.build());
+            checkError(res);
+            return res;
         } catch (IOException e) {
             e.printStackTrace();
             throw new Twitter4HoloException(e.getMessage());
+        } catch (Twitter4HoloException e){
+            if(e.getErrorCode()==89){
+                new InvalidateToken(this,new JsonConverter()).call();
+                return get(param);
+            }
+            throw e;
         }
     }
 
@@ -68,7 +82,9 @@ public class Oauth2 extends AbsOauth{
         }
         builder.post(toBody(param));
         try {
-            return call(builder.build());
+            Response res= call(builder.build());
+            checkError(res);
+            return res;
         } catch (IOException e) {
             e.printStackTrace();
             throw  new Twitter4HoloException(e.getMessage());

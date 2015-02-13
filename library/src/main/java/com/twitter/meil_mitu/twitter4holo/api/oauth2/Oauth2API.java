@@ -10,11 +10,7 @@ public class Oauth2API extends AbsAPI {
         super(oauth, json);
     }
 
-    public Token token(){
-        return new Token(Oauth,Json);
-    }
+    public Token token(){return new Token(Oauth,Json);}
 
-    public InvalidateToken invalidateToken(){
-        return new InvalidateToken(Oauth,Json);
-    }
+    public InvalidateToken invalidateToken(){return new InvalidateToken(Oauth,Json);}
 }

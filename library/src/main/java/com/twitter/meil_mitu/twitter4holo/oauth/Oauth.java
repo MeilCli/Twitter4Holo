@@ -56,7 +56,9 @@ public class Oauth extends AbsOauth {
         }
         builder.get();
         try {
-            return call(builder.build());
+            Response res= call(builder.build());
+            checkError(res);
+            return res;
         } catch (IOException e) {
             e.printStackTrace();
             throw new Twitter4HoloException(e.getMessage());
@@ -85,7 +87,9 @@ public class Oauth extends AbsOauth {
             builder.post(RequestBody.create(MediaText, ""));
         }
         try {
-            return call(builder.build());
+            Response res= call(builder.build());
+            checkError(res);
+            return res;
         } catch (IOException e) {
             e.printStackTrace();
             throw  new Twitter4HoloException(e.getMessage());

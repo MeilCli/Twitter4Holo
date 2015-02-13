@@ -34,7 +34,5 @@ public class OauthAPI extends AbsAPI{
 
     public RequestToken requestToken(){return new RequestToken(Oauth,Json);}
 
-    public AccessToken accessToken(String verifier){
-        return new AccessToken(Oauth,Json,verifier);
-    }
+    public AccessToken accessToken(String verifier){return new AccessToken(Oauth,Json,verifier);}
 }
