@@ -1,5 +1,5 @@
 # Twitter4Holo
-Twitter Oauth Library for Android 4.0.3 and upper 
+Twitter Oauth Library for Android 4.0.3 and upper  
 作りかけ 
 
 * oauth/* supported
@@ -48,6 +48,12 @@ Twitter Oauth Library for Android 4.0.3 and upper
 	//should use async thread
 	long id = twitter.media().upload(File).call().MediaId;//File is File class
     Status status = twitter.statuses().update(Text).mediaIds(new long[]{id}).call();//Text is String class
+
+*get user_timeline*
+
+	//should use async thread
+	ResponseList<Status> list = twitter.statuses().userTimeline().screenName(ScreenName).count(20).call();
+	//ResponseList extends ArrayList
 
 ライセンス
 ----------
