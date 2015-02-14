@@ -4,14 +4,18 @@ import com.squareup.okhttp.Response;
 import com.squareup.okhttp.ResponseBody;
 import com.twitter.meil_mitu.twitter4holo.data.CursorIDs;
 import com.twitter.meil_mitu.twitter4holo.data.DirectMessage;
+import com.twitter.meil_mitu.twitter4holo.data.Friendship;
+import com.twitter.meil_mitu.twitter4holo.data.IDs;
 import com.twitter.meil_mitu.twitter4holo.data.Media;
 import com.twitter.meil_mitu.twitter4holo.data.Oauth2Token;
 import com.twitter.meil_mitu.twitter4holo.data.OauthRequestToken;
 import com.twitter.meil_mitu.twitter4holo.data.OauthToken;
 import com.twitter.meil_mitu.twitter4holo.data.OembedStatus;
 import com.twitter.meil_mitu.twitter4holo.data.RateLimit;
+import com.twitter.meil_mitu.twitter4holo.data.Relationship;
 import com.twitter.meil_mitu.twitter4holo.data.SearchResult;
 import com.twitter.meil_mitu.twitter4holo.data.Status;
+import com.twitter.meil_mitu.twitter4holo.data.User;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
 import org.json.JSONArray;
@@ -63,6 +67,20 @@ public abstract class AbsJsonConverter {
     public abstract ResponseData<DirectMessage> toDirectMessageResponseData(Response res)throws Twitter4HoloException;
 
     public abstract ResponseList<DirectMessage> toDirectMessageResponseList(Response res)throws Twitter4HoloException;
+
+    public abstract ResponseData<IDs> toIDsResponseData(Response res)throws Twitter4HoloException;
+
+    public abstract User toUser(Response res)throws Twitter4HoloException;
+
+    public abstract ResponseData<User> toUserResponseData(Response res)throws Twitter4HoloException;
+
+    public abstract ResponseList<User> toUserResponseList(Response res)throws Twitter4HoloException;
+
+    public abstract Relationship toRelationship(Response res)throws Twitter4HoloException;
+
+    public abstract ResponseData<Relationship> toRelationshipResponseData(Response res)throws Twitter4HoloException;
+
+    public abstract ResponseList<Friendship> toFriendshipResponseList(Response res)throws Twitter4HoloException;
 
     protected JSONObject toJSONObject(String res)throws Twitter4HoloException{
         try {

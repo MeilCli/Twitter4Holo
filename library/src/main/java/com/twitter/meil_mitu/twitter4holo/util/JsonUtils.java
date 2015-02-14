@@ -137,6 +137,15 @@ public class JsonUtils {
         }
     }
 
+    public static String getString(JSONArray ar,int index) throws Twitter4HoloException {
+        try {
+            return ar.getString(index);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            throw new Twitter4HoloException(e.getMessage());
+        }
+    }
+
     public static int getInt(JSONArray ar,int index) throws Twitter4HoloException {
         try {
             return ar.getInt(index);

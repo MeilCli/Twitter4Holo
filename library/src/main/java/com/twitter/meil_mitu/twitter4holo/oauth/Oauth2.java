@@ -36,7 +36,7 @@ public class Oauth2 extends AbsOauth{
             throw new IncorrectException("do not allow OauthType");
         }
         if(AccessToken==null||TokenType==null){
-            new Token(this,new JsonConverter()).call();// token is post
+            new Token(this,JsonConverter.getDefaultConverter()).call();// token is post
         }
         Request.Builder builder = new Request.Builder();
         builder.url(toUrl(param));
@@ -58,7 +58,7 @@ public class Oauth2 extends AbsOauth{
             throw new Twitter4HoloException(e.getMessage());
         } catch (Twitter4HoloException e){
             if(e.getErrorCode()==89){
-                new InvalidateToken(this,new JsonConverter()).call();
+                new InvalidateToken(this,JsonConverter.getDefaultConverter()).call();
                 return get(param);
             }
             throw e;

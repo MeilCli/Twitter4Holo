@@ -1,6 +1,7 @@
 package com.twitter.meil_mitu.twitter4holo;
 
 import com.twitter.meil_mitu.twitter4holo.api.directmessages.DirectMessagesAPI;
+import com.twitter.meil_mitu.twitter4holo.api.friendships.FriendshipsAPI;
 import com.twitter.meil_mitu.twitter4holo.api.media.MediaAPI;
 import com.twitter.meil_mitu.twitter4holo.api.oauth.OauthAPI;
 import com.twitter.meil_mitu.twitter4holo.api.oauth2.Oauth2API;
@@ -16,9 +17,10 @@ public class Twitter {
     protected MediaAPI Media;
     protected SearchAPI Search;
     protected DirectMessagesAPI DirectMessage;
+    protected FriendshipsAPI Friendships;
 
     public Twitter(AbsOauth oauth){
-        this(oauth,new JsonConverter());
+        this(oauth,JsonConverter.getDefaultConverter());
     }
 
     public Twitter(AbsOauth oauth,AbsJsonConverter json){
@@ -31,6 +33,7 @@ public class Twitter {
         this.Media = new MediaAPI(Oauth,Json);
         this.Search = new SearchAPI(Oauth,Json);
         this.DirectMessage=new DirectMessagesAPI(Oauth,Json);
+        this.Friendships=new FriendshipsAPI(Oauth,Json);
     }
 
     public OauthAPI oauth(){return Oauth1;}
@@ -44,5 +47,7 @@ public class Twitter {
     public SearchAPI search(){return Search;}
 
     public DirectMessagesAPI directMessages(){return DirectMessage;}
+
+    public FriendshipsAPI friendships(){return Friendships;}
 
 }

@@ -25,6 +25,17 @@ public class Utils {
         return sb.toString();
     }
 
+    public static String toString(String[] ss){
+        StringBuilder sb =new StringBuilder();
+        for(String s:ss){
+            if(sb.length()>0){
+                sb.append(',');
+            }
+            sb.append(s);
+        }
+        return sb.toString();
+    }
+
     public static String replaceLine(String s){
         StringBuilder sb = new StringBuilder();
        for(int i=0;i<s.length();i++){
