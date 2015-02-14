@@ -2,6 +2,7 @@ package com.twitter.meil_mitu.twitter4holo;
 
 import com.squareup.okhttp.Response;
 import com.twitter.meil_mitu.twitter4holo.data.CursorIDs;
+import com.twitter.meil_mitu.twitter4holo.data.CursorUsers;
 import com.twitter.meil_mitu.twitter4holo.data.DirectMessage;
 import com.twitter.meil_mitu.twitter4holo.data.Friendship;
 import com.twitter.meil_mitu.twitter4holo.data.IDs;
@@ -163,5 +164,10 @@ public class JsonConverter extends AbsJsonConverter {
             }
         }
         return list;
+    }
+
+    @Override
+    public ResponseData<CursorUsers> toCursorUsersResponseData(Response res) throws Twitter4HoloException {
+        return new ResponseData<CursorUsers>(new CursorUsers(toJSONObject(toString(res.body()))),toRateLimit(res));
     }
 }

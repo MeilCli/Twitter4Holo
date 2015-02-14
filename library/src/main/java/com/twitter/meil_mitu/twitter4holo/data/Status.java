@@ -31,12 +31,12 @@ public class Status implements Parcelable {
             CurrentUserRetweet=new CurrentUserRetweet(getJSONObject(obj,"current_user_retweet"));
         }
         if(obj.isNull("entities")){
-            Entities=null;
+            Entities=new Entities();
         }else{
             Entities=new Entities(getJSONObject(obj,"entities"));
         }
         if(obj.isNull("extended_entities")){
-            ExtendedEntities=null;
+            ExtendedEntities=new Entities();
         }else{
             ExtendedEntities=new Entities(getJSONObject(obj,"extended_entities"));
         }
@@ -67,7 +67,11 @@ public class Status implements Parcelable {
     public Status(Parcel in) {
         long tmpCreatedAt = in.readLong();
         this.CreatedAt = tmpCreatedAt == -1 ? null : new Date(tmpCreatedAt);
-        this.CurrentUserRetweet = in.readParcelable(com.twitter.meil_mitu.twitter4holo.data.CurrentUserRetweet.class.getClassLoader());
+        if(in.readByte()==1) {
+            this.CurrentUserRetweet = in.readParcelable(com.twitter.meil_mitu.twitter4holo.data.CurrentUserRetweet.class.getClassLoader());
+        }else{
+            this.CurrentUserRetweet=null;
+        }
         this.Entities = in.readParcelable(com.twitter.meil_mitu.twitter4holo.data.Entities.class.getClassLoader());
         this.ExtendedEntities = in.readParcelable(com.twitter.meil_mitu.twitter4holo.data.Entities.class.getClassLoader());
         this.FavoriteCount = in.readInt();
@@ -81,15 +85,26 @@ public class Status implements Parcelable {
         this.Lang = in.readString();
         this.Source = in.readString();
         this.Text = in.readString();
-        this.RetweetedStatus = in.readParcelable(Status.class.getClassLoader());
-        this.User = in.readParcelable(User.class.getClassLoader());
+        if(in.readByte()==1) {
+            this.RetweetedStatus = in.readParcelable(Status.class.getClassLoader());
+        }else{
+            this.RetweetedStatus=null;
+        }
+        if(in.readByte()==1) {
+            this.User = in.readParcelable(User.class.getClassLoader());
+        }else{
+            this.User=null;
+        }
         EntitySupport=new EntitySupport(Text,Entities);
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(CreatedAt != null ? CreatedAt.getTime() : -1);
-        dest.writeParcelable(this.CurrentUserRetweet, 0);
+        dest.writeByte(this.CurrentUserRetweet!=null?(byte)1:(byte)0);
+        if(this.CurrentUserRetweet!=null){
+            dest.writeParcelable(this.CurrentUserRetweet, 0);
+        }
         dest.writeParcelable(this.Entities, 0);
         dest.writeParcelable(this.ExtendedEntities, 0);
         dest.writeInt(this.FavoriteCount);
@@ -103,8 +118,14 @@ public class Status implements Parcelable {
         dest.writeString(this.Lang);
         dest.writeString(this.Source);
         dest.writeString(this.Text);
-        dest.writeParcelable(this.RetweetedStatus, flags);
-        dest.writeParcelable(this.User, flags);
+        dest.writeByte(this.RetweetedStatus!=null?(byte)1:(byte)0);
+        if(this.RetweetedStatus!=null){
+            dest.writeParcelable(this.RetweetedStatus, flags);
+        }
+        dest.writeByte(this.User!=null?(byte)1:(byte)0);
+        if(this.User!=null){
+            dest.writeParcelable(this.User, flags);
+        }
     }
 
     @Override

@@ -12,14 +12,19 @@ import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.*;
 public class UserEntities implements Parcelable {
     public final Entities Url,Description;
 
+    public UserEntities(){
+        Url=new Entities();
+        Description=new Entities();
+    }
+
     public UserEntities(JSONObject obj) throws Twitter4HoloException {
         if(obj.isNull("url")){
-            Url=null;
+            Url=new Entities();
         }else{
             Url=new Entities(getJSONObject(obj,"url"));
         }
         if(obj.isNull("description")){
-            Description=null;
+            Description=new Entities();
         }else{
             Description=new Entities(getJSONObject(obj,"description"));
         }

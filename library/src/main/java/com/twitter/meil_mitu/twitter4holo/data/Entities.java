@@ -20,6 +20,14 @@ public class Entities implements Parcelable {
     public final SymbolEntity[] Symbol;
     public final UserMentionEntity[] UserMention;
 
+    public Entities(){
+        URL=new URLEntity[0];
+        Media=new MediaEntity[0];
+        Hashtag=new HashtagEntity[0];
+        Symbol=new SymbolEntity[0];
+        UserMention=new UserMentionEntity[0];
+    }
+
     public Entities(JSONObject obj) throws Twitter4HoloException {
         if(obj.isNull("urls")){
             URL=new URLEntity[0];

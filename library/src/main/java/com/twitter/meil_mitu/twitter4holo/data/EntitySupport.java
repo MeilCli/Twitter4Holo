@@ -9,13 +9,8 @@ public class EntitySupport {
     public final String PlainText;
 
     public EntitySupport(String text,Entities entities){
-        if(entities!=null){
-            SpannableText = EntityUtils.toLinkHtml(text,entities);
-            PlainText=EntityUtils.toLinkURL(text,entities);
-        }else{
-            SpannableText=new SpannableStringBuilder(text);
-            PlainText=text;
-        }
+        SpannableText = EntityUtils.toLinkHtml(text,entities);
+        PlainText=EntityUtils.toLinkURL(text,entities);
     }
 
     @Override

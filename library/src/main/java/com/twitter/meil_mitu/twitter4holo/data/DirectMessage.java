@@ -23,7 +23,7 @@ public class DirectMessage implements Parcelable {
     public DirectMessage(JSONObject obj) throws Twitter4HoloException {
         CreatedAt=getDate(obj,"created_at");
         if(obj.isNull("entities")){
-            Entities=null;
+            Entities=new Entities();
         }else{
             Entities=new Entities(getJSONObject(obj,"entities"));
         }

@@ -13,6 +13,19 @@ Twitter Oauth Library for Android 4.0.3 and upper
 * media/* supported
 * direct_messages/* supported
 * friendships/* supported
+* friends/* supported
+* followers/* supported
+
+####何をしたかったのか
+* Oauth2をわかりやすく
+* メソッドをわかりやすく
+* public fieldのほうが早いらしいのでそっちに
+* 必要そうなfieldだけを持ち、足りなかった場合のために拡張性を上げる
+* parcelをサポート
+
+####なぜこうなったのか
+* public fieldが大文字スタートなのはほとんどC#の影響
+* たまにエンドポイント通りの設計になってないのはjavaの予約語とかいろいろあってだな…
 
 #### gradle
 	repositories {

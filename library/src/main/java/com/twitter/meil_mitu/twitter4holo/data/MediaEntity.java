@@ -29,7 +29,11 @@ public class MediaEntity extends URLEntity implements android.os.Parcelable {
         this.Id = in.readLong();
         this.MediaUrl = in.readString();
         this.Type = in.readString();
-        this.VideoInfo=in.readParcelable(com.twitter.meil_mitu.twitter4holo.data.VideoInfo.class.getClassLoader());
+        if(in.readByte()==1) {
+            this.VideoInfo = in.readParcelable(com.twitter.meil_mitu.twitter4holo.data.VideoInfo.class.getClassLoader());
+        }else{
+            this.VideoInfo=null;
+        }
     }
 
     @Override
@@ -38,7 +42,10 @@ public class MediaEntity extends URLEntity implements android.os.Parcelable {
         dest.writeLong(this.Id);
         dest.writeString(this.MediaUrl);
         dest.writeString(this.Type);
-        dest.writeParcelable(this.VideoInfo,flags);
+        dest.writeByte(this.VideoInfo!=null?(byte)1:(byte)0);
+        if(this.VideoInfo!=null){
+            dest.writeParcelable(this.VideoInfo,flags);
+        }
     }
 
     @Override

@@ -28,7 +28,7 @@ public class User implements Parcelable {
         CreatedAt=getDate(obj,"created_at");
         Description = getString(obj,"description","");
         if(obj.isNull("entities")){
-            Entities=null;
+            Entities=new UserEntities();
         }else{
             Entities=new UserEntities(getJSONObject(obj,"entities"));
         }
@@ -83,7 +83,11 @@ public class User implements Parcelable {
         this.ProfileImageUrl = in.readString();
         this.ScreenName = in.readString();
         this.Url = in.readString();
-        this.Status = in.readParcelable(com.twitter.meil_mitu.twitter4holo.data.Status.class.getClassLoader());
+        if(in.readByte()==1) {
+            this.Status = in.readParcelable(com.twitter.meil_mitu.twitter4holo.data.Status.class.getClassLoader());
+        }else{
+            this.Status=null;
+        }
         UserEntitySupport=new UserEntitySupport(Url,Description,Entities);
     }
 
@@ -111,7 +115,10 @@ public class User implements Parcelable {
         dest.writeString(this.ProfileImageUrl);
         dest.writeString(this.ScreenName);
         dest.writeString(this.Url);
-        dest.writeParcelable(this.Status, 0);
+        dest.writeByte(this.Status!=null?(byte)1:(byte)0);
+        if(this.Status!=null){
+            dest.writeParcelable(this.Status, 0);
+        }
     }
 
     @Override

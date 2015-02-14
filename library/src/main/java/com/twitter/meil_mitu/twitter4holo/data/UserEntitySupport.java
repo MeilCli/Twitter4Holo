@@ -5,13 +5,8 @@ public class UserEntitySupport {
     public final EntitySupport Url,Description;
 
     public UserEntitySupport(String url,String description,UserEntities entities){
-       if(entities!=null){
-           Url=new EntitySupport(url,entities.Url);
-           Description=new EntitySupport(description,entities.Description);
-       }else{
-           Url=new EntitySupport(url,null);
-           Description=new EntitySupport(description,null);
-       }
+         Url=new EntitySupport(url,entities.Url);
+         Description=new EntitySupport(description,entities.Description);
     }
 
     @Override

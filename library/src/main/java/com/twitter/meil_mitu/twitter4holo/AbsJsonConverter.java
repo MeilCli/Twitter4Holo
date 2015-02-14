@@ -3,6 +3,7 @@ package com.twitter.meil_mitu.twitter4holo;
 import com.squareup.okhttp.Response;
 import com.squareup.okhttp.ResponseBody;
 import com.twitter.meil_mitu.twitter4holo.data.CursorIDs;
+import com.twitter.meil_mitu.twitter4holo.data.CursorUsers;
 import com.twitter.meil_mitu.twitter4holo.data.DirectMessage;
 import com.twitter.meil_mitu.twitter4holo.data.Friendship;
 import com.twitter.meil_mitu.twitter4holo.data.IDs;
@@ -81,6 +82,8 @@ public abstract class AbsJsonConverter {
     public abstract ResponseData<Relationship> toRelationshipResponseData(Response res)throws Twitter4HoloException;
 
     public abstract ResponseList<Friendship> toFriendshipResponseList(Response res)throws Twitter4HoloException;
+
+    public abstract ResponseData<CursorUsers> toCursorUsersResponseData(Response res)throws Twitter4HoloException;
 
     protected JSONObject toJSONObject(String res)throws Twitter4HoloException{
         try {
