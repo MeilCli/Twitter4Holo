@@ -1,5 +1,6 @@
 package com.twitter.meil_mitu.twitter4holo.data;
 
+import android.database.CrossProcessCursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -61,5 +62,15 @@ public class Cursor implements Parcelable {
     public int describeContents() {
         return 0;
     }
+
+    public static final Creator<Cursor> CREATOR = new Creator<Cursor>() {
+        public Cursor createFromParcel(Parcel source) {
+            return new Cursor(source);
+        }
+
+        public Cursor[] newArray(int size) {
+            return new Cursor[size];
+        }
+    };
 
 }

@@ -88,4 +88,14 @@ public class RelationshipTarget implements Parcelable {
         return 0;
     }
 
+    public static final Creator<RelationshipTarget> CREATOR = new Creator<RelationshipTarget>() {
+        public RelationshipTarget createFromParcel(Parcel source) {
+            return new RelationshipTarget(source);
+        }
+
+        public RelationshipTarget[] newArray(int size) {
+            return new RelationshipTarget[size];
+        }
+    };
+
 }

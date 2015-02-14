@@ -70,4 +70,13 @@ public class URLEntity extends Entity implements android.os.Parcelable {
         return 0;
     }
 
+    public static final Creator<URLEntity> CREATOR = new Creator<URLEntity>() {
+        public URLEntity createFromParcel(Parcel source) {
+            return new URLEntity(source);
+        }
+
+        public URLEntity[] newArray(int size) {
+            return new URLEntity[size];
+        }
+    };
 }

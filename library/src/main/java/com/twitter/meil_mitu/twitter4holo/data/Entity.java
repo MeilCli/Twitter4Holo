@@ -7,6 +7,9 @@ import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.security.cert.CertificateEncodingException;
+
 import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.*;
 
 public class Entity implements Parcelable {
@@ -62,5 +65,15 @@ public class Entity implements Parcelable {
     public int describeContents() {
         return 0;
     }
+
+    public static final Creator<Entity> CREATOR = new Creator<Entity>() {
+        public Entity createFromParcel(Parcel source) {
+            return new Entity(source);
+        }
+
+        public Entity[] newArray(int size) {
+            return new Entity[size];
+        }
+    };
 
 }
