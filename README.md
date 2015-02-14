@@ -2,14 +2,14 @@
 Twitter Oauth Library for Android 4.0.3 and upper 
 作りかけ 
 
-*oauth/ supported
-*oauth2/ supported
-*statuses/ supported
-*media/ supported
-*direct_messages/ supported
-*friendships/ supported
+* oauth/* supported
+* oauth2/* supported
+* statuses/* supported
+* media/* supported
+* direct_messages/* supported
+* friendships/* supported
 
-####gradle
+#### gradle
 	repositories {
 	    mavenCentral()
 	    maven {
@@ -22,7 +22,7 @@ Twitter Oauth Library for Android 4.0.3 and upper
 		compile 'meilcli:twitter4holo:0.0.+@aar'
 	}
 
-####make Twitter instance
+#### make Twitter instance
 *Oauth(not have token)*
 
 	Oauth oauth = new Oauth(new Config(),"ConsumerKey","ConsumerSecret");//Config is nullable
@@ -42,7 +42,7 @@ Twitter Oauth Library for Android 4.0.3 and upper
 	Oauth2 oauth = new Oauth2(new Config(),"ConsumerKey","ConsumerSecret");//Config is nullable
 	Twitter twitter = new Twitter(oauth);
 
-###call Twitter API
+### call Twitter API
 *update status with media*
 
 	//should use async thread
