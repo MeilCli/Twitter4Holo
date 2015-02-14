@@ -2,12 +2,12 @@
 Twitter Oauth Library for Android 4.0.3 and upper 
 作りかけ 
 
-*oauth/\* supported
-*oauth2/\* supported
-*statuses/\* supported
-*media/\* supported
-*direct_messages/\* supported
-*friendships/\* supported
+*oauth/ supported
+*oauth2/ supported
+*statuses/ supported
+*media/ supported
+*direct_messages/ supported
+*friendships/ supported
 
 ####gradle
 	repositories {
