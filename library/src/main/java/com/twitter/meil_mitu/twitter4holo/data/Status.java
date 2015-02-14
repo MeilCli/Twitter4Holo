@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import java.util.Date;
 import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.*;
+import static com.twitter.meil_mitu.twitter4holo.util.ParcelUtils.*;
 
 public class Status implements Parcelable {
 
@@ -81,8 +82,8 @@ public class Status implements Parcelable {
         this.Id = in.readLong();
         this.InReplyToStatusId = in.readLong();
         this.InReplyToUserId = in.readLong();
-        this.InReplyToScreenName = in.readString();
-        this.Lang = in.readString();
+        this.InReplyToScreenName = readNullableString(in);
+        this.Lang = readNullableString(in);
         this.Source = in.readString();
         this.Text = in.readString();
         if(in.readByte()==1) {
@@ -114,8 +115,8 @@ public class Status implements Parcelable {
         dest.writeLong(this.Id);
         dest.writeLong(this.InReplyToStatusId);
         dest.writeLong(this.InReplyToUserId);
-        dest.writeString(this.InReplyToScreenName);
-        dest.writeString(this.Lang);
+        writeNullableString(dest,this.InReplyToScreenName);
+        writeNullableString(dest,this.Lang);
         dest.writeString(this.Source);
         dest.writeString(this.Text);
         dest.writeByte(this.RetweetedStatus!=null?(byte)1:(byte)0);

@@ -17,6 +17,9 @@ public class Oauth2Token implements Parcelable {
     }
 
     public Oauth2Token(JSONObject obj,String tokenType) throws Twitter4HoloException {
+        if(tokenType==null){
+            throw new Twitter4HoloException("tokenType is null");
+        }
         this.TokenType=tokenType;
         this.AccessToken=getString(obj,"access_token");
     }

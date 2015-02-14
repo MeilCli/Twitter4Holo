@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import java.util.Date;
 
 import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.*;
+import static com.twitter.meil_mitu.twitter4holo.util.ParcelUtils.*;
 
 public class User implements Parcelable {
 
@@ -74,12 +75,12 @@ public class User implements Parcelable {
         this.IsProtected = in.readByte() != 0;
         this.IsVerified = in.readByte() != 0;
         this.Id = in.readLong();
-        this.Lang = in.readString();
+        this.Lang = readNullableString(in);
         this.Location = in.readString();
         this.IsMuting= in.readByte() != 0;
         this.Name = in.readString();
-        this.ProfileBackgroundImageUrl = in.readString();
-        this.ProfileBannerUrl = in.readString();
+        this.ProfileBackgroundImageUrl = readNullableString(in);
+        this.ProfileBannerUrl = readNullableString(in);
         this.ProfileImageUrl = in.readString();
         this.ScreenName = in.readString();
         this.Url = in.readString();
@@ -106,12 +107,12 @@ public class User implements Parcelable {
         dest.writeByte(IsProtected ? (byte) 1 : (byte) 0);
         dest.writeByte(IsVerified ? (byte) 1 : (byte) 0);
         dest.writeLong(this.Id);
-        dest.writeString(this.Lang);
+        writeNullableString(dest,this.Lang);
         dest.writeString(this.Location);
         dest.writeByte(IsMuting ? (byte) 1 : (byte) 0);
         dest.writeString(this.Name);
-        dest.writeString(this.ProfileBackgroundImageUrl);
-        dest.writeString(this.ProfileBannerUrl);
+        writeNullableString(dest,this.ProfileBackgroundImageUrl);
+        writeNullableString(dest,this.ProfileBannerUrl);
         dest.writeString(this.ProfileImageUrl);
         dest.writeString(this.ScreenName);
         dest.writeString(this.Url);
