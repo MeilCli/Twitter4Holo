@@ -24,6 +24,7 @@ Twitter Oauth Library for Android 4.0.3 and upper
 
 ####make Twitter instance
 *Oauth(not have token)*
+
 	Oauth oauth = new Oauth(new Config(),"ConsumerKey","ConsumerSecret");//Config is nullable
 	Twitter twitter = new Twitter(oauth);
 	twitter.oauth().requestToken().call();//should use async thread
@@ -32,15 +33,18 @@ Twitter Oauth Library for Android 4.0.3 and upper
 	twitter.oauth().accessToken(verifier).call();//should use async thread
 
 *Oauth(have token)*
+
 	Oauth oauth = new Oauth(new Config(),"ConsumerKey","ConsumerSecret","AccessToken","AccessTokenSecret");//Config is nullable
 	Twitter twitter = new Twitter(oauth);
 
 *Oauth2*
+
 	Oauth2 oauth = new Oauth2(new Config(),"ConsumerKey","ConsumerSecret");//Config is nullable
 	Twitter twitter = new Twitter(oauth);
 
 ###call Twitter API
 *update status with media*
+
 	//should use async thread
 	long id = twitter.media().upload(File).call().MediaId;//File is File class
     Status status = twitter.statuses().update(Text).mediaIds(new long[]{id}).call();//Text is String class
