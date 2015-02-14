@@ -2,6 +2,9 @@
 Twitter Oauth Library for Android 4.0.3 and upper  
 作りかけ 
 
+* if you want to know Objects, you shall see [data package](https://github.com/MeilCli/Twitter4Holo/tree/master/library/src/main/java/com/twitter/meil_mitu/twitter4holo/data)
+* Objects is not full
+* if you want to use full Objects, you shall make Data class and Converter extends AbsJsonConverter
 * oauth/* supported
 * oauth2/* supported
 * statuses/* supported
@@ -42,7 +45,7 @@ Twitter Oauth Library for Android 4.0.3 and upper
 	Oauth2 oauth = new Oauth2(new Config(),"ConsumerKey","ConsumerSecret");//Config is nullable
 	Twitter twitter = new Twitter(oauth);
 
-### call Twitter API
+#### call Twitter API
 *update status with media*
 
 	//should use async thread
