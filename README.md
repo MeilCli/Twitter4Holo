@@ -2,6 +2,8 @@
 Twitter Oauth Library for Android 4.0.3 and upper  
 作りかけ 
 
+* use okhttp
+* response Objects implements Parcelable without **Support class
 * if you want to know Objects, you shall see [data package](https://github.com/MeilCli/Twitter4Holo/tree/master/library/src/main/java/com/twitter/meil_mitu/twitter4holo/data)
 * Objects is not full
 * if you want to use full Objects, you shall make Data class and Converter extends AbsJsonConverter
