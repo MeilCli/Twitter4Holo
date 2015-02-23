@@ -2,7 +2,7 @@
 Twitter Oauth Library for Android 4.0.3 and upper  
 作りかけ 
 
-* use okhttp
+* use [okhttp][okhttp_url]
 * response Objects implements Parcelable without **Support class
 * if you want to know Objects, you shall see [data package](https://github.com/MeilCli/Twitter4Holo/tree/master/library/src/main/java/com/twitter/meil_mitu/twitter4holo/data)
 * Objects is not full
@@ -15,6 +15,9 @@ Twitter Oauth Library for Android 4.0.3 and upper
 * friendships/* supported
 * friends/* supported
 * followers/* supported
+* account/* supported
+* blocks/* supported
+* users/* supported
 
 ####何をしたかったのか
 * Oauth2をわかりやすく
@@ -26,6 +29,13 @@ Twitter Oauth Library for Android 4.0.3 and upper
 ####なぜこうなったのか
 * public fieldが大文字スタートなのはほとんどC#の影響
 * たまにエンドポイント通りの設計になってないのはjavaの予約語とかいろいろあってだな…
+
+####次したいこと
+* すべてのREST API対応
+* Streaming API対応(site streamは難しそう)
+* Oauth Echo対応(Aclogとかサポートしたい)
+* ActiveAndroidを使いSQLiteをサポート←public final fieldややこしいので値変更用クラス作る
+* 独自クエリ作成←自分用
 
 #### gradle
 	repositories {
@@ -72,6 +82,22 @@ Twitter Oauth Library for Android 4.0.3 and upper
 	//should use async thread
 	ResponseList<Status> list = twitter.statuses().userTimeline().screenName(ScreenName).count(20).call();
 	//ResponseList extends ArrayList
+
+#### replace API namespace
+*if this endpoint is added another endpoints, may change namespace*
+
+* GET statuses/retweeters/ids → statuses.Retweeters
+* GET friendships/no_retweets/ids → friendships.NoRetweets
+
+*endpoints escape, so change namespace*
+
+* GET direct_messages → directmessages.Get
+* POST direct_messages/new → directmessages.PostNew
+* GET account/settings → account.GetSettings
+* POST account/settings → account.PostSettings
+* GET users/suggestions/:slug → suggestions.Get
+* GET users/suggestions → suggestions.List
+* GET users/suggestions/:slug/members → suggestions.Members
 
 ライセンス
 ----------

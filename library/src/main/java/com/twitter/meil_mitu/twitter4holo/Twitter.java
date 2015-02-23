@@ -1,5 +1,7 @@
 package com.twitter.meil_mitu.twitter4holo;
 
+import com.twitter.meil_mitu.twitter4holo.api.account.AccountAPI;
+import com.twitter.meil_mitu.twitter4holo.api.blocks.BlocksAPI;
 import com.twitter.meil_mitu.twitter4holo.api.directmessages.DirectMessagesAPI;
 import com.twitter.meil_mitu.twitter4holo.api.followers.FollowersAPI;
 import com.twitter.meil_mitu.twitter4holo.api.friends.FriendsAPI;
@@ -9,6 +11,7 @@ import com.twitter.meil_mitu.twitter4holo.api.oauth.OauthAPI;
 import com.twitter.meil_mitu.twitter4holo.api.oauth2.Oauth2API;
 import com.twitter.meil_mitu.twitter4holo.api.search.SearchAPI;
 import com.twitter.meil_mitu.twitter4holo.api.statuses.StatusesAPI;
+import com.twitter.meil_mitu.twitter4holo.api.users.UsersAPI;
 import com.twitter.meil_mitu.twitter4holo.oauth.Oauth;
 
 public class Twitter {
@@ -23,6 +26,9 @@ public class Twitter {
     protected FriendshipsAPI Friendships;
     protected FriendsAPI Friends;
     protected FollowersAPI Followers;
+    protected AccountAPI Account;
+    protected BlocksAPI Blocks;
+    protected UsersAPI Users;
 
     public Twitter(AbsOauth oauth){
         this(oauth,JsonConverter.getDefaultConverter());
@@ -41,6 +47,9 @@ public class Twitter {
         this.Friendships=new FriendshipsAPI(Oauth,Json);
         this.Friends=new FriendsAPI(Oauth,Json);
         this.Followers=new FollowersAPI(Oauth,Json);
+        this.Account=new AccountAPI(Oauth,Json);
+        this.Blocks=new BlocksAPI(Oauth,Json);
+        this.Users=new UsersAPI(Oauth,Json);
     }
 
     public OauthAPI oauth(){return Oauth1;}
@@ -60,5 +69,11 @@ public class Twitter {
     public FriendsAPI friends(){return Friends;}
 
     public FollowersAPI followers(){return Followers;}
+
+    public AccountAPI account(){return Account;}
+
+    public BlocksAPI blocks(){return Blocks;}
+
+    public UsersAPI users(){return Users;}
 
 }

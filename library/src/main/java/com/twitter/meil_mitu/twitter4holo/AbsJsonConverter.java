@@ -2,6 +2,7 @@ package com.twitter.meil_mitu.twitter4holo;
 
 import com.squareup.okhttp.Response;
 import com.squareup.okhttp.ResponseBody;
+import com.twitter.meil_mitu.twitter4holo.data.Banner;
 import com.twitter.meil_mitu.twitter4holo.data.CursorIDs;
 import com.twitter.meil_mitu.twitter4holo.data.CursorUsers;
 import com.twitter.meil_mitu.twitter4holo.data.DirectMessage;
@@ -15,7 +16,10 @@ import com.twitter.meil_mitu.twitter4holo.data.OembedStatus;
 import com.twitter.meil_mitu.twitter4holo.data.RateLimit;
 import com.twitter.meil_mitu.twitter4holo.data.Relationship;
 import com.twitter.meil_mitu.twitter4holo.data.SearchResult;
+import com.twitter.meil_mitu.twitter4holo.data.Setting;
 import com.twitter.meil_mitu.twitter4holo.data.Status;
+import com.twitter.meil_mitu.twitter4holo.data.Suggestion;
+import com.twitter.meil_mitu.twitter4holo.data.SuggestionUser;
 import com.twitter.meil_mitu.twitter4holo.data.User;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
@@ -85,6 +89,16 @@ public abstract class AbsJsonConverter {
 
     public abstract ResponseData<CursorUsers> toCursorUsersResponseData(Response res)throws Twitter4HoloException;
 
+    public abstract Setting toSetting(Response res)throws Twitter4HoloException;
+
+    public abstract ResponseData<Setting> toSettingResponseData(Response res)throws Twitter4HoloException;
+
+    public abstract ResponseData<Banner> toBannerResponseData(Response res)throws Twitter4HoloException;
+
+    public abstract ResponseList<Suggestion> toSuggestionResponseList(Response res)throws Twitter4HoloException;
+
+    public abstract ResponseData<SuggestionUser> toSuggestionUserResponseData(Response res)throws Twitter4HoloException;
+
     protected JSONObject toJSONObject(String res)throws Twitter4HoloException{
         try {
             return new JSONObject(res);
@@ -103,7 +117,7 @@ public abstract class AbsJsonConverter {
         }
     }
 
-    protected String toString(ResponseBody body)throws Twitter4HoloException{
+    public String toString(ResponseBody body)throws Twitter4HoloException{
         try {
             return body.string();
         } catch (IOException e) {

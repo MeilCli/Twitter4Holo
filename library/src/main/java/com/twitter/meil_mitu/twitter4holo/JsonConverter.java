@@ -1,6 +1,7 @@
 package com.twitter.meil_mitu.twitter4holo;
 
 import com.squareup.okhttp.Response;
+import com.twitter.meil_mitu.twitter4holo.data.Banner;
 import com.twitter.meil_mitu.twitter4holo.data.CursorIDs;
 import com.twitter.meil_mitu.twitter4holo.data.CursorUsers;
 import com.twitter.meil_mitu.twitter4holo.data.DirectMessage;
@@ -10,7 +11,10 @@ import com.twitter.meil_mitu.twitter4holo.data.Media;
 import com.twitter.meil_mitu.twitter4holo.data.OembedStatus;
 import com.twitter.meil_mitu.twitter4holo.data.Relationship;
 import com.twitter.meil_mitu.twitter4holo.data.SearchResult;
+import com.twitter.meil_mitu.twitter4holo.data.Setting;
 import com.twitter.meil_mitu.twitter4holo.data.Status;
+import com.twitter.meil_mitu.twitter4holo.data.Suggestion;
+import com.twitter.meil_mitu.twitter4holo.data.SuggestionUser;
 import com.twitter.meil_mitu.twitter4holo.data.User;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
@@ -169,5 +173,43 @@ public class JsonConverter extends AbsJsonConverter {
     @Override
     public ResponseData<CursorUsers> toCursorUsersResponseData(Response res) throws Twitter4HoloException {
         return new ResponseData<CursorUsers>(new CursorUsers(toJSONObject(toString(res.body()))),toRateLimit(res));
+    }
+
+    @Override
+    public Setting toSetting(Response res) throws Twitter4HoloException {
+        return new Setting(toJSONObject(toString(res.body())));
+    }
+
+    @Override
+    public ResponseData<Setting> toSettingResponseData(Response res) throws Twitter4HoloException {
+        return new ResponseData<Setting>(toSetting(res),toRateLimit(res));
+    }
+
+    @Override
+    public ResponseData<Banner> toBannerResponseData(Response res) throws Twitter4HoloException {
+        return new ResponseData<Banner>(new Banner(toJSONObject(toString(res.body()))),toRateLimit(res));
+    }
+
+    @Override
+    public ResponseList<Suggestion> toSuggestionResponseList(Response res) throws Twitter4HoloException {
+        JSONArray ar = toJSONArray(toString(res.body()));
+        int size=ar.length();
+        ResponseList<Suggestion> list = new ResponseList<Suggestion>(toRateLimit(res));
+        for(int i=0;i<size;i++){
+            try {
+                list.add(new Suggestion(getJSONObject(ar,i)));
+            }catch (Twitter4HoloException e){
+                e.printStackTrace();
+                if(Config.IsDebug){
+                    throw e;
+                }
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public ResponseData<SuggestionUser> toSuggestionUserResponseData(Response res) throws Twitter4HoloException {
+        return new ResponseData<SuggestionUser>(new SuggestionUser(toJSONObject(toString(res.body()))),toRateLimit(res));
     }
 }
