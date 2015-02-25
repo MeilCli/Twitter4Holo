@@ -2,8 +2,11 @@ package com.twitter.meil_mitu.twitter4holo.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.*;
 import com.squareup.okhttp.Response;
+import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
+
+import org.json.JSONObject;
 
 public class RateLimit implements Parcelable {
     public final int Limit,Remaining;
@@ -13,6 +16,12 @@ public class RateLimit implements Parcelable {
         Limit = Integer.parseInt(res.header("X-Rate-Limit-Limit", "0"));
         Remaining = Integer.parseInt(res.header("X-Rate-Limit-Remaining", "0"));
         Reset = Long.parseLong(res.header("X-Rate-Limit-Reset", "-1"));
+    }
+
+    public RateLimit(JSONObject obj) throws Twitter4HoloException {
+        Limit=getInt(obj,"limit");
+        Remaining=getInt(obj,"remaining");
+        Reset=getLong(obj,"reset");
     }
 
     public RateLimit(Parcel in) {

@@ -3,24 +3,36 @@ package com.twitter.meil_mitu.twitter4holo;
 import com.squareup.okhttp.Response;
 import com.squareup.okhttp.ResponseBody;
 import com.twitter.meil_mitu.twitter4holo.data.Banner;
+import com.twitter.meil_mitu.twitter4holo.data.ConfigurationResult;
 import com.twitter.meil_mitu.twitter4holo.data.CursorIDs;
+import com.twitter.meil_mitu.twitter4holo.data.CursorLists;
 import com.twitter.meil_mitu.twitter4holo.data.CursorUsers;
 import com.twitter.meil_mitu.twitter4holo.data.DirectMessage;
 import com.twitter.meil_mitu.twitter4holo.data.Friendship;
 import com.twitter.meil_mitu.twitter4holo.data.IDs;
+import com.twitter.meil_mitu.twitter4holo.data.Language;
 import com.twitter.meil_mitu.twitter4holo.data.Media;
 import com.twitter.meil_mitu.twitter4holo.data.Oauth2Token;
 import com.twitter.meil_mitu.twitter4holo.data.OauthRequestToken;
 import com.twitter.meil_mitu.twitter4holo.data.OauthToken;
 import com.twitter.meil_mitu.twitter4holo.data.OembedStatus;
+import com.twitter.meil_mitu.twitter4holo.data.Place;
+import com.twitter.meil_mitu.twitter4holo.data.PlaceQuery;
+import com.twitter.meil_mitu.twitter4holo.data.PrivacyResult;
 import com.twitter.meil_mitu.twitter4holo.data.RateLimit;
+import com.twitter.meil_mitu.twitter4holo.data.RateLimitResult;
 import com.twitter.meil_mitu.twitter4holo.data.Relationship;
+import com.twitter.meil_mitu.twitter4holo.data.SavedSearch;
 import com.twitter.meil_mitu.twitter4holo.data.SearchResult;
 import com.twitter.meil_mitu.twitter4holo.data.Setting;
 import com.twitter.meil_mitu.twitter4holo.data.Status;
 import com.twitter.meil_mitu.twitter4holo.data.Suggestion;
 import com.twitter.meil_mitu.twitter4holo.data.SuggestionUser;
+import com.twitter.meil_mitu.twitter4holo.data.TosResult;
+import com.twitter.meil_mitu.twitter4holo.data.TrendPlace;
+import com.twitter.meil_mitu.twitter4holo.data.TrendResult;
 import com.twitter.meil_mitu.twitter4holo.data.User;
+import com.twitter.meil_mitu.twitter4holo.data.UserList;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
 import org.json.JSONArray;
@@ -28,8 +40,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-
-import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.*;
 
 public abstract class AbsJsonConverter {
 
@@ -52,6 +62,8 @@ public abstract class AbsJsonConverter {
     public RateLimit toRateLimit(Response res){
         return new RateLimit(res);
     }
+
+    public abstract ResponseData<RateLimitResult> toRateLimitResultResponseData(Response res)throws Twitter4HoloException;
 
     public abstract Status toStatus(Response res)throws Twitter4HoloException;
 
@@ -98,6 +110,36 @@ public abstract class AbsJsonConverter {
     public abstract ResponseList<Suggestion> toSuggestionResponseList(Response res)throws Twitter4HoloException;
 
     public abstract ResponseData<SuggestionUser> toSuggestionUserResponseData(Response res)throws Twitter4HoloException;
+
+    public abstract UserList toUserList(Response res)throws Twitter4HoloException;
+
+    public abstract ResponseData<UserList> toUserListResponseData(Response res)throws Twitter4HoloException;
+
+    public abstract ResponseList<UserList> toUserListResponseList(Response res)throws Twitter4HoloException;
+
+    public abstract ResponseData<CursorLists> toCursorListsResponseData(Response res)throws Twitter4HoloException;
+
+    public abstract SavedSearch toSavedSearch(Response res)throws Twitter4HoloException;
+
+    public abstract ResponseData<SavedSearch> toSavedSearchResponseData(Response res)throws Twitter4HoloException;
+
+    public abstract ResponseList<SavedSearch> toSavedSearchResponseList(Response res)throws Twitter4HoloException;
+
+    public abstract ResponseData<Place> toPlaceResponseData(Response res)throws Twitter4HoloException;
+
+    public abstract ResponseData<PlaceQuery> toPlaceQueryResponseData(Response res)throws Twitter4HoloException;
+
+    public abstract ResponseData<TrendResult> toTrendResultResponseData(Response res)throws Twitter4HoloException;
+
+    public abstract ResponseList<TrendPlace> toTrendPlaceResponseList(Response res)throws Twitter4HoloException;
+
+    public abstract ResponseData<ConfigurationResult> toConfigurationResultResponseData(Response res)throws Twitter4HoloException;
+
+    public abstract ResponseList<Language> toLanguageResponseList(Response res)throws Twitter4HoloException;
+
+    public abstract ResponseData<PrivacyResult> toPrivacyResultResponseData(Response res)throws Twitter4HoloException;
+
+    public abstract ResponseData<TosResult> toTosResultResponseData(Response res)throws Twitter4HoloException;
 
     protected JSONObject toJSONObject(String res)throws Twitter4HoloException{
         try {

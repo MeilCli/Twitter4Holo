@@ -2,20 +2,32 @@ package com.twitter.meil_mitu.twitter4holo;
 
 import com.squareup.okhttp.Response;
 import com.twitter.meil_mitu.twitter4holo.data.Banner;
+import com.twitter.meil_mitu.twitter4holo.data.ConfigurationResult;
 import com.twitter.meil_mitu.twitter4holo.data.CursorIDs;
+import com.twitter.meil_mitu.twitter4holo.data.CursorLists;
 import com.twitter.meil_mitu.twitter4holo.data.CursorUsers;
 import com.twitter.meil_mitu.twitter4holo.data.DirectMessage;
 import com.twitter.meil_mitu.twitter4holo.data.Friendship;
 import com.twitter.meil_mitu.twitter4holo.data.IDs;
+import com.twitter.meil_mitu.twitter4holo.data.Language;
 import com.twitter.meil_mitu.twitter4holo.data.Media;
 import com.twitter.meil_mitu.twitter4holo.data.OembedStatus;
+import com.twitter.meil_mitu.twitter4holo.data.Place;
+import com.twitter.meil_mitu.twitter4holo.data.PlaceQuery;
+import com.twitter.meil_mitu.twitter4holo.data.PrivacyResult;
+import com.twitter.meil_mitu.twitter4holo.data.RateLimitResult;
 import com.twitter.meil_mitu.twitter4holo.data.Relationship;
+import com.twitter.meil_mitu.twitter4holo.data.SavedSearch;
 import com.twitter.meil_mitu.twitter4holo.data.SearchResult;
 import com.twitter.meil_mitu.twitter4holo.data.Setting;
 import com.twitter.meil_mitu.twitter4holo.data.Status;
 import com.twitter.meil_mitu.twitter4holo.data.Suggestion;
 import com.twitter.meil_mitu.twitter4holo.data.SuggestionUser;
+import com.twitter.meil_mitu.twitter4holo.data.TosResult;
+import com.twitter.meil_mitu.twitter4holo.data.TrendPlace;
+import com.twitter.meil_mitu.twitter4holo.data.TrendResult;
 import com.twitter.meil_mitu.twitter4holo.data.User;
+import com.twitter.meil_mitu.twitter4holo.data.UserList;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
 import org.json.JSONArray;
@@ -31,6 +43,11 @@ public class JsonConverter extends AbsJsonConverter {
             defaultConverter=new JsonConverter();
         }
         return defaultConverter;
+    }
+
+    @Override
+    public ResponseData<RateLimitResult> toRateLimitResultResponseData(Response res) throws Twitter4HoloException {
+        return new ResponseData<RateLimitResult>(new RateLimitResult(toJSONObject(toString(res.body()))),toRateLimit(res));
     }
 
     @Override
@@ -211,5 +228,132 @@ public class JsonConverter extends AbsJsonConverter {
     @Override
     public ResponseData<SuggestionUser> toSuggestionUserResponseData(Response res) throws Twitter4HoloException {
         return new ResponseData<SuggestionUser>(new SuggestionUser(toJSONObject(toString(res.body()))),toRateLimit(res));
+    }
+
+    @Override
+    public UserList toUserList(Response res) throws Twitter4HoloException {
+        return new UserList(toJSONObject(toString(res.body())));
+    }
+
+    @Override
+    public ResponseData<UserList> toUserListResponseData(Response res) throws Twitter4HoloException {
+        return new ResponseData<UserList>(toUserList(res),toRateLimit(res));
+    }
+
+    @Override
+    public ResponseList<UserList> toUserListResponseList(Response res) throws Twitter4HoloException {
+        JSONArray ar = toJSONArray(toString(res.body()));
+        int size=ar.length();
+        ResponseList<UserList> list = new ResponseList<UserList>(toRateLimit(res));
+        for(int i=0;i<size;i++){
+            try {
+                list.add(new UserList(getJSONObject(ar,i)));
+            }catch (Twitter4HoloException e){
+                e.printStackTrace();
+                if(Config.IsDebug){
+                    throw e;
+                }
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public ResponseData<CursorLists> toCursorListsResponseData(Response res) throws Twitter4HoloException {
+        return new ResponseData<CursorLists>(new CursorLists(toJSONObject(toString(res.body()))),toRateLimit(res));
+    }
+
+    @Override
+    public SavedSearch toSavedSearch(Response res) throws Twitter4HoloException {
+        return new SavedSearch(toJSONObject(toString(res.body())));
+    }
+
+    @Override
+    public ResponseData<SavedSearch> toSavedSearchResponseData(Response res) throws Twitter4HoloException {
+        return new ResponseData<SavedSearch>(toSavedSearch(res),toRateLimit(res));
+    }
+
+    @Override
+    public ResponseList<SavedSearch> toSavedSearchResponseList(Response res) throws Twitter4HoloException {
+        JSONArray ar = toJSONArray(toString(res.body()));
+        int size=ar.length();
+        ResponseList<SavedSearch> list = new ResponseList<SavedSearch>(toRateLimit(res));
+        for(int i=0;i<size;i++){
+            try {
+                list.add(new SavedSearch(getJSONObject(ar,i)));
+            }catch (Twitter4HoloException e){
+                e.printStackTrace();
+                if(Config.IsDebug){
+                    throw e;
+                }
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public ResponseData<Place> toPlaceResponseData(Response res) throws Twitter4HoloException {
+        return new ResponseData<Place>(new Place(toJSONObject(toString(res.body()))),toRateLimit(res));
+    }
+
+    @Override
+    public ResponseData<PlaceQuery> toPlaceQueryResponseData(Response res) throws Twitter4HoloException {
+        return new ResponseData<PlaceQuery>(new PlaceQuery(toJSONObject(toString(res.body()))),toRateLimit(res));
+    }
+
+    @Override
+    public ResponseData<TrendResult> toTrendResultResponseData(Response res) throws Twitter4HoloException {
+        return new ResponseData<TrendResult>(new TrendResult(toJSONObject(toString(res.body()))),toRateLimit(res));
+    }
+
+    @Override
+    public ResponseList<TrendPlace> toTrendPlaceResponseList(Response res) throws Twitter4HoloException {
+        JSONArray ar = toJSONArray(toString(res.body()));
+        int size=ar.length();
+        ResponseList<TrendPlace> list = new ResponseList<TrendPlace>(toRateLimit(res));
+        for(int i=0;i<size;i++){
+            try {
+                list.add(new TrendPlace(getJSONObject(ar,i)));
+            }catch (Twitter4HoloException e){
+                e.printStackTrace();
+                if(Config.IsDebug){
+                    throw e;
+                }
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public ResponseData<ConfigurationResult> toConfigurationResultResponseData(Response res) throws Twitter4HoloException {
+        return new ResponseData<ConfigurationResult>(new ConfigurationResult(toJSONObject(toString(res.body()))),toRateLimit(res));
+    }
+
+    @Override
+    public ResponseList<Language> toLanguageResponseList(Response res) throws Twitter4HoloException {
+        JSONArray ar = toJSONArray(toString(res.body()));
+        int size=ar.length();
+        ResponseList<Language> list = new ResponseList<Language>(toRateLimit(res));
+        for(int i=0;i<size;i++){
+            try {
+                list.add(new Language(getJSONObject(ar,i)));
+            }catch (Twitter4HoloException e){
+                e.printStackTrace();
+                if(Config.IsDebug){
+                    throw e;
+                }
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public ResponseData<PrivacyResult> toPrivacyResultResponseData(Response res) throws Twitter4HoloException {
+        return new ResponseData<PrivacyResult>(new PrivacyResult(toJSONObject(toString(res.body()))),toRateLimit(res));
+    }
+
+    @Override
+    public ResponseData<TosResult> toTosResultResponseData(Response res) throws Twitter4HoloException {
+        return new ResponseData<TosResult>(new TosResult(toJSONObject(toString(res.body()))),toRateLimit(res));
     }
 }

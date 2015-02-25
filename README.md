@@ -7,17 +7,11 @@ Twitter Oauth Library for Android 4.0.3 and upper
 * if you want to know Objects, you shall see [data package](https://github.com/MeilCli/Twitter4Holo/tree/master/library/src/main/java/com/twitter/meil_mitu/twitter4holo/data)
 * Objects is not full
 * if you want to use full Objects, you shall make Data class and Converter extends AbsJsonConverter
-* oauth/* supported
-* oauth2/* supported
-* statuses/* supported
-* media/* supported
-* direct_messages/* supported
-* friendships/* supported
-* friends/* supported
-* followers/* supported
-* account/* supported
-* blocks/* supported
-* users/* supported
+* ok [oauth](https://dev.twitter.com/oauth/3-legged)
+* ok [oauth2](https://dev.twitter.com/oauth/application-only)
+* ok [multiple media upload](https://dev.twitter.com/rest/public/uploading-media)
+* ok [Video in MediaEntity](https://blog.twitter.com/2015/now-on-twitter-group-direct-messages-and-mobile-video-capture)
+* ok [REST API](https://dev.twitter.com/rest/public)
 
 ####何をしたかったのか
 * Oauth2をわかりやすく
@@ -31,7 +25,6 @@ Twitter Oauth Library for Android 4.0.3 and upper
 * たまにエンドポイント通りの設計になってないのはjavaの予約語とかいろいろあってだな…
 
 ####次したいこと
-* すべてのREST API対応
 * Streaming API対応(site streamは難しそう)
 * Oauth Echo対応(Aclogとかサポートしたい)
 * ActiveAndroidを使いSQLiteをサポート←public final fieldややこしいので値変更用クラス作る
@@ -47,7 +40,7 @@ Twitter Oauth Library for Android 4.0.3 and upper
 	
 	dependencies {
 		compile 'com.squareup.okhttp:okhttp:2.2.0'
-		compile 'meilcli:twitter4holo:0.0.+@aar'
+		compile 'meilcli:twitter4holo:0.1.+@aar'
 	}
 
 #### make Twitter instance
@@ -86,8 +79,8 @@ Twitter Oauth Library for Android 4.0.3 and upper
 #### replace API namespace
 *if this endpoint is added another endpoints, may change namespace*
 
-* GET statuses/retweeters/ids → statuses.Retweeters
-* GET friendships/no_retweets/ids → friendships.NoRetweets
+* GET statuses/retweeters/ids → statuses.Retweeters → ??
+* GET friendships/no_retweets/ids → friendships.NoRetweets → ??
 
 *endpoints escape, so change namespace*
 
@@ -98,6 +91,8 @@ Twitter Oauth Library for Android 4.0.3 and upper
 * GET users/suggestions/:slug → suggestions.Get
 * GET users/suggestions → suggestions.List
 * GET users/suggestions/:slug/members → suggestions.Members
+* GET lists/subscribers → lists.subscribers.Get
+* GET lists/members → lists.members.Get
 
 ライセンス
 ----------

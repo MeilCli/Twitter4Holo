@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Date;
+import java.util.Iterator;
 
 public class JsonUtils {
 
@@ -126,6 +127,10 @@ public class JsonUtils {
             e.printStackTrace();
             throw new Twitter4HoloException(e.getMessage());
         }
+    }
+
+    public static Iterator<String> keys(JSONObject obj){
+        return obj.keys();
     }
 
     public static JSONObject getJSONObject(JSONArray ar,int index) throws Twitter4HoloException{
