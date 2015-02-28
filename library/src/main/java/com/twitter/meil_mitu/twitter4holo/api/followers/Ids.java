@@ -3,14 +3,15 @@ package com.twitter.meil_mitu.twitter4holo.api.followers;
 import com.twitter.meil_mitu.twitter4holo.AbsGet;
 import com.twitter.meil_mitu.twitter4holo.AbsJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
+import com.twitter.meil_mitu.twitter4holo.ITwitterJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.OauthType;
 import com.twitter.meil_mitu.twitter4holo.ResponseData;
 import com.twitter.meil_mitu.twitter4holo.data.CursorIDs;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
-public class Ids extends AbsGet {
+public class Ids extends AbsGet <ITwitterJsonConverter>{
 
-    public Ids(AbsOauth oauth, AbsJsonConverter json) {
+    public Ids(AbsOauth oauth, ITwitterJsonConverter json) {
         super(oauth, json);
     }
 

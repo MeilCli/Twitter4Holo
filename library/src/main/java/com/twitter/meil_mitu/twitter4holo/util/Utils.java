@@ -6,9 +6,23 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 public class Utils {
+
+    // http://javatechnology.net/java/url-encode/
+    // not encode '-'
     public static String urlEncode(String string) {
         try {
-            return URLEncoder.encode(string, "UTF-8");
+            String encoded= URLEncoder.encode(string, "UTF-8");
+            StringBuilder sb = new StringBuilder(encoded.length());
+            for(char c:encoded.toCharArray()){
+                if(c=='+'){
+                    sb.append("%20");
+                }else if(c=='*'){
+                    sb.append("%2A");
+                }else{
+                    sb.append(c);
+                }
+            }
+            return sb.toString();
         } catch (UnsupportedEncodingException e) {
             return string;
         }

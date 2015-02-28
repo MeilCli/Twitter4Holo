@@ -3,16 +3,17 @@ package com.twitter.meil_mitu.twitter4holo.api.geo;
 import com.twitter.meil_mitu.twitter4holo.AbsGet;
 import com.twitter.meil_mitu.twitter4holo.AbsJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
+import com.twitter.meil_mitu.twitter4holo.ITwitterJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.OauthType;
 import com.twitter.meil_mitu.twitter4holo.ResponseData;
 import com.twitter.meil_mitu.twitter4holo.data.Place;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
-public class Id extends AbsGet {
+public class Id extends AbsGet<ITwitterJsonConverter> {
 
     private String placeId;
 
-    public Id(AbsOauth oauth, AbsJsonConverter json,String placeId) {
+    public Id(AbsOauth oauth, ITwitterJsonConverter json,String placeId) {
         super(oauth, json);
         this.placeId=placeId;
     }

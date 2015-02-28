@@ -3,6 +3,7 @@ Twitter Oauth Library for Android 4.0.3 and upper
 作りかけ 
 
 * use [okhttp][okhttp_url]
+* use [ActiveAndroid][ActiveAndroid_url]
 * response Objects implements Parcelable without **Support class
 * if you want to know Objects, you shall see [data package](https://github.com/MeilCli/Twitter4Holo/tree/master/library/src/main/java/com/twitter/meil_mitu/twitter4holo/data)
 * Objects is not full
@@ -27,26 +28,32 @@ Twitter Oauth Library for Android 4.0.3 and upper
 ####次したいこと
 * Streaming API対応(site streamは難しそう)
 * Oauth Echo対応(Aclogとかサポートしたい)
-* ActiveAndroidを使いSQLiteをサポート←public final fieldややこしいので値変更用クラス作る
 * 独自クエリ作成←自分用
 
 #### gradle
 	repositories {
 	    mavenCentral()
-	    maven {
- 	       url 'https://raw.github.com/MeilCli/Twitter4Holo/master/library/repository'
- 	   }
+	    maven { url "https://raw.github.com/MeilCli/Twitter4Holo/master/library/repository" }
+		maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
 	}
 	
 	dependencies {
 		compile 'com.squareup.okhttp:okhttp:2.2.0'
-		compile 'meilcli:twitter4holo:0.1.+@aar'
+		compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
+		compile 'meilcli:twitter4holo:0.2.+@aar'
 	}
+
+#### AndroidManifest.xml
+	<manifest ...>
+	
+		<uses-permission android:name="android.permission.INTERNET"/>
+	
+	</manifest>
 
 #### make Twitter instance
 *Oauth(not have token)*
 
-	Oauth oauth = new Oauth(new Config(),"ConsumerKey","ConsumerSecret");//Config is nullable
+	Oauth oauth = new Oauth(new Twitter4HoloConfig(),"ConsumerKey","ConsumerSecret");//Twitter4HoloConfig is nullable
 	Twitter twitter = new Twitter(oauth);
 	twitter.oauth().requestToken().call();//should use async thread
 	String url = twitter.oauth().authorize();
@@ -55,12 +62,12 @@ Twitter Oauth Library for Android 4.0.3 and upper
 
 *Oauth(have token)*
 
-	Oauth oauth = new Oauth(new Config(),"ConsumerKey","ConsumerSecret","AccessToken","AccessTokenSecret");//Config is nullable
+	Oauth oauth = new Oauth(new Twitter4HoloConfig(),"ConsumerKey","ConsumerSecret","AccessToken","AccessTokenSecret");//Twitter4HoloConfig is nullable
 	Twitter twitter = new Twitter(oauth);
 
 *Oauth2*
 
-	Oauth2 oauth = new Oauth2(new Config(),"ConsumerKey","ConsumerSecret");//Config is nullable
+	Oauth2 oauth = new Oauth2(new Twitter4HoloConfig(),"ConsumerKey","ConsumerSecret");//Twitter4HoloConfig is nullable
 	Twitter twitter = new Twitter(oauth);
 
 #### call Twitter API
@@ -100,5 +107,7 @@ Twitter Oauth Library for Android 4.0.3 and upper
 This source is The MIT License.
 
 using [okhttp][okhttp_url] [Apache License, Version 2.0][Apache]
+using [ActiveAndroid][ActiveAndroid_url] [Apache License, Version 2.0][Apache]
 [Apache]: http://www.apache.org/licenses/LICENSE-2.0
 [okhttp_url]: https://github.com/square/okhttp
+[ActiveAndroid_url]: https://github.com/pardom/ActiveAndroid

@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
+import com.twitter.meil_mitu.twitter4holo.item.DirectMessageItem;
 
 import org.json.JSONObject;
 
@@ -39,6 +40,16 @@ public class DirectMessage implements Parcelable {
             Sender=new User(getJSONObject(obj,"sender"));
         }
         Text=getString(obj,"text");
+        EntitySupport=new EntitySupport(Text,Entities);
+    }
+
+    public DirectMessage(DirectMessageItem item){
+       CreatedAt=item.CreatedAt;
+        Entities=item.Entities;
+       Id=item.Id;
+        Recipient=new User(item.Recipient);
+        Sender=new User(item.Sender);
+        Text=item.Text;
         EntitySupport=new EntitySupport(Text,Entities);
     }
 

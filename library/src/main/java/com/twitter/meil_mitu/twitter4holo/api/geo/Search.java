@@ -3,14 +3,15 @@ package com.twitter.meil_mitu.twitter4holo.api.geo;
 import com.twitter.meil_mitu.twitter4holo.AbsGet;
 import com.twitter.meil_mitu.twitter4holo.AbsJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
+import com.twitter.meil_mitu.twitter4holo.ITwitterJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.OauthType;
 import com.twitter.meil_mitu.twitter4holo.ResponseData;
 import com.twitter.meil_mitu.twitter4holo.data.PlaceQuery;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
-public class Search extends AbsGet {
+public class Search extends AbsGet<ITwitterJsonConverter> {
 
-    public Search(AbsOauth oauth, AbsJsonConverter json) {
+    public Search(AbsOauth oauth, ITwitterJsonConverter json) {
         super(oauth, json);
     }
 

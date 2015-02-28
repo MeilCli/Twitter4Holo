@@ -3,13 +3,14 @@ package com.twitter.meil_mitu.twitter4holo.api.friendships;
 import com.twitter.meil_mitu.twitter4holo.AbsJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
 import com.twitter.meil_mitu.twitter4holo.AbsPost;
+import com.twitter.meil_mitu.twitter4holo.ITwitterJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.OauthType;
 import com.twitter.meil_mitu.twitter4holo.data.Relationship;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
-public class Update extends AbsPost {
+public class Update extends AbsPost<ITwitterJsonConverter> {
 
-    public Update(AbsOauth oauth, AbsJsonConverter json) {
+    public Update(AbsOauth oauth, ITwitterJsonConverter json) {
         super(oauth, json);
     }
 

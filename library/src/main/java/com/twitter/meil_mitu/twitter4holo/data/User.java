@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
+import com.twitter.meil_mitu.twitter4holo.item.UserItem;
 
 import org.json.JSONObject;
 
@@ -57,6 +58,37 @@ public class User implements Parcelable {
         StatusesCount=getInt(obj,"statuses_count");
         Url=getString(obj,"url","");
         IsVerified=getBoolean(obj,"verified");
+        UserEntitySupport=new UserEntitySupport(Url,Description,Entities);
+    }
+
+    public User(UserItem item){
+        CreatedAt=item.CreatedAt;
+        Description=item.Description;
+        Entities=item.Entities;
+        FavouritesCount=item.FavouritesCount;
+        FollowersCount=item.FollowersCount;
+        FriendsCount=item.FriendsCount;
+        ListedCount=item.ListedCount;
+        StatusesCount=item.StatusesCount;
+        IsFollowRequestSent=item.IsFollowRequestSent;
+        IsFollowing=item.IsFollowing;
+        IsProtected=item.IsProtected;
+        IsMuting=item.IsMuting;
+        IsVerified=item.IsVerified;
+        Id=item.Id;
+        Lang=item.Lang;
+        Location=item.Location;
+        Name=item.Name;
+        ProfileBackgroundImageUrl=item.ProfileBackgroundImageUrl;
+        ProfileBannerUrl=item.ProfileBannerUrl;
+                ProfileImageUrl=item.ProfileImageUrl;
+        ScreenName=item.ScreenName;
+        Url=item.Url;
+        if(item.Status!=null){
+            Status=new Status(item.Status);
+        }else{
+            Status=null;
+        }
         UserEntitySupport=new UserEntitySupport(Url,Description,Entities);
     }
 

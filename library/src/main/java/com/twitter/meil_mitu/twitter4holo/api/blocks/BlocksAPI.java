@@ -1,12 +1,12 @@
 package com.twitter.meil_mitu.twitter4holo.api.blocks;
 
-import com.twitter.meil_mitu.twitter4holo.AbsJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
-import com.twitter.meil_mitu.twitter4holo.api.AbsAPI;
+import com.twitter.meil_mitu.twitter4holo.ITwitterJsonConverter;
+import com.twitter.meil_mitu.twitter4holo.AbsAPI;
 
-public class BlocksAPI extends AbsAPI {
+public class BlocksAPI extends AbsAPI<ITwitterJsonConverter> {
 
-    public BlocksAPI(AbsOauth oauth, AbsJsonConverter json) {
+    public BlocksAPI(AbsOauth oauth, ITwitterJsonConverter json) {
         super(oauth, json);
     }
 

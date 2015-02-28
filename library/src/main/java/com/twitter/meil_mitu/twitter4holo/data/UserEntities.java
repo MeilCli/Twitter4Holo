@@ -3,13 +3,14 @@ package com.twitter.meil_mitu.twitter4holo.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.twitter.meil_mitu.twitter4holo.IObjectConverter;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
 import org.json.JSONObject;
 
 import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.*;
 
-public class UserEntities implements Parcelable {
+public class UserEntities implements Parcelable ,IObjectConverter{
     public final Entities Url,Description;
 
     public UserEntities(){
@@ -39,6 +40,14 @@ public class UserEntities implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeParcelable(this.Url, 0);
         dest.writeParcelable(this.Description, 0);
+    }
+
+    @Override
+    public JSONObject toJSONObject() throws Twitter4HoloException{
+        JSONObject obj = new JSONObject();
+        putJSONObject(obj,"url",Url.toJSONObject());
+        putJSONObject(obj,"description",Description.toJSONObject());
+        return obj;
     }
 
     @Override
@@ -84,4 +93,6 @@ public class UserEntities implements Parcelable {
             return new UserEntities[size];
         }
     };
+
+
 }

@@ -6,8 +6,8 @@ import com.squareup.okhttp.Response;
 import com.twitter.meil_mitu.twitter4holo.AbsGet;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
 import com.twitter.meil_mitu.twitter4holo.AbsPost;
-import com.twitter.meil_mitu.twitter4holo.Config;
-import com.twitter.meil_mitu.twitter4holo.JsonConverter;
+import com.twitter.meil_mitu.twitter4holo.Twitter4HoloConfig;
+import com.twitter.meil_mitu.twitter4holo.TwitterJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.OauthType;
 import com.twitter.meil_mitu.twitter4holo.api.oauth2.InvalidateToken;
 import com.twitter.meil_mitu.twitter4holo.api.oauth2.Token;
@@ -20,11 +20,11 @@ public class Oauth2 extends AbsOauth{
     protected String AccessToken;
     protected String TokenType;
 
-    public Oauth2(Config config, String consumerKey, String consumerSecret) {
+    public Oauth2(Twitter4HoloConfig config, String consumerKey, String consumerSecret) {
         super(config, consumerKey, consumerSecret);
     }
 
-    public Oauth2(Config config, String consumerKey, String consumerSecret,String accessToken,String tokenType) {
+    public Oauth2(Twitter4HoloConfig config, String consumerKey, String consumerSecret,String accessToken,String tokenType) {
         super(config, consumerKey, consumerSecret);
         this.AccessToken = accessToken;
         this.TokenType = tokenType;
@@ -36,7 +36,7 @@ public class Oauth2 extends AbsOauth{
             throw new IncorrectException("do not allow OauthType");
         }
         if(AccessToken==null||TokenType==null){
-            new Token(this,JsonConverter.getDefaultConverter()).call();// token is post
+            new Token(this, TwitterJsonConverter.getDefaultConverter()).call();// token is post
         }
         Request.Builder builder = new Request.Builder();
         builder.url(toUrl(param));
@@ -58,7 +58,7 @@ public class Oauth2 extends AbsOauth{
             throw new Twitter4HoloException(e.getMessage());
         } catch (Twitter4HoloException e){
             if(e.getErrorCode()==89){
-                new InvalidateToken(this,JsonConverter.getDefaultConverter()).call();
+                new InvalidateToken(this, TwitterJsonConverter.getDefaultConverter()).call();
                 return get(param);
             }
             throw e;

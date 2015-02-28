@@ -3,16 +3,17 @@ package com.twitter.meil_mitu.twitter4holo.api.users.suggestions;
 import com.twitter.meil_mitu.twitter4holo.AbsGet;
 import com.twitter.meil_mitu.twitter4holo.AbsJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
+import com.twitter.meil_mitu.twitter4holo.ITwitterJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.OauthType;
 import com.twitter.meil_mitu.twitter4holo.ResponseData;
 import com.twitter.meil_mitu.twitter4holo.data.SuggestionUser;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
-public class Get extends AbsGet {
+public class Get extends AbsGet<ITwitterJsonConverter> {
 
     private String slug;
 
-    public Get(AbsOauth oauth, AbsJsonConverter json,String slug) {
+    public Get(AbsOauth oauth, ITwitterJsonConverter json,String slug) {
         super(oauth, json);
         this.slug=slug;
     }

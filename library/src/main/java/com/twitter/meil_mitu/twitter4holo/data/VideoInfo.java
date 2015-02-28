@@ -4,6 +4,7 @@ package com.twitter.meil_mitu.twitter4holo.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.twitter.meil_mitu.twitter4holo.IObjectConverter;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
 import org.json.JSONArray;
@@ -13,7 +14,7 @@ import java.util.Arrays;
 
 import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.*;
 
-public class VideoInfo implements Parcelable {
+public class VideoInfo implements Parcelable ,IObjectConverter{
 
     public final long DurationMillis;
     public final VideoVariant[] Variants;
@@ -48,6 +49,14 @@ public class VideoInfo implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(this.DurationMillis);
         dest.writeParcelableArray(this.Variants, flags);
+    }
+
+    @Override
+     public JSONObject toJSONObject() throws Twitter4HoloException{
+        JSONObject obj=new JSONObject();
+        putLong(obj,"duration_millis",DurationMillis);
+        putJSONArray(obj, "variants", toJSONArray(Variants));
+        return obj;
     }
 
     @Override
@@ -92,4 +101,6 @@ public class VideoInfo implements Parcelable {
             return new VideoInfo[size];
         }
     };
+
+
 }

@@ -4,14 +4,15 @@ package com.twitter.meil_mitu.twitter4holo.api.account;
 import com.twitter.meil_mitu.twitter4holo.AbsJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
 import com.twitter.meil_mitu.twitter4holo.AbsPost;
+import com.twitter.meil_mitu.twitter4holo.ITwitterJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.OauthType;
 import com.twitter.meil_mitu.twitter4holo.data.Setting;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
 
-public class PostSettings extends AbsPost {
+public class PostSettings extends AbsPost <ITwitterJsonConverter>{
 
-    public PostSettings(AbsOauth oauth, AbsJsonConverter json) {
+    public PostSettings(AbsOauth oauth, ITwitterJsonConverter json) {
         super(oauth, json);
     }
 

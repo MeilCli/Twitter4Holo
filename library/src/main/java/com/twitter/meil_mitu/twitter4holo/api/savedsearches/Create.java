@@ -3,13 +3,14 @@ package com.twitter.meil_mitu.twitter4holo.api.savedsearches;
 import com.twitter.meil_mitu.twitter4holo.AbsJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
 import com.twitter.meil_mitu.twitter4holo.AbsPost;
+import com.twitter.meil_mitu.twitter4holo.ITwitterJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.OauthType;
 import com.twitter.meil_mitu.twitter4holo.data.SavedSearch;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
-public class Create extends AbsPost {
+public class Create extends AbsPost<ITwitterJsonConverter> {
 
-    public Create(AbsOauth oauth, AbsJsonConverter json,String query) {
+    public Create(AbsOauth oauth, ITwitterJsonConverter json,String query) {
         super(oauth, json);
         addParam("query",query);
     }

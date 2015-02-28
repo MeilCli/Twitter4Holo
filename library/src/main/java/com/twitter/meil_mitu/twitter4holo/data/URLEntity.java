@@ -33,6 +33,15 @@ public class URLEntity extends Entity implements android.os.Parcelable {
     }
 
     @Override
+    public JSONObject toJSONObject() throws Twitter4HoloException {
+        JSONObject obj =  super.toJSONObject();
+        putString(obj,"url",Url);
+        putString(obj,"display_url",DisplayUrl);
+        putString(obj,"expanded_url",ExpandedUrl);
+        return obj;
+    }
+
+    @Override
     public String toString() {
         return super.toString()+" URLEntity{" +
                 "Url='" + Url + '\'' +

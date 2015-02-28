@@ -1,12 +1,12 @@
 package com.twitter.meil_mitu.twitter4holo.api.statuses;
 
-import com.twitter.meil_mitu.twitter4holo.AbsJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
-import com.twitter.meil_mitu.twitter4holo.api.AbsAPI;
+import com.twitter.meil_mitu.twitter4holo.ITwitterJsonConverter;
+import com.twitter.meil_mitu.twitter4holo.AbsAPI;
 
-public class StatusesAPI extends AbsAPI {
+public class StatusesAPI extends AbsAPI <ITwitterJsonConverter>{
 
-    public StatusesAPI(AbsOauth oauth, AbsJsonConverter json) {
+    public StatusesAPI(AbsOauth oauth, ITwitterJsonConverter json) {
         super(oauth, json);
     }
 

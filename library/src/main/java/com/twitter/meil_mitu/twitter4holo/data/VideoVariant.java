@@ -3,13 +3,14 @@ package com.twitter.meil_mitu.twitter4holo.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.twitter.meil_mitu.twitter4holo.IObjectConverter;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
 import org.json.JSONObject;
 
 import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.*;
 
-public class VideoVariant implements Parcelable {
+public class VideoVariant implements Parcelable ,IObjectConverter{
 
     public final int Bitrate;
     public final String ContentType,Url;
@@ -31,6 +32,15 @@ public class VideoVariant implements Parcelable {
         dest.writeInt(this.Bitrate);
         dest.writeString(this.ContentType);
         dest.writeString(this.Url);
+    }
+
+    @Override
+    public JSONObject toJSONObject() throws Twitter4HoloException {
+        JSONObject obj = new JSONObject();
+        putInt(obj,"bitrate",Bitrate);
+        putString(obj,"content_type",ContentType);
+        putString(obj,"url",Url);
+        return obj;
     }
 
     @Override

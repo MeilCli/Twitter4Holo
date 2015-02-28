@@ -8,7 +8,7 @@ import com.twitter.meil_mitu.twitter4holo.AbsGet;
 import com.twitter.meil_mitu.twitter4holo.AbsMethod;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
 import com.twitter.meil_mitu.twitter4holo.AbsPost;
-import com.twitter.meil_mitu.twitter4holo.Config;
+import com.twitter.meil_mitu.twitter4holo.Twitter4HoloConfig;
 import com.twitter.meil_mitu.twitter4holo.OauthType;
 import com.twitter.meil_mitu.twitter4holo.exception.IncorrectException;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
@@ -28,11 +28,11 @@ public class Oauth extends AbsOauth {
     protected String AccessToken;
     protected String AccessTokenSecret;
 
-    public Oauth(Config config, String consumerKey, String consumerSecret) {
+    public Oauth(Twitter4HoloConfig config, String consumerKey, String consumerSecret) {
         super(config, consumerKey, consumerSecret);
     }
 
-    public Oauth(Config config, String consumerKey, String consumerSecret,String accessToken,String accessTokenSecret) {
+    public Oauth(Twitter4HoloConfig config, String consumerKey, String consumerSecret,String accessToken,String accessTokenSecret) {
         super(config, consumerKey, consumerSecret);
         this.AccessToken=accessToken;
         this.AccessTokenSecret=accessTokenSecret;

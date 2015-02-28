@@ -3,6 +3,7 @@ package com.twitter.meil_mitu.twitter4holo.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.twitter.meil_mitu.twitter4holo.IObjectConverter;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
 import org.json.JSONArray;
@@ -12,7 +13,7 @@ import java.util.Arrays;
 
 import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.*;
 
-public class Entities implements Parcelable {
+public class Entities implements Parcelable ,IObjectConverter{
 
     public final URLEntity[] URL;
     public final MediaEntity[] Media;
@@ -134,6 +135,17 @@ public class Entities implements Parcelable {
     }
 
     @Override
+    public JSONObject toJSONObject() throws Twitter4HoloException{
+        JSONObject obj = new JSONObject();
+        putJSONArray(obj,"urls",toJSONArray(URL));
+        putJSONArray(obj,"media",toJSONArray(Media));
+        putJSONArray(obj,"hashtags",toJSONArray(Hashtag));
+        putJSONArray(obj,"symbols",toJSONArray(Symbol));
+        putJSONArray(obj,"user_mentions",toJSONArray(UserMention));
+        return obj;
+    }
+
+    @Override
     public String toString() {
         return "Entities{" +
                 "URL=" + Arrays.toString(URL) +
@@ -184,4 +196,6 @@ public class Entities implements Parcelable {
             return new Entities[size];
         }
     };
+
+
 }

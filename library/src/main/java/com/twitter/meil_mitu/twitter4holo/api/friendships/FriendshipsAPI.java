@@ -1,12 +1,12 @@
 package com.twitter.meil_mitu.twitter4holo.api.friendships;
 
-import com.twitter.meil_mitu.twitter4holo.AbsJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
-import com.twitter.meil_mitu.twitter4holo.api.AbsAPI;
+import com.twitter.meil_mitu.twitter4holo.ITwitterJsonConverter;
+import com.twitter.meil_mitu.twitter4holo.AbsAPI;
 
-public class FriendshipsAPI extends AbsAPI {
+public class FriendshipsAPI extends AbsAPI<ITwitterJsonConverter> {
 
-    public FriendshipsAPI(AbsOauth oauth, AbsJsonConverter json) {
+    public FriendshipsAPI(AbsOauth oauth, ITwitterJsonConverter json) {
         super(oauth, json);
     }
 

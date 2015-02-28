@@ -1,12 +1,12 @@
 package com.twitter.meil_mitu.twitter4holo.api.savedsearches;
 
-import com.twitter.meil_mitu.twitter4holo.AbsJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
-import com.twitter.meil_mitu.twitter4holo.api.AbsAPI;
+import com.twitter.meil_mitu.twitter4holo.ITwitterJsonConverter;
+import com.twitter.meil_mitu.twitter4holo.AbsAPI;
 
-public class SavedSearchesAPI extends AbsAPI {
+public class SavedSearchesAPI extends AbsAPI<ITwitterJsonConverter> {
 
-    public SavedSearchesAPI(AbsOauth oauth, AbsJsonConverter json) {
+    public SavedSearchesAPI(AbsOauth oauth, ITwitterJsonConverter json) {
         super(oauth, json);
     }
 

@@ -3,12 +3,13 @@ package com.twitter.meil_mitu.twitter4holo.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.twitter.meil_mitu.twitter4holo.IObjectConverter;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
 import org.json.JSONObject;
 import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.*;
 
-public class CurrentUserRetweet implements Parcelable {
+public class CurrentUserRetweet implements Parcelable ,IObjectConverter{
     public final long Id;
 
     public CurrentUserRetweet(JSONObject obj) throws Twitter4HoloException {
@@ -22,6 +23,13 @@ public class CurrentUserRetweet implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(this.Id);
+    }
+
+    @Override
+    public JSONObject toJSONObject() throws Twitter4HoloException{
+        JSONObject obj = new JSONObject();
+        putLong(obj,"id",Id);
+        return obj;
     }
 
     @Override
@@ -62,4 +70,6 @@ public class CurrentUserRetweet implements Parcelable {
             return new CurrentUserRetweet[size];
         }
     };
+
+
 }

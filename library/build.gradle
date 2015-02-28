@@ -35,15 +35,17 @@ uploadArchives {
             repository url: "file://${projectDir}/repository"
             pom.groupId = 'meilcli'
             pom.artifactId = 'twitter4holo'
-            pom.version = '0.1.0'
+            pom.version = '0.2.0'
         }
     }
 }
 
 repositories {
     mavenCentral()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
 }
 
 dependencies {
     compile 'com.squareup.okhttp:okhttp:2.2.0'
+    compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
 }

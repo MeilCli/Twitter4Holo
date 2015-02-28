@@ -3,13 +3,14 @@ package com.twitter.meil_mitu.twitter4holo.api.users;
 import com.twitter.meil_mitu.twitter4holo.AbsJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
 import com.twitter.meil_mitu.twitter4holo.AbsPost;
+import com.twitter.meil_mitu.twitter4holo.ITwitterJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.OauthType;
 import com.twitter.meil_mitu.twitter4holo.data.User;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
-public class ReportSpam extends AbsPost {
+public class ReportSpam extends AbsPost<ITwitterJsonConverter> {
 
-    public ReportSpam(AbsOauth oauth, AbsJsonConverter json) {
+    public ReportSpam(AbsOauth oauth, ITwitterJsonConverter json) {
         super(oauth, json);
     }
 

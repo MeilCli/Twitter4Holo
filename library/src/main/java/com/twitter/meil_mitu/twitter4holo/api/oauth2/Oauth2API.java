@@ -1,12 +1,12 @@
 package com.twitter.meil_mitu.twitter4holo.api.oauth2;
 
-import com.twitter.meil_mitu.twitter4holo.AbsJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
-import com.twitter.meil_mitu.twitter4holo.api.AbsAPI;
+import com.twitter.meil_mitu.twitter4holo.ITwitterJsonConverter;
+import com.twitter.meil_mitu.twitter4holo.AbsAPI;
 
-public class Oauth2API extends AbsAPI {
+public class Oauth2API extends AbsAPI<ITwitterJsonConverter> {
 
-    public Oauth2API(AbsOauth oauth, AbsJsonConverter json) {
+    public Oauth2API(AbsOauth oauth, ITwitterJsonConverter json) {
         super(oauth, json);
     }
 

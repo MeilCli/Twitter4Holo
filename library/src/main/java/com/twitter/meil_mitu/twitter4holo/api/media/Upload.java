@@ -3,15 +3,16 @@ package com.twitter.meil_mitu.twitter4holo.api.media;
 import com.twitter.meil_mitu.twitter4holo.AbsJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
 import com.twitter.meil_mitu.twitter4holo.AbsPost;
+import com.twitter.meil_mitu.twitter4holo.ITwitterJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.OauthType;
 import com.twitter.meil_mitu.twitter4holo.data.Media;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
 import java.io.File;
 
-public class Upload extends AbsPost {
+public class Upload extends AbsPost<ITwitterJsonConverter> {
 
-    public Upload(AbsOauth oauth, AbsJsonConverter json,File media) {
+    public Upload(AbsOauth oauth, ITwitterJsonConverter json,File media) {
         super(oauth, json);
         addFileParam("media",media);
     }

@@ -35,6 +35,15 @@ public class UserMentionEntity extends Entity implements android.os.Parcelable {
     }
 
     @Override
+    public JSONObject toJSONObject() throws Twitter4HoloException{
+        JSONObject obj= super.toJSONObject();
+        putLong(obj,"id",Id);
+        putString(obj,"screen_name",ScreenName);
+        putString(obj,"name",Name);
+        return obj;
+    }
+
+    @Override
     public String toString() {
         return super.toString()+" UserMentionEntity{" +
                 "Id=" + Id +

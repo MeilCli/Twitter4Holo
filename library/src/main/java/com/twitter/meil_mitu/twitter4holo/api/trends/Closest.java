@@ -3,14 +3,15 @@ package com.twitter.meil_mitu.twitter4holo.api.trends;
 import com.twitter.meil_mitu.twitter4holo.AbsGet;
 import com.twitter.meil_mitu.twitter4holo.AbsJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
+import com.twitter.meil_mitu.twitter4holo.ITwitterJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.OauthType;
 import com.twitter.meil_mitu.twitter4holo.ResponseList;
 import com.twitter.meil_mitu.twitter4holo.data.TrendPlace;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
-public class Closest extends AbsGet {
+public class Closest extends AbsGet<ITwitterJsonConverter> {
 
-    public Closest(AbsOauth oauth, AbsJsonConverter json) {
+    public Closest(AbsOauth oauth, ITwitterJsonConverter json) {
         super(oauth, json);
     }
 

@@ -3,15 +3,16 @@ package com.twitter.meil_mitu.twitter4holo.api.account;
 import com.twitter.meil_mitu.twitter4holo.AbsJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
 import com.twitter.meil_mitu.twitter4holo.AbsPost;
+import com.twitter.meil_mitu.twitter4holo.ITwitterJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.OauthType;
 import com.twitter.meil_mitu.twitter4holo.data.User;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
 import java.io.File;
 
-public class UpdateProfileImage extends AbsPost {
+public class UpdateProfileImage extends AbsPost <ITwitterJsonConverter>{
 
-    public UpdateProfileImage(AbsOauth oauth, AbsJsonConverter json,File image) {
+    public UpdateProfileImage(AbsOauth oauth,ITwitterJsonConverter json,File image) {
         super(oauth, json);
         addFileParam("image",image);
     }

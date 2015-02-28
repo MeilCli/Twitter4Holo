@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
+import com.twitter.meil_mitu.twitter4holo.item.StatusItem;
 
 import org.json.JSONObject;
 
@@ -61,6 +62,35 @@ public class Status implements Parcelable {
             User=null;
         }else{
             User=new User(getJSONObject(obj,"user"));
+        }
+        EntitySupport=new EntitySupport(Text,Entities);
+    }
+
+    public Status(StatusItem item){
+        CreatedAt=item.CreatedAt;
+        CurrentUserRetweet=item.CurrentUserRetweet;
+        Entities=item.Entities;
+        ExtendedEntities=item.ExtendedEntities;
+        FavoriteCount=item.FavoriteCount;
+        RetweetCount=item.RetweetCount;
+        IsFavorited=item.IsFavorited;
+        IsRetweeted=item.IsRetweeted;
+        Id=item.Id;
+        InReplyToStatusId=item.InReplyToStatusId;
+        InReplyToUserId=item.InReplyToUserId;
+        InReplyToScreenName=item.InReplyToScreenName;
+        Lang=item.Lang;
+        Source=item.Source;
+        Text=item.Text;
+        if(item.RetweetedStatus!=null){
+        RetweetedStatus=new Status(item.RetweetedStatus);
+        }else{
+            RetweetedStatus=null;
+        }
+        if(item.User!=null){
+            User=new User(item.User);
+        }else{
+            User=null;
         }
         EntitySupport=new EntitySupport(Text,Entities);
     }

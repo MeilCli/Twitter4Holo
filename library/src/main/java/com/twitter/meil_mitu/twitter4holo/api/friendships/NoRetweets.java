@@ -3,14 +3,15 @@ package com.twitter.meil_mitu.twitter4holo.api.friendships;
 import com.twitter.meil_mitu.twitter4holo.AbsGet;
 import com.twitter.meil_mitu.twitter4holo.AbsJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
+import com.twitter.meil_mitu.twitter4holo.ITwitterJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.OauthType;
 import com.twitter.meil_mitu.twitter4holo.ResponseData;
 import com.twitter.meil_mitu.twitter4holo.data.IDs;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
-public class NoRetweets extends AbsGet {
+public class NoRetweets extends AbsGet<ITwitterJsonConverter> {
 
-    public NoRetweets(AbsOauth oauth, AbsJsonConverter json) {
+    public NoRetweets(AbsOauth oauth, ITwitterJsonConverter json) {
         super(oauth, json);
     }
 

@@ -3,18 +3,19 @@ package com.twitter.meil_mitu.twitter4holo.api.lists;
 import com.twitter.meil_mitu.twitter4holo.AbsJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
 import com.twitter.meil_mitu.twitter4holo.AbsPost;
+import com.twitter.meil_mitu.twitter4holo.ITwitterJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.OauthType;
 import com.twitter.meil_mitu.twitter4holo.data.UserList;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
-public class Update extends AbsPost {
+public class Update extends AbsPost<ITwitterJsonConverter> {
 
-    public Update(AbsOauth oauth, AbsJsonConverter json,long listId) {
+    public Update(AbsOauth oauth, ITwitterJsonConverter json,long listId) {
         super(oauth, json);
         addParam("list_id",listId);
     }
 
-    public Update(AbsOauth oauth, AbsJsonConverter json,String slug) {
+    public Update(AbsOauth oauth, ITwitterJsonConverter json,String slug) {
         super(oauth, json);
         addParam("slug",slug);
     }

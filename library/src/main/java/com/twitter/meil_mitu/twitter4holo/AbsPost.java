@@ -1,18 +1,26 @@
 package com.twitter.meil_mitu.twitter4holo;
 
+import com.twitter.meil_mitu.twitter4holo.exception.IncorrectException;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class AbsPost extends AbsMethod{
+public abstract class AbsPost<T> extends AbsMethod{
     private HashMap<String,File> fmap = new HashMap<String,File>();
     protected AbsOauth Oauth;
-    protected AbsJsonConverter Json;
+    protected T Json;
+    protected AbsJsonConverter AbsJson;
 
-    public AbsPost(AbsOauth oauth,AbsJsonConverter json){
+    public AbsPost(AbsOauth oauth,T json){
         this.Oauth = oauth;
-        this.Json = json;
+        if(json instanceof AbsJsonConverter){
+            this.Json=json;
+            this.AbsJson=(AbsJsonConverter)json;
+        }else{
+            throw new IncorrectException("json not instanceof AbsJsonConverter");
+        }
     }
 
     @Override

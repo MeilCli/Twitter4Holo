@@ -27,6 +27,13 @@ public class SymbolEntity extends Entity implements android.os.Parcelable {
     }
 
     @Override
+    public JSONObject toJSONObject() throws Twitter4HoloException{
+        JSONObject obj =  super.toJSONObject();
+        putString(obj,"text",Text);
+        return obj;
+    }
+
+    @Override
     public String toString() {
         return super.toString()+" SymbolEntity{" +
                 "Text='" + Text + '\'' +

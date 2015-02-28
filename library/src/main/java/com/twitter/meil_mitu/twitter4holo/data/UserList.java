@@ -4,6 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
+import com.twitter.meil_mitu.twitter4holo.item.UserItem;
+import com.twitter.meil_mitu.twitter4holo.item.UserListItem;
 
 import org.json.JSONObject;
 
@@ -35,6 +37,19 @@ public class UserList implements Parcelable {
         }else{
             User=new User(getJSONObject(obj,"user"));
         }
+    }
+
+    public UserList(UserListItem item){
+        Slug = item.Slug;
+        Name = item.Name;
+        Mode = item.Mode;
+        Description = item.Description;
+        CreatedAt = item.CreatedAt;
+        SubscriberCount = item.SubscriberCount;
+        MemberCount = item.MemberCount;
+        Id = item.Id;
+        IsFollowing = item.IsFollowing;
+        User = new User(item.User);
     }
 
     public UserList(Parcel in) {

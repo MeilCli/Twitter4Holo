@@ -3,19 +3,20 @@ package com.twitter.meil_mitu.twitter4holo.api.lists.members;
 import com.twitter.meil_mitu.twitter4holo.AbsGet;
 import com.twitter.meil_mitu.twitter4holo.AbsJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
+import com.twitter.meil_mitu.twitter4holo.ITwitterJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.OauthType;
 import com.twitter.meil_mitu.twitter4holo.ResponseData;
 import com.twitter.meil_mitu.twitter4holo.data.CursorUsers;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
-public class Get extends AbsGet {
+public class Get extends AbsGet<ITwitterJsonConverter> {
 
-    public Get(AbsOauth oauth, AbsJsonConverter json,long listId) {
+    public Get(AbsOauth oauth, ITwitterJsonConverter json,long listId) {
         super(oauth, json);
         addParam("list_id",listId);
     }
 
-    public Get(AbsOauth oauth, AbsJsonConverter json,String slug) {
+    public Get(AbsOauth oauth, ITwitterJsonConverter json,String slug) {
         super(oauth, json);
         addParam("slug",slug);
     }

@@ -1,15 +1,15 @@
 package com.twitter.meil_mitu.twitter4holo.api.users;
 
-import com.twitter.meil_mitu.twitter4holo.AbsJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
-import com.twitter.meil_mitu.twitter4holo.api.AbsAPI;
+import com.twitter.meil_mitu.twitter4holo.ITwitterJsonConverter;
+import com.twitter.meil_mitu.twitter4holo.AbsAPI;
 import com.twitter.meil_mitu.twitter4holo.api.users.suggestions.SuggestionsAPI;
 
-public class UsersAPI extends AbsAPI {
+public class UsersAPI extends AbsAPI<ITwitterJsonConverter> {
 
     protected SuggestionsAPI Suggestions;
 
-    public UsersAPI(AbsOauth oauth, AbsJsonConverter json) {
+    public UsersAPI(AbsOauth oauth, ITwitterJsonConverter json) {
         super(oauth, json);
         Suggestions=new SuggestionsAPI(Oauth,Json);
     }

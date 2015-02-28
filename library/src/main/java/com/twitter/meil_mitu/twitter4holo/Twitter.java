@@ -20,12 +20,10 @@ import com.twitter.meil_mitu.twitter4holo.api.search.SearchAPI;
 import com.twitter.meil_mitu.twitter4holo.api.statuses.StatusesAPI;
 import com.twitter.meil_mitu.twitter4holo.api.trends.TrendsAPI;
 import com.twitter.meil_mitu.twitter4holo.api.users.UsersAPI;
-import com.twitter.meil_mitu.twitter4holo.data.SavedSearch;
-import com.twitter.meil_mitu.twitter4holo.oauth.Oauth;
 
 public class Twitter {
     protected AbsOauth Oauth;
-    protected AbsJsonConverter Json;
+    protected ITwitterJsonConverter Json;
     protected OauthAPI Oauth1;
     protected Oauth2API Oauth2;
     protected StatusesAPI Statuses;
@@ -48,10 +46,10 @@ public class Twitter {
     protected HelpAPI Help;
 
     public Twitter(AbsOauth oauth){
-        this(oauth,JsonConverter.getDefaultConverter());
+        this(oauth, TwitterJsonConverter.getDefaultConverter());
     }
 
-    public Twitter(AbsOauth oauth,AbsJsonConverter json){
+    public Twitter(AbsOauth oauth,ITwitterJsonConverter json){
         this.Oauth=oauth;
         this.Json=json;
         //API

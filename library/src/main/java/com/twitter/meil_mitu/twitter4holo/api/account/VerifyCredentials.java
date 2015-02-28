@@ -3,14 +3,15 @@ package com.twitter.meil_mitu.twitter4holo.api.account;
 import com.twitter.meil_mitu.twitter4holo.AbsGet;
 import com.twitter.meil_mitu.twitter4holo.AbsJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
+import com.twitter.meil_mitu.twitter4holo.ITwitterJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.OauthType;
 import com.twitter.meil_mitu.twitter4holo.ResponseData;
 import com.twitter.meil_mitu.twitter4holo.data.User;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
-public class VerifyCredentials extends AbsGet {
+public class VerifyCredentials extends AbsGet<ITwitterJsonConverter> {
 
-    public VerifyCredentials(AbsOauth oauth, AbsJsonConverter json) {
+    public VerifyCredentials(AbsOauth oauth, ITwitterJsonConverter json) {
         super(oauth, json);
     }
 

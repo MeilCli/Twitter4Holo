@@ -1,5 +1,6 @@
 package com.twitter.meil_mitu.twitter4holo.util;
 
+import com.twitter.meil_mitu.twitter4holo.IObjectConverter;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
 import org.json.JSONArray;
@@ -129,8 +130,71 @@ public class JsonUtils {
         }
     }
 
+    public static void putInt(JSONObject obj,String name,int value)throws Twitter4HoloException{
+        try {
+            obj.put(name,value);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            throw new Twitter4HoloException(e.getMessage());
+        }
+    }
+
+    public static void putLong(JSONObject obj,String name,long value)throws Twitter4HoloException{
+        try{
+            obj.put(name,value);
+        }catch(JSONException e){
+            e.printStackTrace();
+            throw new Twitter4HoloException(e.getMessage());
+        }
+    }
+
+    public static void putString(JSONObject obj,String name,String value)throws Twitter4HoloException{
+        try {
+            obj.put(name,value);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            throw new Twitter4HoloException(e.getMessage());
+        }
+    }
+
+    public static void putJSONObject(JSONObject obj,String name,JSONObject value)throws Twitter4HoloException{
+        try{
+            obj.put(name,value);
+        }catch(JSONException e){
+            e.printStackTrace();
+            throw new Twitter4HoloException(e.getMessage());
+        }
+    }
+
+    public static void putJSONArray(JSONObject obj,String name,JSONArray value)throws Twitter4HoloException{
+        try {
+            obj.put(name,value);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            throw new Twitter4HoloException(e.getMessage());
+        }
+    }
+
+    public static void putNull(JSONObject obj,String name)throws Twitter4HoloException{
+        try{
+            obj.put(name,null);
+        }catch(JSONException e){
+            e.printStackTrace();
+            throw new Twitter4HoloException(e.getMessage());
+        }
+    }
+
     public static Iterator<String> keys(JSONObject obj){
         return obj.keys();
+    }
+
+    public static JSONObject toJSONObject(String obj)throws Twitter4HoloException{
+        try {
+            return new JSONObject(obj);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            throw new Twitter4HoloException(e.getMessage());
+        }
     }
 
     public static JSONObject getJSONObject(JSONArray ar,int index) throws Twitter4HoloException{
@@ -167,5 +231,26 @@ public class JsonUtils {
             e.printStackTrace();
             throw new Twitter4HoloException(e.getMessage());
         }
+    }
+
+    public static void putInt(JSONArray ar,int index,int value)throws Twitter4HoloException{
+        try {
+            ar.put(index,value);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            throw new Twitter4HoloException(e.getMessage());
+        }
+    }
+
+    public static void putJSONObject(JSONArray ar,JSONObject value)throws Twitter4HoloException{
+        ar.put(value);
+    }
+
+    public static JSONArray toJSONArray(IObjectConverter[] objcts)throws Twitter4HoloException{
+        JSONArray ar=new JSONArray();
+        for(IObjectConverter obj:objcts){
+            putJSONObject(ar,obj.toJSONObject());
+        }
+        return ar;
     }
 }

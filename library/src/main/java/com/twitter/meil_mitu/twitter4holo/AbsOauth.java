@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getInt;
@@ -31,14 +32,14 @@ public abstract class AbsOauth {
 
     protected String ConsumerKey;
     protected String ConsumerSecret;
-    protected Config Config;
+    protected Twitter4HoloConfig Config;
     protected OkHttpClient Http;
 
     private String lastProtocol;
 
-    protected AbsOauth(Config config,String consumerKey,String consumerSecret){
+    protected AbsOauth(Twitter4HoloConfig config,String consumerKey,String consumerSecret){
         if(config==null){
-            config=new Config();
+            config=new Twitter4HoloConfig();
         }
         this.Config = config;
         if(consumerKey==null||consumerSecret==null){
@@ -63,7 +64,7 @@ public abstract class AbsOauth {
         return lastProtocol;
     }
 
-    protected void okhttpSetting(Config config){
+    protected void okhttpSetting(Twitter4HoloConfig config){
         if(Http==null){
             Http=new OkHttpClient();
             ArrayList<Protocol> list = new ArrayList<Protocol>();
@@ -113,7 +114,8 @@ public abstract class AbsOauth {
             for(Map.Entry<String,String> e:param.getParam()){
                 multipartBuilder.addFormDataPart(e.getKey(),Utils.urlEncode(e.getValue()));
             }
-            for(Map.Entry<String,File> e:param.getFileParam()){
+            Set<Map.Entry<String,File>> files = param.getFileParam();
+            for(Map.Entry<String,File> e:files){
                 File f = e.getValue();
                 MediaType type;
                 if(f.getName().endsWith(".png")) {
@@ -123,7 +125,7 @@ public abstract class AbsOauth {
                 }else{
                     type=MediaJpeg;
                 }
-                multipartBuilder.addFormDataPart(e.getKey(),f.getName(),RequestBody.create(type,f));
+                multipartBuilder.addFormDataPart(Utils.urlEncode(e.getKey()),Utils.urlEncode(f.getName()),RequestBody.create(type,f));
             }
             body=multipartBuilder.build();
         }

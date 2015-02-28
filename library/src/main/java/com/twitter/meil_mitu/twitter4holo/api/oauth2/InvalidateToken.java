@@ -3,16 +3,17 @@ package com.twitter.meil_mitu.twitter4holo.api.oauth2;
 import com.twitter.meil_mitu.twitter4holo.AbsJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
 import com.twitter.meil_mitu.twitter4holo.AbsPost;
+import com.twitter.meil_mitu.twitter4holo.ITwitterJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.OauthType;
 import com.twitter.meil_mitu.twitter4holo.data.Oauth2Token;
 import com.twitter.meil_mitu.twitter4holo.exception.IncorrectException;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 import com.twitter.meil_mitu.twitter4holo.oauth.Oauth2;
 
-public class InvalidateToken extends AbsPost {
+public class InvalidateToken extends AbsPost<ITwitterJsonConverter> {
     private Oauth2 oauth2;
 
-    public InvalidateToken(AbsOauth oauth, AbsJsonConverter json) {
+    public InvalidateToken(AbsOauth oauth, ITwitterJsonConverter json) {
         super(oauth, json);
         if(Oauth instanceof  Oauth2){
             oauth2=(Oauth2)oauth;

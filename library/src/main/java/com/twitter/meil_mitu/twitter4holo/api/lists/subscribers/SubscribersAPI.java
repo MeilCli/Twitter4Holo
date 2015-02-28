@@ -1,13 +1,13 @@
 package com.twitter.meil_mitu.twitter4holo.api.lists.subscribers;
 
-import com.twitter.meil_mitu.twitter4holo.AbsJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
-import com.twitter.meil_mitu.twitter4holo.api.AbsAPI;
+import com.twitter.meil_mitu.twitter4holo.ITwitterJsonConverter;
+import com.twitter.meil_mitu.twitter4holo.AbsAPI;
 
 
-public class SubscribersAPI extends AbsAPI {
+public class SubscribersAPI extends AbsAPI<ITwitterJsonConverter> {
 
-    public SubscribersAPI(AbsOauth oauth, AbsJsonConverter json) {
+    public SubscribersAPI(AbsOauth oauth, ITwitterJsonConverter json) {
         super(oauth, json);
     }
 
