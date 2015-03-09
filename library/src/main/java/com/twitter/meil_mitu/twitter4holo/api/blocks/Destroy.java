@@ -1,6 +1,5 @@
 package com.twitter.meil_mitu.twitter4holo.api.blocks;
 
-import com.twitter.meil_mitu.twitter4holo.AbsJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
 import com.twitter.meil_mitu.twitter4holo.AbsPost;
 import com.twitter.meil_mitu.twitter4holo.ITwitterJsonConverter;
@@ -8,49 +7,49 @@ import com.twitter.meil_mitu.twitter4holo.OauthType;
 import com.twitter.meil_mitu.twitter4holo.data.User;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
-public class Destroy extends AbsPost<ITwitterJsonConverter> {
+public class Destroy extends AbsPost<ITwitterJsonConverter>{
 
-    public Destroy(AbsOauth oauth, ITwitterJsonConverter json) {
+    public Destroy(AbsOauth oauth, ITwitterJsonConverter json){
         super(oauth, json);
     }
 
     public Destroy screenName(String screenName){
-        addParam("screen_name",screenName);
+        addParam("screen_name", screenName);
         return this;
     }
 
     public Destroy userId(long userId){
-        addParam("user_id",userId);
+        addParam("user_id", userId);
         return this;
     }
 
     public Destroy includeEntities(boolean includeEntities){
-        addParam("include_entities",includeEntities);
+        addParam("include_entities", includeEntities);
         return this;
     }
 
-    public  Destroy skipStatus(boolean skipStatus){
-        addParam("skip_status",skipStatus);
+    public Destroy skipStatus(boolean skipStatus){
+        addParam("skip_status", skipStatus);
         return this;
     }
 
     @Override
-    public String url() {
+    public String url(){
         return "https://api.twitter.com/1.1/blocks/destroy.json";
     }
 
     @Override
-    public int allowOauthType() {
+    public int allowOauthType(){
         return OauthType.Oauth1;
     }
 
     @Override
-    public boolean isAuthorization() {
+    public boolean isAuthorization(){
         return true;
     }
 
     @Override
-    public User call() throws Twitter4HoloException {
+    public User call() throws Twitter4HoloException{
         return Json.toUser(Oauth.post(this));
     }
 }

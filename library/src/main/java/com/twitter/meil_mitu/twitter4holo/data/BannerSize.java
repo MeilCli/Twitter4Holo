@@ -7,34 +7,35 @@ import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
 import org.json.JSONObject;
 
-import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.*;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getInt;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getString;
 
-public class BannerSize implements Parcelable {
+public class BannerSize implements Parcelable{
 
-    public final int H,W;
+    public final int H, W;
     public final String Url;
 
-    public BannerSize(JSONObject obj) throws Twitter4HoloException {
-        H=getInt(obj,"h");
-        W=getInt(obj,"w");
-        Url=getString(obj,"url");
+    public BannerSize(JSONObject obj) throws Twitter4HoloException{
+        H = getInt(obj, "h");
+        W = getInt(obj, "w");
+        Url = getString(obj, "url");
     }
 
-    public BannerSize(Parcel in) {
+    public BannerSize(Parcel in){
         this.H = in.readInt();
         this.W = in.readInt();
         this.Url = in.readString();
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
+    public void writeToParcel(Parcel dest, int flags){
         dest.writeInt(this.H);
         dest.writeInt(this.W);
         dest.writeString(this.Url);
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return "BannerSize{" +
                 "H=" + H +
                 ", W=" + W +
@@ -43,21 +44,21 @@ public class BannerSize implements Parcelable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof BannerSize)) return false;
+    public boolean equals(Object o){
+        if(this == o) return true;
+        if(!(o instanceof BannerSize)) return false;
 
         BannerSize that = (BannerSize) o;
 
-        if (H != that.H) return false;
-        if (W != that.W) return false;
-        if (!Url.equals(that.Url)) return false;
+        if(H != that.H) return false;
+        if(W != that.W) return false;
+        if(!Url.equals(that.Url)) return false;
 
         return true;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode(){
         int result = H;
         result = 31 * result + W;
         result = 31 * result + Url.hashCode();
@@ -65,16 +66,16 @@ public class BannerSize implements Parcelable {
     }
 
     @Override
-    public int describeContents() {
+    public int describeContents(){
         return 0;
     }
 
-    public static final Parcelable.Creator<BannerSize> CREATOR = new Parcelable.Creator<BannerSize>() {
-        public BannerSize createFromParcel(Parcel source) {
+    public static final Parcelable.Creator<BannerSize> CREATOR = new Parcelable.Creator<BannerSize>(){
+        public BannerSize createFromParcel(Parcel source){
             return new BannerSize(source);
         }
 
-        public BannerSize[] newArray(int size) {
+        public BannerSize[] newArray(int size){
             return new BannerSize[size];
         }
     };

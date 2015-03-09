@@ -1,6 +1,5 @@
 package com.twitter.meil_mitu.twitter4holo.api.statuses;
 
-import com.twitter.meil_mitu.twitter4holo.AbsJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
 import com.twitter.meil_mitu.twitter4holo.AbsPost;
 import com.twitter.meil_mitu.twitter4holo.ITwitterJsonConverter;
@@ -9,40 +8,40 @@ import com.twitter.meil_mitu.twitter4holo.data.Status;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 import com.twitter.meil_mitu.twitter4holo.util.Utils;
 
-public class Update extends AbsPost<ITwitterJsonConverter> {
+public class Update extends AbsPost<ITwitterJsonConverter>{
 
-    public Update(AbsOauth oauth, ITwitterJsonConverter json,String status) {
+    public Update(AbsOauth oauth, ITwitterJsonConverter json, String status){
         super(oauth, json);
-        addParam("status",status);
+        addParam("status", status);
     }
 
     public Update inReplyToStatusId(long inReplyToStatusId){
-        addParam("in_reply_to_status_id",inReplyToStatusId);
+        addParam("in_reply_to_status_id", inReplyToStatusId);
         return this;
     }
 
     public Update possiblySensitive(boolean possiblySensitive){
-        addParam("possibly_sensitive",possiblySensitive);
+        addParam("possibly_sensitive", possiblySensitive);
         return this;
     }
 
     public Update latitude(float latitude){
-        addParam("lat",latitude);
+        addParam("lat", latitude);
         return this;
     }
 
     public Update longitude(float longitude){
-        addParam("long",longitude);
+        addParam("long", longitude);
         return this;
     }
 
     public Update placeId(String placeId){
-        addParam("place_id",placeId);
+        addParam("place_id", placeId);
         return this;
     }
 
     public Update displayCoordinates(boolean displayCoordinates){
-        addParam("display_coordinates",displayCoordinates);
+        addParam("display_coordinates", displayCoordinates);
         return this;
     }
 
@@ -50,7 +49,7 @@ public class Update extends AbsPost<ITwitterJsonConverter> {
      * must not use in JsonConverter for User
      */
     public Update trimUser(boolean trimUser){
-        addParam("trim_user",trimUser);
+        addParam("trim_user", trimUser);
         return this;
     }
 
@@ -60,22 +59,22 @@ public class Update extends AbsPost<ITwitterJsonConverter> {
     }
 
     @Override
-    public String url() {
+    public String url(){
         return "https://api.twitter.com/1.1/statuses/update.json";
     }
 
     @Override
-    public int allowOauthType() {
+    public int allowOauthType(){
         return OauthType.Oauth1;
     }
 
     @Override
-    public boolean isAuthorization() {
+    public boolean isAuthorization(){
         return true;
     }
 
     @Override
-    public Status call() throws Twitter4HoloException {
+    public Status call() throws Twitter4HoloException{
         return Json.toStatus(Oauth.post(this));
     }
 }

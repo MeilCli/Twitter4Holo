@@ -5,21 +5,25 @@ import android.os.Parcel;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
 import org.json.JSONObject;
-import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.*;
 
-public class UserMentionEntity extends Entity implements android.os.Parcelable {
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getLong;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getString;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.putLong;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.putString;
+
+public class UserMentionEntity extends Entity implements android.os.Parcelable{
 
     public final long Id;
-    public final String ScreenName,Name;
+    public final String ScreenName, Name;
 
-    public UserMentionEntity(JSONObject obj) throws Twitter4HoloException {
+    public UserMentionEntity(JSONObject obj) throws Twitter4HoloException{
         super(obj);
-        Id=getLong(obj,"id");
-        ScreenName=getString(obj,"screen_name");
-        Name=getString(obj,"name");
+        Id = getLong(obj, "id");
+        ScreenName = getString(obj, "screen_name");
+        Name = getString(obj, "name");
     }
 
-    public UserMentionEntity(Parcel in) {
+    public UserMentionEntity(Parcel in){
         super(in);
         this.Id = in.readLong();
         this.ScreenName = in.readString();
@@ -27,8 +31,8 @@ public class UserMentionEntity extends Entity implements android.os.Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        super.writeToParcel(dest,flags);
+    public void writeToParcel(Parcel dest, int flags){
+        super.writeToParcel(dest, flags);
         dest.writeLong(this.Id);
         dest.writeString(this.ScreenName);
         dest.writeString(this.Name);
@@ -36,16 +40,16 @@ public class UserMentionEntity extends Entity implements android.os.Parcelable {
 
     @Override
     public JSONObject toJSONObject() throws Twitter4HoloException{
-        JSONObject obj= super.toJSONObject();
-        putLong(obj,"id",Id);
-        putString(obj,"screen_name",ScreenName);
-        putString(obj,"name",Name);
+        JSONObject obj = super.toJSONObject();
+        putLong(obj, "id", Id);
+        putString(obj, "screen_name", ScreenName);
+        putString(obj, "name", Name);
         return obj;
     }
 
     @Override
-    public String toString() {
-        return super.toString()+" UserMentionEntity{" +
+    public String toString(){
+        return super.toString() + " UserMentionEntity{" +
                 "Id=" + Id +
                 ", ScreenName='" + ScreenName + '\'' +
                 ", Name='" + Name + '\'' +
@@ -53,22 +57,22 @@ public class UserMentionEntity extends Entity implements android.os.Parcelable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof UserMentionEntity)) return false;
-        if (!super.equals(o)) return false;
+    public boolean equals(Object o){
+        if(this == o) return true;
+        if(!(o instanceof UserMentionEntity)) return false;
+        if(!super.equals(o)) return false;
 
         UserMentionEntity that = (UserMentionEntity) o;
 
-        if (Id != that.Id) return false;
-        if (!Name.equals(that.Name)) return false;
-        if (!ScreenName.equals(that.ScreenName)) return false;
+        if(Id != that.Id) return false;
+        if(!Name.equals(that.Name)) return false;
+        if(!ScreenName.equals(that.ScreenName)) return false;
 
         return true;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode(){
         int result = super.hashCode();
         result = 31 * result + (int) (Id ^ (Id >>> 32));
         result = 31 * result + ScreenName.hashCode();
@@ -77,16 +81,16 @@ public class UserMentionEntity extends Entity implements android.os.Parcelable {
     }
 
     @Override
-    public int describeContents() {
+    public int describeContents(){
         return 0;
     }
 
-    public static final Creator<UserMentionEntity> CREATOR = new Creator<UserMentionEntity>() {
-        public UserMentionEntity createFromParcel(Parcel source) {
+    public static final Creator<UserMentionEntity> CREATOR = new Creator<UserMentionEntity>(){
+        public UserMentionEntity createFromParcel(Parcel source){
             return new UserMentionEntity(source);
         }
 
-        public UserMentionEntity[] newArray(int size) {
+        public UserMentionEntity[] newArray(int size){
             return new UserMentionEntity[size];
         }
     };

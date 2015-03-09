@@ -18,15 +18,15 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 
-public class EntityUtils {
+public class EntityUtils{
 
     private static int color = Color.parseColor("#DE1E88E5");
 
-    public static SpannableStringBuilder toLinkHtml(String text,Entities entities){
-        return toLinkHtml(text,makeEntity(entities));
+    public static SpannableStringBuilder toLinkHtml(String text, Entities entities){
+        return toLinkHtml(text, makeEntity(entities));
     }
 
-    public static SpannableStringBuilder toLinkHtml(String text, Entity[] entities) {
+    public static SpannableStringBuilder toLinkHtml(String text, Entity[] entities){
         SpannableStringBuilder sb = new SpannableStringBuilder();
         int currentEntityIndex = 0;
         int index = 0;
@@ -36,14 +36,14 @@ public class EntityUtils {
         String escapedText;
         String spanText;
         Character escapeChar;
-        while (index < size) {
-            if (currentEntityIndex < entities.length) {
-                if (entities[currentEntityIndex].start  == index) {
+        while(index < size){
+            if(currentEntityIndex < entities.length){
+                if(entities[currentEntityIndex].start == index){
                     spanStart = sb.length();
                     if(entities[currentEntityIndex].type == EntityType.URL){
-                        spanText=entities[currentEntityIndex].to;
+                        spanText = entities[currentEntityIndex].to;
                     }else{
-                        spanText=text.charAt(index)+entities[currentEntityIndex].to;
+                        spanText = text.charAt(index) + entities[currentEntityIndex].to;
                     }
                     sb.append(spanText);
                     sb.setSpan(new URLSpan(spanText), spanStart, sb.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -53,12 +53,12 @@ public class EntityUtils {
                     continue;
                 }
             }
-            if (text.charAt(index) == '&') {
+            if(text.charAt(index) == '&'){
                 semicolonIndex = text.indexOf(';', index);
-                if (semicolonIndex != -1) {
+                if(semicolonIndex != -1){
                     escapedText = text.substring(index, semicolonIndex + 1);
                     escapeChar = escapeMap.get(escapedText);
-                    if (escapeChar != null) {
+                    if(escapeChar != null){
                         sb.append(escapeChar);
                         index += escapedText.length();
                         continue;
@@ -71,11 +71,11 @@ public class EntityUtils {
         return sb;
     }
 
-    public static String toLinkURL(String text,Entities entities){
-        return toLinkURL(text,makeEntity2(entities));
+    public static String toLinkURL(String text, Entities entities){
+        return toLinkURL(text, makeEntity2(entities));
     }
 
-    public static String toLinkURL(String text,Entity[] entities){
+    public static String toLinkURL(String text, Entity[] entities){
         StringBuilder sb = new StringBuilder();
         int currentEntityIndex = 0;
         int index = 0;
@@ -83,10 +83,10 @@ public class EntityUtils {
         int size = text.length();
         String escapedText;
         Character escapeChar;
-        while (index < size) {
-            if (currentEntityIndex < entities.length) {
-                if (entities[currentEntityIndex].start  == index) {
-                    if(entities[currentEntityIndex].type!=EntityType.URL){
+        while(index < size){
+            if(currentEntityIndex < entities.length){
+                if(entities[currentEntityIndex].start == index){
+                    if(entities[currentEntityIndex].type != EntityType.URL){
                         currentEntityIndex++;
                         continue;
                     }
@@ -96,12 +96,12 @@ public class EntityUtils {
                     continue;
                 }
             }
-            if (text.charAt(index) == '&') {
+            if(text.charAt(index) == '&'){
                 semicolonIndex = text.indexOf(';', index);
-                if (semicolonIndex != -1) {
+                if(semicolonIndex != -1){
                     escapedText = text.substring(index, semicolonIndex + 1);
                     escapeChar = escapeMap.get(escapedText);
-                    if (escapeChar != null) {
+                    if(escapeChar != null){
                         sb.append(escapeChar);
                         index += escapedText.length();
                         continue;
@@ -114,7 +114,7 @@ public class EntityUtils {
         return sb.toString();
     }
 
-    private static Entity[] makeEntity(Entities data) {
+    private static Entity[] makeEntity(Entities data){
         ArrayList<Entity> list = new ArrayList<Entity>();
         setEntity(list, data.URL);
         setEntity(list, data.Media);
@@ -125,74 +125,75 @@ public class EntityUtils {
         return list.toArray(new Entity[list.size()]);
     }
 
-    private static Entity[] makeEntity2(Entities data) {
+    private static Entity[] makeEntity2(Entities data){
         ArrayList<Entity> list = new ArrayList<Entity>();
         setEntity2(list, data.URL);
         setEntity2(list, data.Media);
         return list.toArray(new Entity[list.size()]);
     }
 
-    private static void setEntity(ArrayList<Entity> list, URLEntity[] data) {
-        if (data == null || data.length == 0) {
+    private static void setEntity(ArrayList<Entity> list, URLEntity[] data){
+        if(data == null || data.length == 0){
             return;
         }
-        for (URLEntity e : data) {
+        for(URLEntity e : data){
             list.add(new Entity(EntityType.URL, e.DisplayUrl, e.Start, e.End));
         }
     }
 
-    private static void setEntity(ArrayList<Entity> list, UserMentionEntity[] data) {
-        if (data == null || data.length == 0) {
+    private static void setEntity(ArrayList<Entity> list, UserMentionEntity[] data){
+        if(data == null || data.length == 0){
             return;
         }
-        for (UserMentionEntity e : data) {
+        for(UserMentionEntity e : data){
             list.add(new Entity(EntityType.ID, e.ScreenName, e.Start, e.End));
         }
     }
 
-    private static void setEntity(ArrayList<Entity> list, HashtagEntity[] data) {
-        if (data == null || data.length == 0) {
+    private static void setEntity(ArrayList<Entity> list, HashtagEntity[] data){
+        if(data == null || data.length == 0){
             return;
         }
-        for (HashtagEntity e : data) {
+        for(HashtagEntity e : data){
             list.add(new Entity(EntityType.TAG, e.Text, e.Start, e.End));
         }
     }
 
-    private static void setEntity(ArrayList<Entity> list, SymbolEntity[] data) {
-        if (data == null || data.length == 0) {
+    private static void setEntity(ArrayList<Entity> list, SymbolEntity[] data){
+        if(data == null || data.length == 0){
             return;
         }
-        for (SymbolEntity e : data) {
+        for(SymbolEntity e : data){
             list.add(new Entity(EntityType.SYMBOL, e.Text, e.Start, e.End));
         }
     }
 
-    private static void setEntity2(ArrayList<Entity> list, URLEntity[] data) {
-        if (data == null || data.length == 0) {
+    private static void setEntity2(ArrayList<Entity> list, URLEntity[] data){
+        if(data == null || data.length == 0){
             return;
         }
-        for (URLEntity e : data) {
+        for(URLEntity e : data){
             list.add(new Entity(EntityType.URL, e.ExpandedUrl, e.Start, e.End));
         }
     }
 
     private static EntityComparator comparator = new EntityComparator();
 
-    private static class EntityComparator implements Comparator<Entity> {
-        public int compare(Entity s, Entity t) {
+    private static class EntityComparator implements Comparator<Entity>{
+
+        public int compare(Entity s, Entity t){
             return (s.start - t.start);
         }
     }
 
-    static class Entity {
+    static class Entity{
 
         private EntityType type;
         private String to;
         private int start;
         private int end;
 
-        Entity(EntityType type, String to, int start, int end) {
+        Entity(EntityType type, String to, int start, int end){
             this.type = type;
             this.to = to;
             this.start = start;
@@ -201,13 +202,13 @@ public class EntityUtils {
 
     }
 
-    enum EntityType {
+    enum EntityType{
         URL, ID, TAG, SYMBOL;
     }
 
     private static HashMap<String, Character> escapeMap = new HashMap<String, Character>();
 
-    static {
+    static{
         escapeMap.put("&quot;", '\u0022');
         escapeMap.put("&amp;", '\u0026');
         escapeMap.put("&lt;", '\u003C');

@@ -3,7 +3,8 @@ package com.twitter.meil_mitu.twitter4holo.activeandroid.serializer;
 import com.activeandroid.serializer.TypeSerializer;
 import com.twitter.meil_mitu.twitter4holo.data.CurrentUserRetweet;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
-import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.*;
+
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.toJSONObject;
 
 public class CurrentUserRetweetSerializer extends TypeSerializer{
 
@@ -20,7 +21,7 @@ public class CurrentUserRetweetSerializer extends TypeSerializer{
     @Override
     public String serialize(Object data){
         try{
-            return ((CurrentUserRetweet)data).toJSONObject().toString();
+            return ((CurrentUserRetweet) data).toJSONObject().toString();
         }catch(Twitter4HoloException e){
             e.printStackTrace();
             return null;
@@ -29,7 +30,7 @@ public class CurrentUserRetweetSerializer extends TypeSerializer{
 
     @Override
     public CurrentUserRetweet deserialize(Object data){
-        if(data==null){
+        if(data == null){
             return null;
         }
         try{

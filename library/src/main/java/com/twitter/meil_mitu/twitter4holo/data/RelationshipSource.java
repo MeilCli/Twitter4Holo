@@ -5,23 +5,24 @@ import android.os.Parcel;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
 import org.json.JSONObject;
-import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.*;
 
-public class RelationshipSource extends RelationshipTarget implements android.os.Parcelable {
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getBoolean;
 
-    public final boolean CanDm,IsBlocking,IsBlockedBy,IsMuting,WantRetweets,IsMarkedSpam;
+public class RelationshipSource extends RelationshipTarget implements android.os.Parcelable{
 
-    public RelationshipSource(JSONObject obj) throws Twitter4HoloException {
+    public final boolean CanDm, IsBlocking, IsBlockedBy, IsMuting, WantRetweets, IsMarkedSpam;
+
+    public RelationshipSource(JSONObject obj) throws Twitter4HoloException{
         super(obj);
-        CanDm=getBoolean(obj,"can_dm");
-        IsBlocking=getBoolean(obj,"blocking");
-        IsBlockedBy=getBoolean(obj,"blocked_by");
-        IsMuting=getBoolean(obj,"muting");
-        WantRetweets=getBoolean(obj,"want_retweets");
-        IsMarkedSpam=getBoolean(obj,"marked_spam");
+        CanDm = getBoolean(obj, "can_dm");
+        IsBlocking = getBoolean(obj, "blocking");
+        IsBlockedBy = getBoolean(obj, "blocked_by");
+        IsMuting = getBoolean(obj, "muting");
+        WantRetweets = getBoolean(obj, "want_retweets");
+        IsMarkedSpam = getBoolean(obj, "marked_spam");
     }
 
-    public RelationshipSource(Parcel in) {
+    public RelationshipSource(Parcel in){
         super(in);
         this.CanDm = in.readByte() != 0;
         this.IsBlocking = in.readByte() != 0;
@@ -32,8 +33,8 @@ public class RelationshipSource extends RelationshipTarget implements android.os
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        super.writeToParcel(dest,flags);
+    public void writeToParcel(Parcel dest, int flags){
+        super.writeToParcel(dest, flags);
         dest.writeByte(CanDm ? (byte) 1 : (byte) 0);
         dest.writeByte(IsBlocking ? (byte) 1 : (byte) 0);
         dest.writeByte(IsBlockedBy ? (byte) 1 : (byte) 0);
@@ -43,8 +44,8 @@ public class RelationshipSource extends RelationshipTarget implements android.os
     }
 
     @Override
-    public String toString() {
-        return super.toString()+" RelationshipSource{" +
+    public String toString(){
+        return super.toString() + " RelationshipSource{" +
                 "CanDm=" + CanDm +
                 ", IsBlocking=" + IsBlocking +
                 ", IsBlockedBy=" + IsBlockedBy +
@@ -55,25 +56,25 @@ public class RelationshipSource extends RelationshipTarget implements android.os
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof RelationshipSource)) return false;
-        if (!super.equals(o)) return false;
+    public boolean equals(Object o){
+        if(this == o) return true;
+        if(!(o instanceof RelationshipSource)) return false;
+        if(!super.equals(o)) return false;
 
         RelationshipSource that = (RelationshipSource) o;
 
-        if (CanDm != that.CanDm) return false;
-        if (IsBlockedBy != that.IsBlockedBy) return false;
-        if (IsBlocking != that.IsBlocking) return false;
-        if (IsMarkedSpam != that.IsMarkedSpam) return false;
-        if (IsMuting != that.IsMuting) return false;
-        if (WantRetweets != that.WantRetweets) return false;
+        if(CanDm != that.CanDm) return false;
+        if(IsBlockedBy != that.IsBlockedBy) return false;
+        if(IsBlocking != that.IsBlocking) return false;
+        if(IsMarkedSpam != that.IsMarkedSpam) return false;
+        if(IsMuting != that.IsMuting) return false;
+        if(WantRetweets != that.WantRetweets) return false;
 
         return true;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode(){
         int result = super.hashCode();
         result = 31 * result + (CanDm ? 1 : 0);
         result = 31 * result + (IsBlocking ? 1 : 0);
@@ -85,16 +86,16 @@ public class RelationshipSource extends RelationshipTarget implements android.os
     }
 
     @Override
-    public int describeContents() {
+    public int describeContents(){
         return 0;
     }
 
-    public static final Creator<RelationshipSource> CREATOR = new Creator<RelationshipSource>() {
-        public RelationshipSource createFromParcel(Parcel source) {
+    public static final Creator<RelationshipSource> CREATOR = new Creator<RelationshipSource>(){
+        public RelationshipSource createFromParcel(Parcel source){
             return new RelationshipSource(source);
         }
 
-        public RelationshipSource[] newArray(int size) {
+        public RelationshipSource[] newArray(int size){
             return new RelationshipSource[size];
         }
     };

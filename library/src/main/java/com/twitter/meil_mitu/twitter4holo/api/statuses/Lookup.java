@@ -1,7 +1,6 @@
 package com.twitter.meil_mitu.twitter4holo.api.statuses;
 
 import com.twitter.meil_mitu.twitter4holo.AbsGet;
-import com.twitter.meil_mitu.twitter4holo.AbsJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
 import com.twitter.meil_mitu.twitter4holo.ITwitterJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.OauthType;
@@ -10,15 +9,15 @@ import com.twitter.meil_mitu.twitter4holo.data.Status;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 import com.twitter.meil_mitu.twitter4holo.util.Utils;
 
-public class Lookup extends AbsGet <ITwitterJsonConverter>{
+public class Lookup extends AbsGet<ITwitterJsonConverter>{
 
-    public Lookup(AbsOauth oauth, ITwitterJsonConverter json,long[] id) {
+    public Lookup(AbsOauth oauth, ITwitterJsonConverter json, long[] id){
         super(oauth, json);
         addParam("id", Utils.toString(id));
     }
 
     public Lookup includeEntities(boolean includeEntities){
-        addParam("include_entities",includeEntities);
+        addParam("include_entities", includeEntities);
         return this;
     }
 
@@ -26,7 +25,7 @@ public class Lookup extends AbsGet <ITwitterJsonConverter>{
      * must not use in JsonConverter for User
      */
     public Lookup trimUser(boolean trimUser){
-        addParam("trim_user",trimUser);
+        addParam("trim_user", trimUser);
         return this;
     }
 
@@ -34,27 +33,27 @@ public class Lookup extends AbsGet <ITwitterJsonConverter>{
      * must not use in JsonConverter for Status
      */
     public Lookup map(boolean map){
-        addParam("map",map);
+        addParam("map", map);
         return this;
     }
 
     @Override
-    public String url() {
+    public String url(){
         return "https://api.twitter.com/1.1/statuses/lookup.json";
     }
 
     @Override
-    public int allowOauthType() {
-        return OauthType.Oauth1|OauthType.Oauth2;
+    public int allowOauthType(){
+        return OauthType.Oauth1 | OauthType.Oauth2;
     }
 
     @Override
-    public boolean isAuthorization() {
+    public boolean isAuthorization(){
         return true;
     }
 
     @Override
-    public ResponseList<Status> call() throws Twitter4HoloException {
+    public ResponseList<Status> call() throws Twitter4HoloException{
         return Json.toStatusResponseList(Oauth.get(this));
     }
 }

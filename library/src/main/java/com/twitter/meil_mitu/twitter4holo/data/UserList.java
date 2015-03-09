@@ -4,38 +4,42 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
-import com.twitter.meil_mitu.twitter4holo.item.UserItem;
 import com.twitter.meil_mitu.twitter4holo.item.UserListItem;
 
 import org.json.JSONObject;
 
 import java.util.Date;
 
-import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.*;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getBoolean;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getDate;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getInt;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getJSONObject;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getLong;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getString;
 
-public class UserList implements Parcelable {
+public class UserList implements Parcelable{
 
-    public final String Slug,Name,Mode,Description;
+    public final String Slug, Name, Mode, Description;
     public final Date CreatedAt;
-    public final int SubscriberCount,MemberCount;
+    public final int SubscriberCount, MemberCount;
     public final long Id;
     public final boolean IsFollowing;
     public final User User;
 
-    public UserList(JSONObject obj) throws Twitter4HoloException {
-        Slug=getString(obj,"slug");
-        Name=getString(obj,"name");
-        CreatedAt=getDate(obj,"created_at");
-        SubscriberCount=getInt(obj,"subscriber_count");
-        MemberCount=getInt(obj,"member_count");
-        Mode=getString(obj,"mode");
-        Id=getLong(obj,"id");
-        Description=getString(obj,"description");
-        IsFollowing=getBoolean(obj,"following");
+    public UserList(JSONObject obj) throws Twitter4HoloException{
+        Slug = getString(obj, "slug");
+        Name = getString(obj, "name");
+        CreatedAt = getDate(obj, "created_at");
+        SubscriberCount = getInt(obj, "subscriber_count");
+        MemberCount = getInt(obj, "member_count");
+        Mode = getString(obj, "mode");
+        Id = getLong(obj, "id");
+        Description = getString(obj, "description");
+        IsFollowing = getBoolean(obj, "following");
         if(obj.isNull("user")){
             throw new Twitter4HoloException("user is null");
         }else{
-            User=new User(getJSONObject(obj,"user"));
+            User = new User(getJSONObject(obj, "user"));
         }
     }
 
@@ -52,7 +56,7 @@ public class UserList implements Parcelable {
         User = new User(item.User);
     }
 
-    public UserList(Parcel in) {
+    public UserList(Parcel in){
         this.Slug = in.readString();
         this.Name = in.readString();
         this.Mode = in.readString();
@@ -67,7 +71,7 @@ public class UserList implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
+    public void writeToParcel(Parcel dest, int flags){
         dest.writeString(this.Slug);
         dest.writeString(this.Name);
         dest.writeString(this.Mode);
@@ -81,7 +85,7 @@ public class UserList implements Parcelable {
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return "UserList{" +
                 "Slug='" + Slug + '\'' +
                 ", Name='" + Name + '\'' +
@@ -97,36 +101,36 @@ public class UserList implements Parcelable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof UserList)) return false;
+    public boolean equals(Object o){
+        if(this == o) return true;
+        if(!(o instanceof UserList)) return false;
 
         UserList userList = (UserList) o;
 
-        if (Id != userList.Id) return false;
-        if (!User.equals(userList.User)) return false;
+        if(Id != userList.Id) return false;
+        if(!User.equals(userList.User)) return false;
 
         return true;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode(){
         int result = (int) (Id ^ (Id >>> 32));
         result = 31 * result + User.hashCode();
         return result;
     }
 
     @Override
-    public int describeContents() {
+    public int describeContents(){
         return 0;
     }
 
-    public static final Parcelable.Creator<UserList> CREATOR = new Parcelable.Creator<UserList>() {
-        public UserList createFromParcel(Parcel source) {
+    public static final Parcelable.Creator<UserList> CREATOR = new Parcelable.Creator<UserList>(){
+        public UserList createFromParcel(Parcel source){
             return new UserList(source);
         }
 
-        public UserList[] newArray(int size) {
+        public UserList[] newArray(int size){
             return new UserList[size];
         }
     };

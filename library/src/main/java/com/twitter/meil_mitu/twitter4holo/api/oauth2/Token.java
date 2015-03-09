@@ -1,6 +1,5 @@
 package com.twitter.meil_mitu.twitter4holo.api.oauth2;
 
-import com.twitter.meil_mitu.twitter4holo.AbsJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
 import com.twitter.meil_mitu.twitter4holo.AbsPost;
 import com.twitter.meil_mitu.twitter4holo.ITwitterJsonConverter;
@@ -11,30 +10,31 @@ import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 import com.twitter.meil_mitu.twitter4holo.oauth.Oauth2;
 
 public class Token extends AbsPost<ITwitterJsonConverter>{
+
     private Oauth2 oauth2;
 
-    public Token(AbsOauth oauth,ITwitterJsonConverter json) {
-        super(oauth,json);
-        if(Oauth instanceof  Oauth2){
-            oauth2=(Oauth2)oauth;
+    public Token(AbsOauth oauth, ITwitterJsonConverter json){
+        super(oauth, json);
+        if(Oauth instanceof Oauth2){
+            oauth2 = (Oauth2) oauth;
         }else{
             throw new IncorrectException("Oauth is not Oauth2");
         }
-        this.addParam("grant_type","client_credentials");
+        this.addParam("grant_type", "client_credentials");
     }
 
     @Override
-    public String url() {
+    public String url(){
         return "https://api.twitter.com/oauth2/token";
     }
 
     @Override
-    public int allowOauthType() {
+    public int allowOauthType(){
         return OauthType.Oauth2Basic;
     }
 
     @Override
-    public boolean isAuthorization() {
+    public boolean isAuthorization(){
         return true;
     }
 

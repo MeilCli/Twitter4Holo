@@ -7,24 +7,26 @@ import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
 import org.json.JSONObject;
 
-import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.*;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getBoolean;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getLong;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getString;
 
-public class RelationshipTarget implements Parcelable {
+public class RelationshipTarget implements Parcelable{
 
     public final long Id;
     public final String ScreenName;
-    public final boolean IsFollowing,IsFollowedBy,IsFollowingReceived,IsFollowingRequested;
+    public final boolean IsFollowing, IsFollowedBy, IsFollowingReceived, IsFollowingRequested;
 
-    public RelationshipTarget(JSONObject obj) throws Twitter4HoloException {
-        Id=getLong(obj,"id");
-        ScreenName=getString(obj,"screen_name");
-        IsFollowing=getBoolean(obj,"following");
-        IsFollowedBy=getBoolean(obj,"followed_by");
-        IsFollowingReceived=getBoolean(obj,"following_received");
-        IsFollowingRequested=getBoolean(obj,"following_requested");
+    public RelationshipTarget(JSONObject obj) throws Twitter4HoloException{
+        Id = getLong(obj, "id");
+        ScreenName = getString(obj, "screen_name");
+        IsFollowing = getBoolean(obj, "following");
+        IsFollowedBy = getBoolean(obj, "followed_by");
+        IsFollowingReceived = getBoolean(obj, "following_received");
+        IsFollowingRequested = getBoolean(obj, "following_requested");
     }
 
-    public RelationshipTarget(Parcel in) {
+    public RelationshipTarget(Parcel in){
         this.Id = in.readLong();
         this.ScreenName = in.readString();
         this.IsFollowing = in.readByte() != 0;
@@ -34,7 +36,7 @@ public class RelationshipTarget implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
+    public void writeToParcel(Parcel dest, int flags){
         dest.writeLong(this.Id);
         dest.writeString(this.ScreenName);
         dest.writeByte(IsFollowing ? (byte) 1 : (byte) 0);
@@ -44,7 +46,7 @@ public class RelationshipTarget implements Parcelable {
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return "RelationshipTarget{" +
                 "Id=" + Id +
                 ", ScreenName='" + ScreenName + '\'' +
@@ -56,24 +58,24 @@ public class RelationshipTarget implements Parcelable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof RelationshipTarget)) return false;
+    public boolean equals(Object o){
+        if(this == o) return true;
+        if(!(o instanceof RelationshipTarget)) return false;
 
         RelationshipTarget that = (RelationshipTarget) o;
 
-        if (Id != that.Id) return false;
-        if (IsFollowedBy != that.IsFollowedBy) return false;
-        if (IsFollowing != that.IsFollowing) return false;
-        if (IsFollowingReceived != that.IsFollowingReceived) return false;
-        if (IsFollowingRequested != that.IsFollowingRequested) return false;
-        if (!ScreenName.equals(that.ScreenName)) return false;
+        if(Id != that.Id) return false;
+        if(IsFollowedBy != that.IsFollowedBy) return false;
+        if(IsFollowing != that.IsFollowing) return false;
+        if(IsFollowingReceived != that.IsFollowingReceived) return false;
+        if(IsFollowingRequested != that.IsFollowingRequested) return false;
+        if(!ScreenName.equals(that.ScreenName)) return false;
 
         return true;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode(){
         int result = (int) (Id ^ (Id >>> 32));
         result = 31 * result + ScreenName.hashCode();
         result = 31 * result + (IsFollowing ? 1 : 0);
@@ -84,16 +86,16 @@ public class RelationshipTarget implements Parcelable {
     }
 
     @Override
-    public int describeContents() {
+    public int describeContents(){
         return 0;
     }
 
-    public static final Creator<RelationshipTarget> CREATOR = new Creator<RelationshipTarget>() {
-        public RelationshipTarget createFromParcel(Parcel source) {
+    public static final Creator<RelationshipTarget> CREATOR = new Creator<RelationshipTarget>(){
+        public RelationshipTarget createFromParcel(Parcel source){
             return new RelationshipTarget(source);
         }
 
-        public RelationshipTarget[] newArray(int size) {
+        public RelationshipTarget[] newArray(int size){
             return new RelationshipTarget[size];
         }
     };

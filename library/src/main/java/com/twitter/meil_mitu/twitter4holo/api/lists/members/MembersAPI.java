@@ -1,43 +1,73 @@
 package com.twitter.meil_mitu.twitter4holo.api.lists.members;
 
+import com.twitter.meil_mitu.twitter4holo.AbsAPI;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
 import com.twitter.meil_mitu.twitter4holo.ITwitterJsonConverter;
-import com.twitter.meil_mitu.twitter4holo.AbsAPI;
 
-public class MembersAPI extends AbsAPI<ITwitterJsonConverter> {
+public class MembersAPI extends AbsAPI<ITwitterJsonConverter>{
 
-    public MembersAPI(AbsOauth oauth, ITwitterJsonConverter json) {
+    public MembersAPI(AbsOauth oauth, ITwitterJsonConverter json){
         super(oauth, json);
     }
 
-    public Destroy destroy(){return new Destroy(Oauth,Json);}
+    public Destroy destroy(){
+        return new Destroy(Oauth, Json);
+    }
 
-    public CreateAll createAll(long listId){return new CreateAll(Oauth,Json,listId);}
+    public CreateAll createAll(long listId){
+        return new CreateAll(Oauth, Json, listId);
+    }
 
-    public CreateAll createAll(String slug){return new CreateAll(Oauth,Json,slug);}
+    public CreateAll createAll(String slug){
+        return new CreateAll(Oauth, Json, slug);
+    }
 
-    public Show show(long listId,long userId){return new Show(Oauth,Json,listId,userId);}
+    public Show show(long listId, long userId){
+        return new Show(Oauth, Json, listId, userId);
+    }
 
-    public Show show(long listId,String screenName){return new Show(Oauth,Json,listId,screenName);}
+    public Show show(long listId, String screenName){
+        return new Show(Oauth, Json, listId, screenName);
+    }
 
-    public Show show(String slug,long userId){return new Show(Oauth,Json,slug,userId);}
+    public Show show(String slug, long userId){
+        return new Show(Oauth, Json, slug, userId);
+    }
 
-    public Show show(String slug,String screenName){return new Show(Oauth,Json,slug,screenName);}
+    public Show show(String slug, String screenName){
+        return new Show(Oauth, Json, slug, screenName);
+    }
 
-    public Get get(long listId){return new Get(Oauth,Json,listId);}
+    public Get get(long listId){
+        return new Get(Oauth, Json, listId);
+    }
 
-    public Get get(String slug){return new Get(Oauth,Json,slug);}
+    public Get get(String slug){
+        return new Get(Oauth, Json, slug);
+    }
 
-    public Create create(long listId,long userId){return new Create(Oauth,Json,listId,userId);}
+    public Create create(long listId, long userId){
+        return new Create(Oauth, Json, listId, userId);
+    }
 
-    public Create create(long listId,String screenName){return new Create(Oauth,Json,listId,screenName);}
+    public Create create(long listId, String screenName){
+        return new Create(Oauth, Json, listId, screenName);
+    }
 
-    public Create create(String slug,long userId){return new Create(Oauth,Json,slug,userId);}
+    public Create create(String slug, long userId){
+        return new Create(Oauth, Json, slug, userId);
+    }
 
-    public Create create(String slug,String screenName){return new Create(Oauth,Json,slug,screenName);}
+    public Create create(String slug, String screenName){
+        return new Create(Oauth, Json, slug, screenName);
+    }
 
-    public DestroyAll destroyAll(long listId){return new DestroyAll(Oauth,Json,listId);}
+    public DestroyAll destroyAll(long listId){
+        return new DestroyAll(Oauth, Json, listId);
+    }
 
-    public DestroyAll destroyAll(String slug){return new DestroyAll(Oauth,Json,slug);}
+    public DestroyAll destroyAll(String slug){
+        return new DestroyAll(Oauth, Json, slug);
+    }
 
 }

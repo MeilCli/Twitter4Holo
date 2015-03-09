@@ -6,7 +6,13 @@ import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
 import org.json.JSONObject;
 
-import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.*;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getJSONObject;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getLong;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getString;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.putJSONObject;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.putLong;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.putNull;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.putString;
 
 public class MediaEntity extends URLEntity implements android.os.Parcelable{
 
@@ -53,13 +59,13 @@ public class MediaEntity extends URLEntity implements android.os.Parcelable{
     @Override
     public JSONObject toJSONObject() throws Twitter4HoloException{
         JSONObject obj = super.toJSONObject();
-        putLong(obj,"id",Id);
-        putString(obj,"media_url",MediaUrl);
-        putString(obj,"type",Type);
-        if(VideoInfo==null){
-            putNull(obj,"video_info");
+        putLong(obj, "id", Id);
+        putString(obj, "media_url", MediaUrl);
+        putString(obj, "type", Type);
+        if(VideoInfo == null){
+            putNull(obj, "video_info");
         }else{
-            putJSONObject(obj,"video_info",VideoInfo.toJSONObject());
+            putJSONObject(obj, "video_info", VideoInfo.toJSONObject());
         }
         return obj;
     }

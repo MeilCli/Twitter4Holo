@@ -1,6 +1,5 @@
 package com.twitter.meil_mitu.twitter4holo.data;
 
-import android.database.CrossProcessCursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -8,30 +7,30 @@ import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
 import org.json.JSONObject;
 
-import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.*;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getLong;
 
-public class Cursor implements Parcelable {
+public class Cursor implements Parcelable{
 
-    public final long PreviousCursor,NextCursor;
+    public final long PreviousCursor, NextCursor;
 
-    public Cursor(JSONObject obj) throws Twitter4HoloException {
-        PreviousCursor=getLong(obj,"previous_cursor");
-        NextCursor=getLong(obj,"next_cursor");
+    public Cursor(JSONObject obj) throws Twitter4HoloException{
+        PreviousCursor = getLong(obj, "previous_cursor");
+        NextCursor = getLong(obj, "next_cursor");
     }
 
-    public Cursor(Parcel in) {
+    public Cursor(Parcel in){
         this.PreviousCursor = in.readLong();
         this.NextCursor = in.readLong();
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
+    public void writeToParcel(Parcel dest, int flags){
         dest.writeLong(this.PreviousCursor);
         dest.writeLong(this.NextCursor);
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return "Cursor{" +
                 "PreviousCursor=" + PreviousCursor +
                 ", NextCursor=" + NextCursor +
@@ -39,36 +38,36 @@ public class Cursor implements Parcelable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Cursor)) return false;
+    public boolean equals(Object o){
+        if(this == o) return true;
+        if(!(o instanceof Cursor)) return false;
 
         Cursor cursor = (Cursor) o;
 
-        if (NextCursor != cursor.NextCursor) return false;
-        if (PreviousCursor != cursor.PreviousCursor) return false;
+        if(NextCursor != cursor.NextCursor) return false;
+        if(PreviousCursor != cursor.PreviousCursor) return false;
 
         return true;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode(){
         int result = (int) (PreviousCursor ^ (PreviousCursor >>> 32));
         result = 31 * result + (int) (NextCursor ^ (NextCursor >>> 32));
         return result;
     }
 
     @Override
-    public int describeContents() {
+    public int describeContents(){
         return 0;
     }
 
-    public static final Creator<Cursor> CREATOR = new Creator<Cursor>() {
-        public Cursor createFromParcel(Parcel source) {
+    public static final Creator<Cursor> CREATOR = new Creator<Cursor>(){
+        public Cursor createFromParcel(Parcel source){
             return new Cursor(source);
         }
 
-        public Cursor[] newArray(int size) {
+        public Cursor[] newArray(int size){
             return new Cursor[size];
         }
     };

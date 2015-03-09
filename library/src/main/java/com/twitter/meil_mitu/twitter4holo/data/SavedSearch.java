@@ -9,22 +9,24 @@ import org.json.JSONObject;
 
 import java.util.Date;
 
-import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.*;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getDate;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getLong;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getString;
 
-public class SavedSearch implements Parcelable {
+public class SavedSearch implements Parcelable{
 
     public final Date CreatedAt;
     public final long Id;
-    public final String Name,Query;
+    public final String Name, Query;
 
-    public SavedSearch(JSONObject obj) throws Twitter4HoloException {
-        CreatedAt=getDate(obj,"created_at");
-        Id=getLong(obj,"id");
-        Name=getString(obj,"name");
-        Query=getString(obj,"query");
+    public SavedSearch(JSONObject obj) throws Twitter4HoloException{
+        CreatedAt = getDate(obj, "created_at");
+        Id = getLong(obj, "id");
+        Name = getString(obj, "name");
+        Query = getString(obj, "query");
     }
 
-    public SavedSearch(Parcel in) {
+    public SavedSearch(Parcel in){
         long tmpCreatedAt = in.readLong();
         this.CreatedAt = tmpCreatedAt == -1 ? null : new Date(tmpCreatedAt);
         this.Id = in.readLong();
@@ -33,7 +35,7 @@ public class SavedSearch implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
+    public void writeToParcel(Parcel dest, int flags){
         dest.writeLong(CreatedAt != null ? CreatedAt.getTime() : -1);
         dest.writeLong(this.Id);
         dest.writeString(this.Name);
@@ -41,43 +43,43 @@ public class SavedSearch implements Parcelable {
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return "SavedSearch{" +
                 "CreatedAt=" + CreatedAt +
                 ", Id=" + Id +
                 ", Name='" + Name + '\'' +
-                ", Query='" + Query + '\'' +
+                ", QueryBool='" + Query + '\'' +
                 '}';
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof SavedSearch)) return false;
+    public boolean equals(Object o){
+        if(this == o) return true;
+        if(!(o instanceof SavedSearch)) return false;
 
         SavedSearch that = (SavedSearch) o;
 
-        if (Id != that.Id) return false;
+        if(Id != that.Id) return false;
 
         return true;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode(){
         return (int) (Id ^ (Id >>> 32));
     }
 
     @Override
-    public int describeContents() {
+    public int describeContents(){
         return 0;
     }
 
-    public static final Parcelable.Creator<SavedSearch> CREATOR = new Parcelable.Creator<SavedSearch>() {
-        public SavedSearch createFromParcel(Parcel source) {
+    public static final Parcelable.Creator<SavedSearch> CREATOR = new Parcelable.Creator<SavedSearch>(){
+        public SavedSearch createFromParcel(Parcel source){
             return new SavedSearch(source);
         }
 
-        public SavedSearch[] newArray(int size) {
+        public SavedSearch[] newArray(int size){
             return new SavedSearch[size];
         }
     };

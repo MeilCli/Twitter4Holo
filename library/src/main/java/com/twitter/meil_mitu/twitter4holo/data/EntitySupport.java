@@ -4,17 +4,18 @@ import android.text.SpannableStringBuilder;
 
 import com.twitter.meil_mitu.twitter4holo.util.EntityUtils;
 
-public class EntitySupport {
+public class EntitySupport{
+
     public final SpannableStringBuilder SpannableText;
     public final String PlainText;
 
-    public EntitySupport(String text,Entities entities){
-        SpannableText = EntityUtils.toLinkHtml(text,entities);
-        PlainText=EntityUtils.toLinkURL(text,entities);
+    public EntitySupport(String text, Entities entities){
+        SpannableText = EntityUtils.toLinkHtml(text, entities);
+        PlainText = EntityUtils.toLinkURL(text, entities);
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return "EntitySupport{" +
                 "SpannableText=" + SpannableText +
                 ", PlainText='" + PlainText + '\'' +
@@ -22,20 +23,20 @@ public class EntitySupport {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof EntitySupport)) return false;
+    public boolean equals(Object o){
+        if(this == o) return true;
+        if(!(o instanceof EntitySupport)) return false;
 
         EntitySupport that = (EntitySupport) o;
 
-        if (!PlainText.equals(that.PlainText)) return false;
-        if (!SpannableText.equals(that.SpannableText)) return false;
+        if(!PlainText.equals(that.PlainText)) return false;
+        if(!SpannableText.equals(that.SpannableText)) return false;
 
         return true;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode(){
         int result = SpannableText.hashCode();
         result = 31 * result + PlainText.hashCode();
         return result;

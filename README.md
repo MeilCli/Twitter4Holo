@@ -10,9 +10,11 @@ Twitter Oauth Library for Android 4.0.3 and upper
 * if you want to use full Objects, you shall make Data class and Converter extends AbsJsonConverter
 * ok [oauth](https://dev.twitter.com/oauth/3-legged)
 * ok [oauth2](https://dev.twitter.com/oauth/application-only)
+* ok [oauth echo](https://dev.twitter.com/oauth/echo)
 * ok [multiple media upload](https://dev.twitter.com/rest/public/uploading-media)
 * ok [Video in MediaEntity](https://blog.twitter.com/2015/now-on-twitter-group-direct-messages-and-mobile-video-capture)
 * ok [REST API](https://dev.twitter.com/rest/public)
+* ok [Aclog API](http://aclog.koba789.com/about/api)
 
 ####何をしたかったのか
 * Oauth2をわかりやすく
@@ -27,8 +29,6 @@ Twitter Oauth Library for Android 4.0.3 and upper
 
 ####次したいこと
 * Streaming API対応(site streamは難しそう)
-* Oauth Echo対応(Aclogとかサポートしたい)
-* 独自クエリ作成←自分用
 
 #### gradle
 	repositories {
@@ -49,6 +49,13 @@ Twitter Oauth Library for Android 4.0.3 and upper
 		<uses-permission android:name="android.permission.INTERNET"/>
 	
 	</manifest>
+
+#### Application class
+*if use item package* (use ActiveAndroid or change Object Values)
+
+	Configuration.Builder builder =new Configuration.Builder(this.getContext());
+    TwitterBuildHelper.add(builder);
+    ActiveAndroid.initialize(builder.create());
 
 #### make Twitter instance
 *Oauth(not have token)*
@@ -106,7 +113,7 @@ Twitter Oauth Library for Android 4.0.3 and upper
 
 This source is The MIT License.
 
-using [okhttp][okhttp_url] [Apache License, Version 2.0][Apache]
+using [okhttp][okhttp_url] [Apache License, Version 2.0][Apache]  
 using [ActiveAndroid][ActiveAndroid_url] [Apache License, Version 2.0][Apache]
 [Apache]: http://www.apache.org/licenses/LICENSE-2.0
 [okhttp_url]: https://github.com/square/okhttp

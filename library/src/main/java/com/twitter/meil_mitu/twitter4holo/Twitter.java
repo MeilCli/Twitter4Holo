@@ -21,7 +21,8 @@ import com.twitter.meil_mitu.twitter4holo.api.statuses.StatusesAPI;
 import com.twitter.meil_mitu.twitter4holo.api.trends.TrendsAPI;
 import com.twitter.meil_mitu.twitter4holo.api.users.UsersAPI;
 
-public class Twitter {
+public class Twitter{
+
     protected AbsOauth Oauth;
     protected ITwitterJsonConverter Json;
     protected OauthAPI Oauth1;
@@ -49,70 +50,114 @@ public class Twitter {
         this(oauth, TwitterJsonConverter.getDefaultConverter());
     }
 
-    public Twitter(AbsOauth oauth,ITwitterJsonConverter json){
-        this.Oauth=oauth;
-        this.Json=json;
+    public Twitter(AbsOauth oauth, ITwitterJsonConverter json){
+        this.Oauth = oauth;
+        this.Json = json;
         //API
-        this.Oauth1=new OauthAPI(Oauth,Json);
-        this.Oauth2 = new Oauth2API(Oauth,Json);
-        this.Statuses=new StatusesAPI(Oauth,Json);
-        this.Media = new MediaAPI(Oauth,Json);
-        this.Search = new SearchAPI(Oauth,Json);
-        this.DirectMessage=new DirectMessagesAPI(Oauth,Json);
-        this.Friendships=new FriendshipsAPI(Oauth,Json);
-        this.Friends=new FriendsAPI(Oauth,Json);
-        this.Followers=new FollowersAPI(Oauth,Json);
-        this.Account=new AccountAPI(Oauth,Json);
-        this.Blocks=new BlocksAPI(Oauth,Json);
-        this.Users=new UsersAPI(Oauth,Json);
-        this.Mutes=new MutesAPI(Oauth,Json);
-        this.Favorites=new FavoritesAPI(Oauth,Json);
-        this.Lists=new ListsAPI(Oauth,Json);
-        this.SavedSearches=new SavedSearchesAPI(Oauth,Json);
-        this.Geo=new GeoAPI(Oauth,Json);
-        this.Trends=new TrendsAPI(Oauth,Json);
-        this.Application=new ApplicationAPI(Oauth,Json);
-        this.Help=new HelpAPI(Oauth,Json);
+        this.Oauth1 = new OauthAPI(Oauth, Json);
+        this.Oauth2 = new Oauth2API(Oauth, Json);
+        this.Statuses = new StatusesAPI(Oauth, Json);
+        this.Media = new MediaAPI(Oauth, Json);
+        this.Search = new SearchAPI(Oauth, Json);
+        this.DirectMessage = new DirectMessagesAPI(Oauth, Json);
+        this.Friendships = new FriendshipsAPI(Oauth, Json);
+        this.Friends = new FriendsAPI(Oauth, Json);
+        this.Followers = new FollowersAPI(Oauth, Json);
+        this.Account = new AccountAPI(Oauth, Json);
+        this.Blocks = new BlocksAPI(Oauth, Json);
+        this.Users = new UsersAPI(Oauth, Json);
+        this.Mutes = new MutesAPI(Oauth, Json);
+        this.Favorites = new FavoritesAPI(Oauth, Json);
+        this.Lists = new ListsAPI(Oauth, Json);
+        this.SavedSearches = new SavedSearchesAPI(Oauth, Json);
+        this.Geo = new GeoAPI(Oauth, Json);
+        this.Trends = new TrendsAPI(Oauth, Json);
+        this.Application = new ApplicationAPI(Oauth, Json);
+        this.Help = new HelpAPI(Oauth, Json);
     }
 
-    public OauthAPI oauth(){return Oauth1;}
+    public AbsOauth getOauth(){
+        return Oauth;
+    }
 
-    public Oauth2API oauth2(){return Oauth2;}
+    public OauthAPI oauth(){
+        return Oauth1;
+    }
 
-    public StatusesAPI statuses(){return Statuses;}
+    public Oauth2API oauth2(){
+        return Oauth2;
+    }
 
-    public MediaAPI media(){return Media;}
+    public StatusesAPI statuses(){
+        return Statuses;
+    }
 
-    public SearchAPI search(){return Search;}
+    public MediaAPI media(){
+        return Media;
+    }
 
-    public DirectMessagesAPI directMessages(){return DirectMessage;}
+    public SearchAPI search(){
+        return Search;
+    }
 
-    public FriendshipsAPI friendships(){return Friendships;}
+    public DirectMessagesAPI directMessages(){
+        return DirectMessage;
+    }
 
-    public FriendsAPI friends(){return Friends;}
+    public FriendshipsAPI friendships(){
+        return Friendships;
+    }
 
-    public FollowersAPI followers(){return Followers;}
+    public FriendsAPI friends(){
+        return Friends;
+    }
 
-    public AccountAPI account(){return Account;}
+    public FollowersAPI followers(){
+        return Followers;
+    }
 
-    public BlocksAPI blocks(){return Blocks;}
+    public AccountAPI account(){
+        return Account;
+    }
 
-    public UsersAPI users(){return Users;}
+    public BlocksAPI blocks(){
+        return Blocks;
+    }
 
-    public MutesAPI mutes(){return Mutes;}
+    public UsersAPI users(){
+        return Users;
+    }
 
-    public FavoritesAPI favorites(){return Favorites;}
+    public MutesAPI mutes(){
+        return Mutes;
+    }
 
-    public ListsAPI lists(){return Lists;}
+    public FavoritesAPI favorites(){
+        return Favorites;
+    }
 
-    public SavedSearchesAPI savedSearches(){return SavedSearches;}
+    public ListsAPI lists(){
+        return Lists;
+    }
 
-    public GeoAPI geo(){return Geo;}
+    public SavedSearchesAPI savedSearches(){
+        return SavedSearches;
+    }
 
-    public TrendsAPI trends(){return Trends;}
+    public GeoAPI geo(){
+        return Geo;
+    }
 
-    public ApplicationAPI application(){return Application;}
+    public TrendsAPI trends(){
+        return Trends;
+    }
 
-    public HelpAPI help(){return Help;}
+    public ApplicationAPI application(){
+        return Application;
+    }
+
+    public HelpAPI help(){
+        return Help;
+    }
 
 }

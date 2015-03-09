@@ -4,7 +4,7 @@ import com.activeandroid.serializer.TypeSerializer;
 import com.twitter.meil_mitu.twitter4holo.data.Entities;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
-import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.*;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.toJSONObject;
 
 public class EntitiesSerializer extends TypeSerializer{
 
@@ -21,7 +21,7 @@ public class EntitiesSerializer extends TypeSerializer{
     @Override
     public String serialize(Object data){
         try{
-            return ((Entities)data).toJSONObject().toString();
+            return ((Entities) data).toJSONObject().toString();
         }catch(Twitter4HoloException e){
             e.printStackTrace();
             return null;
@@ -30,7 +30,7 @@ public class EntitiesSerializer extends TypeSerializer{
 
     @Override
     public Entities deserialize(Object data){
-        if(data==null){
+        if(data == null){
             return new Entities();
         }
         try{

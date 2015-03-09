@@ -5,33 +5,33 @@ import android.util.Base64;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-public class Utils {
+public class Utils{
 
     // http://javatechnology.net/java/url-encode/
     // not encode '-'
-    public static String urlEncode(String string) {
-        try {
-            String encoded= URLEncoder.encode(string, "UTF-8");
+    public static String urlEncode(String string){
+        try{
+            String encoded = URLEncoder.encode(string, "UTF-8");
             StringBuilder sb = new StringBuilder(encoded.length());
-            for(char c:encoded.toCharArray()){
-                if(c=='+'){
+            for(char c : encoded.toCharArray()){
+                if(c == '+'){
                     sb.append("%20");
-                }else if(c=='*'){
+                }else if(c == '*'){
                     sb.append("%2A");
                 }else{
                     sb.append(c);
                 }
             }
             return sb.toString();
-        } catch (UnsupportedEncodingException e) {
+        }catch(UnsupportedEncodingException e){
             return string;
         }
     }
 
     public static String toString(long[] ls){
-        StringBuilder sb =new StringBuilder();
-        for(long l:ls){
-            if(sb.length()>0){
+        StringBuilder sb = new StringBuilder();
+        for(long l : ls){
+            if(sb.length() > 0){
                 sb.append(',');
             }
             sb.append(l);
@@ -40,9 +40,9 @@ public class Utils {
     }
 
     public static String toString(String[] ss){
-        StringBuilder sb =new StringBuilder();
-        for(String s:ss){
-            if(sb.length()>0){
+        StringBuilder sb = new StringBuilder();
+        for(String s : ss){
+            if(sb.length() > 0){
                 sb.append(',');
             }
             sb.append(s);
@@ -52,12 +52,12 @@ public class Utils {
 
     public static String replaceLine(String s){
         StringBuilder sb = new StringBuilder();
-       for(int i=0;i<s.length();i++){
-           char c = s.charAt(i);
-           if(c!='\n'){
-               sb.append(c);
-           }
-       }
+        for(int i = 0; i < s.length(); i++){
+            char c = s.charAt(i);
+            if(c != '\n'){
+                sb.append(c);
+            }
+        }
         return sb.toString();
     }
 

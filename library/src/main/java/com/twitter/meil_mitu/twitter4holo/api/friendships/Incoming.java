@@ -1,7 +1,6 @@
 package com.twitter.meil_mitu.twitter4holo.api.friendships;
 
 import com.twitter.meil_mitu.twitter4holo.AbsGet;
-import com.twitter.meil_mitu.twitter4holo.AbsJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.AbsOauth;
 import com.twitter.meil_mitu.twitter4holo.ITwitterJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.OauthType;
@@ -9,14 +8,14 @@ import com.twitter.meil_mitu.twitter4holo.ResponseData;
 import com.twitter.meil_mitu.twitter4holo.data.CursorIDs;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
-public class Incoming extends AbsGet<ITwitterJsonConverter> {
+public class Incoming extends AbsGet<ITwitterJsonConverter>{
 
-    public Incoming(AbsOauth oauth, ITwitterJsonConverter json) {
+    public Incoming(AbsOauth oauth, ITwitterJsonConverter json){
         super(oauth, json);
     }
 
     public Incoming cursor(long cursor){
-        addParam("cursor",cursor);
+        addParam("cursor", cursor);
         return this;
     }
 
@@ -24,27 +23,27 @@ public class Incoming extends AbsGet<ITwitterJsonConverter> {
      * must not use in JsonConverter for CursorIDs
      */
     public Incoming stringifyIds(boolean stringifyIds){
-        addParam("stringify_ids",stringifyIds);
+        addParam("stringify_ids", stringifyIds);
         return this;
     }
 
     @Override
-    public String url() {
+    public String url(){
         return "https://api.twitter.com/1.1/friendships/incoming.json";
     }
 
     @Override
-    public int allowOauthType() {
+    public int allowOauthType(){
         return OauthType.Oauth1;
     }
 
     @Override
-    public boolean isAuthorization() {
+    public boolean isAuthorization(){
         return true;
     }
 
     @Override
-    public ResponseData<CursorIDs> call() throws Twitter4HoloException {
+    public ResponseData<CursorIDs> call() throws Twitter4HoloException{
         return Json.toCursorIDsResponseData(Oauth.get(this));
     }
 }

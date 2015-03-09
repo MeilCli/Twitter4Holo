@@ -7,21 +7,22 @@ import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
 import org.json.JSONObject;
 
-import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.*;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getInt;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getString;
 
-public class TrendPlace implements Parcelable {
+public class TrendPlace implements Parcelable{
 
-    public final String Country,CountryCode,Name;
+    public final String Country, CountryCode, Name;
     public final int Woeid;
 
-    public TrendPlace(JSONObject obj) throws Twitter4HoloException {
-        Country=getString(obj,"country","");
-        CountryCode=getString(obj,"countryCode","");
-        Name=getString(obj,"name","");
-        Woeid=getInt(obj,"woeid");
+    public TrendPlace(JSONObject obj) throws Twitter4HoloException{
+        Country = getString(obj, "country", "");
+        CountryCode = getString(obj, "countryCode", "");
+        Name = getString(obj, "name", "");
+        Woeid = getInt(obj, "woeid");
     }
 
-    public TrendPlace(Parcel in) {
+    public TrendPlace(Parcel in){
         this.Country = in.readString();
         this.CountryCode = in.readString();
         this.Name = in.readString();
@@ -29,7 +30,7 @@ public class TrendPlace implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
+    public void writeToParcel(Parcel dest, int flags){
         dest.writeString(this.Country);
         dest.writeString(this.CountryCode);
         dest.writeString(this.Name);
@@ -37,7 +38,7 @@ public class TrendPlace implements Parcelable {
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return "TrendPlace{" +
                 "Country='" + Country + '\'' +
                 ", CountryCode='" + CountryCode + '\'' +
@@ -47,22 +48,22 @@ public class TrendPlace implements Parcelable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof TrendPlace)) return false;
+    public boolean equals(Object o){
+        if(this == o) return true;
+        if(!(o instanceof TrendPlace)) return false;
 
         TrendPlace that = (TrendPlace) o;
 
-        if (Woeid != that.Woeid) return false;
-        if (!Country.equals(that.Country)) return false;
-        if (!CountryCode.equals(that.CountryCode)) return false;
-        if (!Name.equals(that.Name)) return false;
+        if(Woeid != that.Woeid) return false;
+        if(!Country.equals(that.Country)) return false;
+        if(!CountryCode.equals(that.CountryCode)) return false;
+        if(!Name.equals(that.Name)) return false;
 
         return true;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode(){
         int result = Country.hashCode();
         result = 31 * result + CountryCode.hashCode();
         result = 31 * result + Name.hashCode();
@@ -71,16 +72,16 @@ public class TrendPlace implements Parcelable {
     }
 
     @Override
-    public int describeContents() {
+    public int describeContents(){
         return 0;
     }
 
-    public static final Parcelable.Creator<TrendPlace> CREATOR = new Parcelable.Creator<TrendPlace>() {
-        public TrendPlace createFromParcel(Parcel source) {
+    public static final Parcelable.Creator<TrendPlace> CREATOR = new Parcelable.Creator<TrendPlace>(){
+        public TrendPlace createFromParcel(Parcel source){
             return new TrendPlace(source);
         }
 
-        public TrendPlace[] newArray(int size) {
+        public TrendPlace[] newArray(int size){
             return new TrendPlace[size];
         }
     };

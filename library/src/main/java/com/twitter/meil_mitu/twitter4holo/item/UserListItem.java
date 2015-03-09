@@ -4,7 +4,6 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.twitter.meil_mitu.twitter4holo.activeandroid.IModelItem;
-import com.twitter.meil_mitu.twitter4holo.data.User;
 import com.twitter.meil_mitu.twitter4holo.data.UserList;
 
 import java.util.Date;
@@ -36,9 +35,11 @@ public class UserListItem extends Model implements IModelItem{
     public long UpdatedAt;
 
     public UserListItem(){
+        super();
     }
 
     public UserListItem(UserList ul){
+        super();
         Slug = ul.Slug;
         Name = ul.Name;
         Mode = ul.Mode;

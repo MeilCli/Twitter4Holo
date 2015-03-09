@@ -1,6 +1,6 @@
 package com.twitter.meil_mitu.twitter4holo.exception;
 
-public class Twitter4HoloException extends Exception {
+public class Twitter4HoloException extends Exception{
 
     private int httpStatusCode;
     private int errorCode;
@@ -11,7 +11,7 @@ public class Twitter4HoloException extends Exception {
         super(message);
     }
 
-    public Twitter4HoloException(String message,int httpStatusCode,int errorCode) {
+    public Twitter4HoloException(String message, int httpStatusCode, int errorCode){
         super(message);
         this.httpStatusCode = httpStatusCode;
         this.errorCode = errorCode;
@@ -19,24 +19,24 @@ public class Twitter4HoloException extends Exception {
         this.errorMessage = toErrorCodeSubMessage(errorCode);
     }
 
-    public int getHttpStatusCode() {
+    public int getHttpStatusCode(){
         return httpStatusCode;
     }
 
-    public int getErrorCode() {
+    public int getErrorCode(){
         return errorCode;
     }
 
-    public String getHttpStatusMessage() {
+    public String getHttpStatusMessage(){
         return httpStatusMessage;
     }
 
-    public String getErrorMessage() {
+    public String getErrorMessage(){
         return errorMessage;
     }
 
-    public static String toHttpStatusCodeSubMessage(int httpStatusCode) {
-        switch (httpStatusCode) {
+    public static String toHttpStatusCodeSubMessage(int httpStatusCode){
+        switch(httpStatusCode){
             case 200:
                 return "Success!";
             case 304:
@@ -72,8 +72,8 @@ public class Twitter4HoloException extends Exception {
         }
     }
 
-    public static String toErrorCodeSubMessage(int errorCode) {
-        switch (errorCode) {
+    public static String toErrorCodeSubMessage(int errorCode){
+        switch(errorCode){
             case 32:
                 return "Your call could not be completed as dialed.";
             case 34:

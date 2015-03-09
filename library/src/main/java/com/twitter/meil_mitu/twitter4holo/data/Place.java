@@ -7,22 +7,22 @@ import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
 import org.json.JSONObject;
 
-import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.*;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getString;
 
-public class Place implements Parcelable {
+public class Place implements Parcelable{
 
-    public final String Country,CountryCode,FullName,Id,Name,PlaceType;
+    public final String Country, CountryCode, FullName, Id, Name, PlaceType;
 
-    public Place(JSONObject obj) throws Twitter4HoloException {
-        Country=getString(obj,"country");
-        CountryCode=getString(obj,"country_code");
-        FullName=getString(obj,"full_name");
-        Id=getString(obj,"id");
-        Name=getString(obj,"name");
-        PlaceType=getString(obj,"place_type");
+    public Place(JSONObject obj) throws Twitter4HoloException{
+        Country = getString(obj, "country");
+        CountryCode = getString(obj, "country_code");
+        FullName = getString(obj, "full_name");
+        Id = getString(obj, "id");
+        Name = getString(obj, "name");
+        PlaceType = getString(obj, "place_type");
     }
 
-    public Place(Parcel in) {
+    public Place(Parcel in){
         this.Country = in.readString();
         this.CountryCode = in.readString();
         this.FullName = in.readString();
@@ -32,7 +32,7 @@ public class Place implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
+    public void writeToParcel(Parcel dest, int flags){
         dest.writeString(this.Country);
         dest.writeString(this.CountryCode);
         dest.writeString(this.FullName);
@@ -42,7 +42,7 @@ public class Place implements Parcelable {
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return "Place{" +
                 "Country='" + Country + '\'' +
                 ", CountryCode='" + CountryCode + '\'' +
@@ -54,33 +54,33 @@ public class Place implements Parcelable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Place)) return false;
+    public boolean equals(Object o){
+        if(this == o) return true;
+        if(!(o instanceof Place)) return false;
 
         Place place = (Place) o;
 
-        if (!Id.equals(place.Id)) return false;
+        if(!Id.equals(place.Id)) return false;
 
         return true;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode(){
         return Id.hashCode();
     }
 
     @Override
-    public int describeContents() {
+    public int describeContents(){
         return 0;
     }
 
-    public static final Parcelable.Creator<Place> CREATOR = new Parcelable.Creator<Place>() {
-        public Place createFromParcel(Parcel source) {
+    public static final Parcelable.Creator<Place> CREATOR = new Parcelable.Creator<Place>(){
+        public Place createFromParcel(Parcel source){
             return new Place(source);
         }
 
-        public Place[] newArray(int size) {
+        public Place[] newArray(int size){
             return new Place[size];
         }
     };

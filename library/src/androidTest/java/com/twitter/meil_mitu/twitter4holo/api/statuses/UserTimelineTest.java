@@ -16,7 +16,7 @@ public class UserTimelineTest extends TestCase{
         assertEquals(list.size(),13);
     }
 
-    public void testCall12() throws Exception{
+    public void testCall2() throws Exception{
         Twitter tw2= ApplicationTest.Twitter2;
         ArrayList<Status> list=tw2.statuses().userTimeline().count(13).screenName("meil_mitu").call();
         assertEquals(list.size(),13);

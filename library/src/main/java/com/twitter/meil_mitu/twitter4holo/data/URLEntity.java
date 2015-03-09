@@ -5,19 +5,22 @@ import android.os.Parcel;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
 import org.json.JSONObject;
-import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.*;
 
-public class URLEntity extends Entity implements android.os.Parcelable {
-    public final String Url,DisplayUrl,ExpandedUrl;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getString;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.putString;
 
-    public URLEntity(JSONObject obj) throws Twitter4HoloException {
+public class URLEntity extends Entity implements android.os.Parcelable{
+
+    public final String Url, DisplayUrl, ExpandedUrl;
+
+    public URLEntity(JSONObject obj) throws Twitter4HoloException{
         super(obj);
-        Url=getString(obj,"url");
-        DisplayUrl=getString(obj,"display_url");
-        ExpandedUrl=getString(obj,"expanded_url");
+        Url = getString(obj, "url");
+        DisplayUrl = getString(obj, "display_url");
+        ExpandedUrl = getString(obj, "expanded_url");
     }
 
-    public URLEntity(Parcel in) {
+    public URLEntity(Parcel in){
         super(in);
         this.Url = in.readString();
         this.DisplayUrl = in.readString();
@@ -25,25 +28,25 @@ public class URLEntity extends Entity implements android.os.Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        super.writeToParcel(dest,flags);
+    public void writeToParcel(Parcel dest, int flags){
+        super.writeToParcel(dest, flags);
         dest.writeString(this.Url);
         dest.writeString(this.DisplayUrl);
         dest.writeString(this.ExpandedUrl);
     }
 
     @Override
-    public JSONObject toJSONObject() throws Twitter4HoloException {
-        JSONObject obj =  super.toJSONObject();
-        putString(obj,"url",Url);
-        putString(obj,"display_url",DisplayUrl);
-        putString(obj,"expanded_url",ExpandedUrl);
+    public JSONObject toJSONObject() throws Twitter4HoloException{
+        JSONObject obj = super.toJSONObject();
+        putString(obj, "url", Url);
+        putString(obj, "display_url", DisplayUrl);
+        putString(obj, "expanded_url", ExpandedUrl);
         return obj;
     }
 
     @Override
-    public String toString() {
-        return super.toString()+" URLEntity{" +
+    public String toString(){
+        return super.toString() + " URLEntity{" +
                 "Url='" + Url + '\'' +
                 ", DisplayUrl='" + DisplayUrl + '\'' +
                 ", ExpandedUrl='" + ExpandedUrl + '\'' +
@@ -51,22 +54,22 @@ public class URLEntity extends Entity implements android.os.Parcelable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof URLEntity)) return false;
-        if (!super.equals(o)) return false;
+    public boolean equals(Object o){
+        if(this == o) return true;
+        if(!(o instanceof URLEntity)) return false;
+        if(!super.equals(o)) return false;
 
         URLEntity urlEntity = (URLEntity) o;
 
-        if (!DisplayUrl.equals(urlEntity.DisplayUrl)) return false;
-        if (!ExpandedUrl.equals(urlEntity.ExpandedUrl)) return false;
-        if (!Url.equals(urlEntity.Url)) return false;
+        if(!DisplayUrl.equals(urlEntity.DisplayUrl)) return false;
+        if(!ExpandedUrl.equals(urlEntity.ExpandedUrl)) return false;
+        if(!Url.equals(urlEntity.Url)) return false;
 
         return true;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode(){
         int result = super.hashCode();
         result = 31 * result + Url.hashCode();
         result = 31 * result + DisplayUrl.hashCode();
@@ -75,16 +78,16 @@ public class URLEntity extends Entity implements android.os.Parcelable {
     }
 
     @Override
-    public int describeContents() {
+    public int describeContents(){
         return 0;
     }
 
-    public static final Creator<URLEntity> CREATOR = new Creator<URLEntity>() {
-        public URLEntity createFromParcel(Parcel source) {
+    public static final Creator<URLEntity> CREATOR = new Creator<URLEntity>(){
+        public URLEntity createFromParcel(Parcel source){
             return new URLEntity(source);
         }
 
-        public URLEntity[] newArray(int size) {
+        public URLEntity[] newArray(int size){
             return new URLEntity[size];
         }
     };
