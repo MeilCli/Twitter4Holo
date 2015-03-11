@@ -12,6 +12,15 @@ import java.util.Iterator;
 
 public class JsonUtils{
 
+    public static Object get(JSONObject obj, String name) throws Twitter4HoloException{
+        try{
+            return obj.get(name);
+        }catch(JSONException e){
+            e.printStackTrace();
+            throw new Twitter4HoloException(e.getMessage());
+        }
+    }
+
     public static JSONObject getJSONObject(JSONObject obj, String name) throws Twitter4HoloException{
         try{
             return obj.getJSONObject(name);

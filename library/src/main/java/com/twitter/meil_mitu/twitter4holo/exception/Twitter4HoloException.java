@@ -19,6 +19,13 @@ public class Twitter4HoloException extends Exception{
         this.errorMessage = toErrorCodeSubMessage(errorCode);
     }
 
+    public Twitter4HoloException(String message, int httpStatusCode, String errorMessage){
+        super(message);
+        this.httpStatusCode = httpStatusCode;
+        this.httpStatusMessage = toHttpStatusCodeSubMessage(httpStatusCode);
+        this.errorMessage = errorMessage;
+    }
+
     public int getHttpStatusCode(){
         return httpStatusCode;
     }

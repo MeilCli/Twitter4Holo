@@ -9,6 +9,7 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
+import com.twitter.meil_mitu.twitter4holo.util.JsonUtils;
 import com.twitter.meil_mitu.twitter4holo.util.Utils;
 
 import org.json.JSONArray;
@@ -22,7 +23,9 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getInt;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getJSONObject;
 import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getString;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.toJSONObject;
 
 public abstract class AbsOauth{
 
@@ -133,26 +136,39 @@ public abstract class AbsOauth{
         return body;
     }
 
+    // http://qiita.com/mpyw/items/b59d3ce03f08be126000
     protected void checkError(Response res) throws Twitter4HoloException{
         if(res.isSuccessful() == false){
             try{
-                JSONObject obj = new JSONObject(res.body().string());
+                String body = res.body().string();
+                JSONObject obj = toJSONObject(body);
                 if(obj.isNull("errors") == false){
-                    JSONArray ar = obj.getJSONArray("errors");
-                    if(ar.length() == 0){
-                        throw new Twitter4HoloException("errors array size is 0");
+                    Object o = JsonUtils.get(obj, "errors");
+                    if(o instanceof String){
+                        String message = (String) o;
+                        throw new Twitter4HoloException(message, res.code(), message);
+                    }else if(o instanceof JSONArray){
+                        JSONArray ar = (JSONArray) o;
+                        if(ar.length() == 0){
+                            throw new Twitter4HoloException("errors array size is 0");
+                        }
+                        String message = getString(getJSONObject(ar, 0), "message");
+                        message += "\n\n";
+                        message += res.request().headers().toString();
+                        message += "\n\n";
+                        message += res.request().toString();
+                        int code = getInt(getJSONObject(ar, 0), "code");
+                        throw new Twitter4HoloException(message, res.code(), code);
+                    }else{
+                        throw new Twitter4HoloException("some exception");
                     }
-                    String message = getString(ar.getJSONObject(0), "message");
-                    message += "\n\n";
-                    message += res.request().headers().toString();
-                    message += "\n\n";
-                    message += res.request().toString();
-                    int code = getInt(ar.getJSONObject(0), "code");
-                    throw new Twitter4HoloException(message, res.code(), code);
+                }else if(obj.isNull("error") == false){
+                    String message = getString(obj, "error");
+                    throw new Twitter4HoloException(message, res.code(), message);
                 }else{
-                    throw new Twitter4HoloException("some exception");
+                    throw new Twitter4HoloException(body);
                 }
-            }catch(Exception e){
+            }catch(IOException e){
                 e.printStackTrace();
                 throw new Twitter4HoloException(e.getMessage());
             }
