@@ -35,6 +35,7 @@ import com.twitter.meil_mitu.twitter4holo.data.UserList;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getJSONObject;
 
@@ -82,6 +83,11 @@ public class TwitterJsonConverter extends AbsJsonConverter implements ITwitterJs
     @Override
     public Status toStatus(Response res) throws Twitter4HoloException{
         return new Status(toJSONObject(toString(res.body())));
+    }
+
+    @Override
+    public Status toStatus(JSONObject obj) throws Twitter4HoloException{
+        return new Status(obj);
     }
 
     @Override
@@ -133,6 +139,11 @@ public class TwitterJsonConverter extends AbsJsonConverter implements ITwitterJs
     }
 
     @Override
+    public DirectMessage toDirectMessage(JSONObject obj) throws Twitter4HoloException{
+        return new DirectMessage(obj);
+    }
+
+    @Override
     public ResponseData<DirectMessage> toDirectMessageResponseData(Response res) throws Twitter4HoloException{
         return new ResponseData<DirectMessage>(new DirectMessage(toJSONObject(toString(res.body()))), toRateLimit(res));
     }
@@ -163,6 +174,11 @@ public class TwitterJsonConverter extends AbsJsonConverter implements ITwitterJs
     @Override
     public User toUser(Response res) throws Twitter4HoloException{
         return new User(toJSONObject(toString(res.body())));
+    }
+
+    @Override
+    public User toUser(JSONObject obj) throws Twitter4HoloException{
+        return new User(obj);
     }
 
     @Override
@@ -262,6 +278,11 @@ public class TwitterJsonConverter extends AbsJsonConverter implements ITwitterJs
     @Override
     public UserList toUserList(Response res) throws Twitter4HoloException{
         return new UserList(toJSONObject(toString(res.body())));
+    }
+
+    @Override
+    public UserList toUserList(JSONObject obj) throws Twitter4HoloException{
+        return new UserList(obj);
     }
 
     @Override

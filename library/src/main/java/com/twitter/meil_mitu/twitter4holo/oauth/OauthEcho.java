@@ -10,16 +10,9 @@ import com.twitter.meil_mitu.twitter4holo.TwitterJsonConverter;
 import com.twitter.meil_mitu.twitter4holo.api.account.VerifyCredentials;
 import com.twitter.meil_mitu.twitter4holo.exception.IncorrectException;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
-import com.twitter.meil_mitu.twitter4holo.util.Utils;
 
 import java.io.IOException;
 import java.net.CookieManager;
-import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeMap;
-
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
 
 public class OauthEcho extends Oauth{
 
@@ -79,12 +72,8 @@ public class OauthEcho extends Oauth{
         builder.header("User-Agent", Config.getUserAgent());
         if(param.isAuthorization() && ConsumerKey != null && ConsumerSecret != null && AccessToken != null && AccessTokenSecret != null){
             try{
-                //aclogでエラーになるから前のライブラリから流用する
-                //原因は不明
-                //builder.addHeader("X-Auth-Service-Provider",Verify.url());
-                builder.addHeader("X-Auth-Service-Provider", VerifyCredentialsUrl);
-                //builder.addHeader("X-Verify-Credentials-Authorization","OAuth " +createAuthorization(param,false));//realm="http://api.twitter.com/",
-                builder.addHeader("X-Verify-Credentials-Authorization", createAuthorization());
+                builder.addHeader("X-Auth-Service-Provider", Verify.url());
+                builder.addHeader("X-Verify-Credentials-Authorization", "OAuth " + createAuthorization(Verify, false));
             }catch(Exception e){
                 e.printStackTrace();
                 throw new Twitter4HoloException(e.getMessage());
@@ -111,10 +100,8 @@ public class OauthEcho extends Oauth{
         builder.header("User-Agent", Config.getUserAgent());
         if(param.isAuthorization() && ConsumerKey != null && ConsumerSecret != null && AccessToken != null && AccessTokenSecret != null){
             try{
-                //builder.addHeader("X-Auth-Service-Provider",Verify.url());
-                builder.addHeader("X-Auth-Service-Provider", VerifyCredentialsUrl);
-                //builder.addHeader("X-Verify-Credentials-Authorization","OAuth " +createAuthorization(param,false));//realm="http://api.twitter.com/",
-                builder.addHeader("X-Verify-Credentials-Authorization", createAuthorization());
+                builder.addHeader("X-Auth-Service-Provider", Verify.url());
+                builder.addHeader("X-Verify-Credentials-Authorization", "OAuth " + createAuthorization(Verify, false));
             }catch(Exception e){
                 e.printStackTrace();
                 throw new Twitter4HoloException(e.getMessage());
@@ -131,62 +118,4 @@ public class OauthEcho extends Oauth{
         }
     }
 
-    private static final String VerifyCredentialsUrl = "https://api.twitter.com/1.1/account/verify_credentials.json";
-
-    private String makeParam(SortedMap<String, String> params, boolean signature){
-        StringBuilder sb = new StringBuilder();
-        for(Map.Entry<String, String> param : params.entrySet()){
-            if(sb.length() > 0){
-                if(signature == true){
-                    sb.append('&');
-                }else{
-                    sb.append(',');
-                }
-            }
-            sb.append(param.getKey());
-            sb.append('=');
-            if(signature == false){
-                sb.append('"');
-            }
-            if(signature == true){
-                sb.append(param.getValue());
-            }else{
-                sb.append(Utils.urlEncode(param.getValue()));
-            }
-            if(signature == false){
-                sb.append('"');
-            }
-        }
-        return sb.toString();
-    }
-
-    protected String createAuthorization() throws Exception{
-        SortedMap<String, String> params = new TreeMap<String, String>();
-        params.put("oauth_consumer_key", ConsumerKey);
-        params.put("oauth_signature_method", "HMAC-SHA1");
-        params.put("oauth_token", AccessToken);
-        params.put("oauth_version", "1.0");
-        params.put("oauth_timestamp", String.valueOf((long) (System.currentTimeMillis() / 1000)));
-        params.put("oauth_nonce", String.valueOf(Math.random()));
-
-        String text = "GET&" + Utils.urlEncode(VerifyCredentialsUrl) + "&" + Utils.urlEncode(makeParam(params, true));
-        String keyText = Utils.urlEncode(ConsumerSecret) + "&" + Utils.urlEncode(AccessTokenSecret);
-        SecretKeySpec signingKey = new SecretKeySpec(keyText.getBytes(), "HmacSHA1");
-        Mac mac = Mac.getInstance(signingKey.getAlgorithm());
-        mac.init(signingKey);
-        byte[] binary = mac.doFinal(text.getBytes());
-        String signature = Utils.base64Encode(binary);
-
-        params.put("oauth_signature", signature);
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("OAuth realm=");
-        sb.append('"');
-        sb.append("http://api.twitter.com/");
-        sb.append('"');
-        sb.append(',');
-        sb.append(makeParam(params, false));
-
-        return sb.toString();
-    }
 }

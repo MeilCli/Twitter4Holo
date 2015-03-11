@@ -34,6 +34,8 @@ import com.twitter.meil_mitu.twitter4holo.data.User;
 import com.twitter.meil_mitu.twitter4holo.data.UserList;
 import com.twitter.meil_mitu.twitter4holo.exception.Twitter4HoloException;
 
+import org.json.JSONObject;
+
 public interface ITwitterJsonConverter{
 
     public Oauth2Token toOauth2Token(Response res) throws Twitter4HoloException;
@@ -50,6 +52,8 @@ public interface ITwitterJsonConverter{
 
     public Status toStatus(Response res) throws Twitter4HoloException;
 
+    public Status toStatus(JSONObject obj) throws Twitter4HoloException;
+
     public ResponseData<Status> toStatusResponseData(Response res) throws Twitter4HoloException;
 
     public ResponseList<Status> toStatusResponseList(Response res) throws Twitter4HoloException;
@@ -64,6 +68,8 @@ public interface ITwitterJsonConverter{
 
     public DirectMessage toDirectMessage(Response res) throws Twitter4HoloException;
 
+    public DirectMessage toDirectMessage(JSONObject obj) throws Twitter4HoloException;
+
     public ResponseData<DirectMessage> toDirectMessageResponseData(Response res) throws Twitter4HoloException;
 
     public ResponseList<DirectMessage> toDirectMessageResponseList(Response res) throws Twitter4HoloException;
@@ -71,6 +77,8 @@ public interface ITwitterJsonConverter{
     public ResponseData<IDs> toIDsResponseData(Response res) throws Twitter4HoloException;
 
     public User toUser(Response res) throws Twitter4HoloException;
+
+    public User toUser(JSONObject obj) throws Twitter4HoloException;
 
     public ResponseData<User> toUserResponseData(Response res) throws Twitter4HoloException;
 
@@ -95,6 +103,8 @@ public interface ITwitterJsonConverter{
     public ResponseData<SuggestionUser> toSuggestionUserResponseData(Response res) throws Twitter4HoloException;
 
     public UserList toUserList(Response res) throws Twitter4HoloException;
+
+    public UserList toUserList(JSONObject obj) throws Twitter4HoloException;
 
     public ResponseData<UserList> toUserListResponseData(Response res) throws Twitter4HoloException;
 

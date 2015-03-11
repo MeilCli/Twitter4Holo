@@ -1,6 +1,6 @@
 # Twitter4Holo
 Twitter Oauth Library for Android 4.0.3 and upper  
-作りかけ 
+please debug and advice 
 
 * use [okhttp][okhttp_url]
 * use [ActiveAndroid][ActiveAndroid_url]
@@ -14,6 +14,9 @@ Twitter Oauth Library for Android 4.0.3 and upper
 * ok [multiple media upload](https://dev.twitter.com/rest/public/uploading-media)
 * ok [Video in MediaEntity](https://blog.twitter.com/2015/now-on-twitter-group-direct-messages-and-mobile-video-capture)
 * ok [REST API](https://dev.twitter.com/rest/public)
+* ok [SampleStream](https://dev.twitter.com/streaming/reference/get/statuses/sample) (please debug and advice)
+* ok [FilterStream](https://dev.twitter.com/streaming/reference/post/statuses/filter) (please debug and advice)
+* ok [UserStream](https://dev.twitter.com/streaming/reference/get/user) (please debug and advice)
 * ok [Aclog API](http://aclog.koba789.com/about/api)
 
 ####何をしたかったのか
@@ -27,8 +30,6 @@ Twitter Oauth Library for Android 4.0.3 and upper
 * public fieldが大文字スタートなのはほとんどC#の影響
 * たまにエンドポイント通りの設計になってないのはjavaの予約語とかいろいろあってだな…
 
-####次したいこと
-* Streaming API対応(site streamは難しそう)
 
 #### gradle
 	repositories {
@@ -40,7 +41,7 @@ Twitter Oauth Library for Android 4.0.3 and upper
 	dependencies {
 		compile 'com.squareup.okhttp:okhttp:2.2.0'
 		compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
-		compile 'meilcli:twitter4holo:0.2.+@aar'
+		compile 'meilcli:twitter4holo:0.4.+@aar'
 	}
 
 #### AndroidManifest.xml

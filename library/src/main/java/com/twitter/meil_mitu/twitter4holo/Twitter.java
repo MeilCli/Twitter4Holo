@@ -20,6 +20,7 @@ import com.twitter.meil_mitu.twitter4holo.api.search.SearchAPI;
 import com.twitter.meil_mitu.twitter4holo.api.statuses.StatusesAPI;
 import com.twitter.meil_mitu.twitter4holo.api.trends.TrendsAPI;
 import com.twitter.meil_mitu.twitter4holo.api.users.UsersAPI;
+import com.twitter.meil_mitu.twitter4holo.streaming.StreamAPI;
 
 public class Twitter{
 
@@ -45,6 +46,7 @@ public class Twitter{
     protected TrendsAPI Trends;
     protected ApplicationAPI Application;
     protected HelpAPI Help;
+    protected StreamAPI Stream;
 
     public Twitter(AbsOauth oauth){
         this(oauth, TwitterJsonConverter.getDefaultConverter());
@@ -74,6 +76,7 @@ public class Twitter{
         this.Trends = new TrendsAPI(Oauth, Json);
         this.Application = new ApplicationAPI(Oauth, Json);
         this.Help = new HelpAPI(Oauth, Json);
+        this.Stream=new StreamAPI(Oauth,Json);
     }
 
     public AbsOauth getOauth(){
@@ -159,5 +162,7 @@ public class Twitter{
     public HelpAPI help(){
         return Help;
     }
+
+    public StreamAPI stream(){return Stream;}
 
 }
