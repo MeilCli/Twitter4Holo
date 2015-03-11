@@ -147,6 +147,11 @@ public class QueryManager{
                 q2 = new Query(q2.Module.getChildString(q2.String), TokenType.String);
             }
             if(q1.String == null || q2.String == null){
+                if(o.Type==TokenType.Equal&&q1.String==q2.String){
+                    return trueQuery;
+                }else if(o.Type==TokenType.NotEqual&&q1.String!=q2.String){
+                    return trueQuery;
+                }
                 return falseQuery;
             }
             switch(o.Type){
