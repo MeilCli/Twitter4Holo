@@ -55,10 +55,16 @@ public class Stream extends Thread{
                 if(param.getStreamListener() != null){
                     param.getStreamListener().onException(e);
                 }
-                if(e.getHttpStatusCode() == HttpURLConnection.HTTP_FORBIDDEN){
+                if(isReconnectionCode(e.getHttpStatusCode()) == false){
                     isClose = true;
                 }
                 sleepTime = 10 * 1000;
+            }catch(IncorrectException e){
+                e.printStackTrace();
+                if(param.getStreamListener() != null){
+                    param.getStreamListener().onException(e);
+                }
+                isClose = true;
             }catch(IOException e){
                 e.printStackTrace();
                 if(param.getStreamListener() != null){
@@ -69,7 +75,7 @@ public class Stream extends Thread{
             if(retryCount >= retryLimit){
                 isClose = true;
             }
-            if(isClose==true){
+            if(isClose == true){
                 break;
             }
             if(sleepTime == 0){
@@ -114,6 +120,18 @@ public class Stream extends Thread{
         }
         isConnect = false;
 
+    }
+
+    private static boolean isReconnectionCode(int code){
+        switch(code){
+            case HttpURLConnection.HTTP_UNAUTHORIZED:
+            case HttpURLConnection.HTTP_FORBIDDEN:
+            case HttpURLConnection.HTTP_NOT_FOUND:
+            case HttpURLConnection.HTTP_NOT_ACCEPTABLE:
+            case HttpURLConnection.HTTP_ENTITY_TOO_LARGE:
+                return false;
+        }
+        return true;
     }
 
     public void close(){
