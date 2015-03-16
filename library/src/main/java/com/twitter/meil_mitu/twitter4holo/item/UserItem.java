@@ -9,7 +9,7 @@ import com.twitter.meil_mitu.twitter4holo.data.UserEntities;
 
 import java.util.Date;
 
-@Table(name = "UserItem", id = "Id")
+@Table(name = "UserItem")
 public class UserItem extends Model implements IModelItem{
 
     @Column(name = "CreatedAt")
@@ -58,6 +58,8 @@ public class UserItem extends Model implements IModelItem{
     public String Url;
     @Column(name = "Status")
     public StatusItem Status;
+    @Column(name = "StatusId")
+    public long StatusId;
     @Column(name = "UpdatedAt")
     public long UpdatedAt;
 
@@ -91,6 +93,9 @@ public class UserItem extends Model implements IModelItem{
         Url = user.Url;
         if(user.Status != null){
             Status = new StatusItem(user.Status);
+            StatusId = user.Status.Id;
+        }else{
+            StatusId = -1;
         }
         UpdatedAt = System.currentTimeMillis();
     }

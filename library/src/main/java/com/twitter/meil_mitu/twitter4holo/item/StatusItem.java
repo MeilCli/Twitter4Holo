@@ -10,7 +10,7 @@ import com.twitter.meil_mitu.twitter4holo.data.Status;
 
 import java.util.Date;
 
-@Table(name = "StatusItem", id = "Id")
+@Table(name = "StatusItem")
 public class StatusItem extends Model implements IModelItem{
 
     @Column(name = "CreatedAt")
@@ -45,8 +45,12 @@ public class StatusItem extends Model implements IModelItem{
     public String Text;
     @Column(name = "RetweetedStatus")
     public StatusItem RetweetedStatus;
-    @Column(name = "User", index = true)
+    @Column(name = "RetweetedStatusId", index = true)
+    public long RetweetedStatusId;
+    @Column(name = "User")
     public UserItem User;
+    @Column(name = "UserId", index = true)
+    public long UserId;
     @Column(name = "UpdatedAt")
     public long UpdatedAt;
 
@@ -73,9 +77,15 @@ public class StatusItem extends Model implements IModelItem{
         Text = status.Text;
         if(status.RetweetedStatus != null){
             RetweetedStatus = new StatusItem(status.RetweetedStatus);
+            RetweetedStatusId = status.RetweetedStatus.Id;
+        }else{
+            RetweetedStatusId = -1;
         }
         if(status.User != null){
             User = new UserItem(status.User);
+            UserId = status.Id;
+        }else{
+            UserId = -1;
         }
         UpdatedAt = System.currentTimeMillis();
     }

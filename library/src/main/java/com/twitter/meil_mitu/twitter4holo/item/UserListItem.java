@@ -8,7 +8,7 @@ import com.twitter.meil_mitu.twitter4holo.data.UserList;
 
 import java.util.Date;
 
-@Table(name = "UserListItem", id = "Id")
+@Table(name = "UserListItem")
 public class UserListItem extends Model implements IModelItem{
 
     @Column(name = "Slug")
@@ -29,8 +29,10 @@ public class UserListItem extends Model implements IModelItem{
     public long Id;
     @Column(name = "IsFollowing")
     public boolean IsFollowing;
-    @Column(name = "User", index = true)
+    @Column(name = "User")
     public UserItem User;
+    @Column(name = "UserId", index = true)
+    public long UserId;
     @Column(name = "UpdatedAt")
     public long UpdatedAt;
 
@@ -50,6 +52,7 @@ public class UserListItem extends Model implements IModelItem{
         Id = ul.Id;
         IsFollowing = ul.IsFollowing;
         User = new UserItem(ul.User);
+        UserId=ul.Id;
         UpdatedAt = System.currentTimeMillis();
     }
 

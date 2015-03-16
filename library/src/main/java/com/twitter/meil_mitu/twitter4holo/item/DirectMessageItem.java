@@ -9,7 +9,7 @@ import com.twitter.meil_mitu.twitter4holo.data.Entities;
 
 import java.util.Date;
 
-@Table(name = "DirectMessageItem", id = "Id")
+@Table(name = "DirectMessageItem")
 public class DirectMessageItem extends Model implements IModelItem{
 
     @Column(name = "CreatedAt")
@@ -18,10 +18,14 @@ public class DirectMessageItem extends Model implements IModelItem{
     public Entities Entities;
     @Column(name = "Id", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE, index = true)
     public long Id;
-    @Column(name = "Recipient", index = true)
+    @Column(name = "Recipient")
     public UserItem Recipient;
-    @Column(name = "Sender", index = true)
+    @Column(name = "RecipientId",index = true)
+    public long RecipientId;
+    @Column(name = "Sender")
     public UserItem Sender;
+    @Column(name = "SenderId",index = true)
+    public long SenderId;
     @Column(name = "Text")
     public String Text;
     @Column(name = "UpdatedAt")
@@ -35,7 +39,9 @@ public class DirectMessageItem extends Model implements IModelItem{
         Entities = dm.Entities;
         Id = dm.Id;
         Recipient = new UserItem(dm.Recipient);
+        RecipientId=dm.Recipient.Id;
         Sender = new UserItem(dm.Sender);
+        SenderId=dm.Sender.Id;
         Text = dm.Text;
         UpdatedAt = System.currentTimeMillis();
     }
