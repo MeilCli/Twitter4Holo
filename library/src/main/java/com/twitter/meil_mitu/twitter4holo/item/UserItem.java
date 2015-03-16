@@ -71,7 +71,7 @@ public class UserItem extends Model implements IModelItem{
         super();
         CreatedAt = user.CreatedAt;
         Description = user.Description;
-        UserEntities Entities = user.Entities;
+        Entities = user.Entities;
         FavouritesCount = user.FavouritesCount;
         FollowersCount = user.FollowersCount;
         FriendsCount = user.FriendsCount;
