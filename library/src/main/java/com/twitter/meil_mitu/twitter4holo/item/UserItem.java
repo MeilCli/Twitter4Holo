@@ -38,7 +38,7 @@ public class UserItem extends Model implements IModelItem{
     public boolean IsMuting;
     @Column(name = "IsVerified")
     public boolean IsVerified;
-    @Column(name = "Id", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE, index = true)
+    @Column(name = "ItemId", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE, index = true)
     public long Id;
     @Column(name = "Lang")
     public String Lang;

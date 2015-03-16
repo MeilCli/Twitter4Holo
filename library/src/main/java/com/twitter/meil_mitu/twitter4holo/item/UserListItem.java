@@ -25,7 +25,7 @@ public class UserListItem extends Model implements IModelItem{
     public int SubscriberCount;
     @Column(name = "MemberCount")
     public int MemberCount;
-    @Column(name = "Id", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE, index = true)
+    @Column(name = "ItemId", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE, index = true)
     public long Id;
     @Column(name = "IsFollowing")
     public boolean IsFollowing;

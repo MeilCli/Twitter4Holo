@@ -16,7 +16,7 @@ public class DirectMessageItem extends Model implements IModelItem{
     public Date CreatedAt;
     @Column(name = "Entities")
     public Entities Entities;
-    @Column(name = "Id", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE, index = true)
+    @Column(name = "ItemId", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE, index = true)
     public long Id;
     @Column(name = "Recipient")
     public UserItem Recipient;

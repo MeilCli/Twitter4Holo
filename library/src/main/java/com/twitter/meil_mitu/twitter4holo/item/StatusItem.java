@@ -29,7 +29,7 @@ public class StatusItem extends Model implements IModelItem{
     public boolean IsFavorited;
     @Column(name = "IsRetweeted")
     public boolean IsRetweeted;
-    @Column(name = "Id", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE, index = true)
+    @Column(name = "ItemId", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE, index = true)
     public long Id;
     @Column(name = "InReplyToStatusId")
     public long InReplyToStatusId;
