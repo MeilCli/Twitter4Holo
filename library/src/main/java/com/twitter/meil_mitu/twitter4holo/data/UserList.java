@@ -16,6 +16,7 @@ import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getInt;
 import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getJSONObject;
 import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getLong;
 import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getString;
+import static com.twitter.meil_mitu.twitter4holo.util.Utils.nullCheck;
 
 public class UserList implements Parcelable{
 
@@ -45,14 +46,20 @@ public class UserList implements Parcelable{
 
     public UserList(UserListItem item){
         Slug = item.Slug;
+        nullCheck(Slug,"Slug");
         Name = item.Name;
+        nullCheck(Name,"Name");
         Mode = item.Mode;
+        nullCheck(Mode,"Mode");
         Description = item.Description;
+        nullCheck(Description,"Description");
         CreatedAt = item.CreatedAt;
+        nullCheck(CreatedAt,"CreatedAt");
         SubscriberCount = item.SubscriberCount;
         MemberCount = item.MemberCount;
         Id = item.Id;
         IsFollowing = item.IsFollowing;
+        nullCheck(item.User,"User");
         User = new User(item.User);
     }
 

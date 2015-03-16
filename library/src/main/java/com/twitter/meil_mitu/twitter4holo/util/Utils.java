@@ -66,4 +66,17 @@ public class Utils{
         // Line 674
         return replaceLine(new String(Base64.encode(bs, Base64.DEFAULT)));
     }
+
+    public static void nullCheck(Object obj,String name)throws NullPointerException{
+        if(obj==null){
+            throw new NullPointerException(name+" is null");
+        }
+    }
+
+    public static void nullCheck(Object[] obj,String name)throws NullPointerException{
+        if(obj==null){
+            throw new NullPointerException(name+" is null");
+        }
+    }
+
 }

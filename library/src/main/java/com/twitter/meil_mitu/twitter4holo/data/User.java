@@ -16,8 +16,10 @@ import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getInt;
 import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getJSONObject;
 import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getLong;
 import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getString;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.putNull;
 import static com.twitter.meil_mitu.twitter4holo.util.ParcelUtils.readNullableString;
 import static com.twitter.meil_mitu.twitter4holo.util.ParcelUtils.writeNullableString;
+import static com.twitter.meil_mitu.twitter4holo.util.Utils.nullCheck;
 
 public class User implements Parcelable{
 
@@ -68,8 +70,11 @@ public class User implements Parcelable{
 
     public User(UserItem item){
         CreatedAt = item.CreatedAt;
+        nullCheck(CreatedAt, "CreatedAt");
         Description = item.Description;
+        nullCheck(Description,"Description");
         Entities = item.Entities;
+        nullCheck(Entities,"Entities");
         FavouritesCount = item.FavouritesCount;
         FollowersCount = item.FollowersCount;
         FriendsCount = item.FriendsCount;
@@ -83,11 +88,15 @@ public class User implements Parcelable{
         Id = item.Id;
         Lang = item.Lang;
         Location = item.Location;
+        nullCheck(Location,"Location");
         Name = item.Name;
+        nullCheck(Name,"Name");
         ProfileBackgroundImageUrl = item.ProfileBackgroundImageUrl;
         ProfileBannerUrl = item.ProfileBannerUrl;
         ProfileImageUrl = item.ProfileImageUrl;
+        nullCheck(ProfileImageUrl,"ProfileImageUrl");
         ScreenName = item.ScreenName;
+        nullCheck(ScreenName,"ScreenName");
         Url = item.Url;
         if(item.Status != null){
             Status = new Status(item.Status);

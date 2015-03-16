@@ -14,6 +14,7 @@ import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getDate;
 import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getJSONObject;
 import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getLong;
 import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getString;
+import static com.twitter.meil_mitu.twitter4holo.util.Utils.nullCheck;
 
 public class DirectMessage implements Parcelable{
 
@@ -48,11 +49,16 @@ public class DirectMessage implements Parcelable{
 
     public DirectMessage(DirectMessageItem item){
         CreatedAt = item.CreatedAt;
+        nullCheck(CreatedAt,"CreatedAt");
         Entities = item.Entities;
+        nullCheck(Entities,"Entities");
         Id = item.Id;
+        nullCheck(item.Recipient,"Recipient");
         Recipient = new User(item.Recipient);
+        nullCheck(item.Sender,"Sender");
         Sender = new User(item.Sender);
         Text = item.Text;
+        nullCheck(Text,"Text");
         EntitySupport = new EntitySupport(Text, Entities);
     }
 

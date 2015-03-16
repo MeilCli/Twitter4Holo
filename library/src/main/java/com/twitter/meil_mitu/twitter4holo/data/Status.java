@@ -16,8 +16,10 @@ import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getInt;
 import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getJSONObject;
 import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getLong;
 import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.getString;
+import static com.twitter.meil_mitu.twitter4holo.util.JsonUtils.putNull;
 import static com.twitter.meil_mitu.twitter4holo.util.ParcelUtils.readNullableString;
 import static com.twitter.meil_mitu.twitter4holo.util.ParcelUtils.writeNullableString;
+import static com.twitter.meil_mitu.twitter4holo.util.Utils.nullCheck;
 
 public class Status implements Parcelable{
 
@@ -75,9 +77,12 @@ public class Status implements Parcelable{
 
     public Status(StatusItem item){
         CreatedAt = item.CreatedAt;
+        nullCheck(CreatedAt, "CreatedAt");
         CurrentUserRetweet = item.CurrentUserRetweet;
         Entities = item.Entities;
+        nullCheck(Entities,"Entities");
         ExtendedEntities = item.ExtendedEntities;
+        nullCheck(ExtendedEntities,"ExtendedEntities");
         FavoriteCount = item.FavoriteCount;
         RetweetCount = item.RetweetCount;
         IsFavorited = item.IsFavorited;
@@ -88,7 +93,9 @@ public class Status implements Parcelable{
         InReplyToScreenName = item.InReplyToScreenName;
         Lang = item.Lang;
         Source = item.Source;
+        nullCheck(Lang,"Lang");
         Text = item.Text;
+        nullCheck(Text,"Text");
         if(item.RetweetedStatus != null){
             RetweetedStatus = new Status(item.RetweetedStatus);
         }else{
