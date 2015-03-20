@@ -33,6 +33,7 @@ public class Status implements Parcelable{
     public final Status RetweetedStatus;
     public final User User;
     public final EntitySupport EntitySupport;
+    public final SourceSupport SourceSupport;
 
     public Status(JSONObject obj) throws Twitter4HoloException{
         CreatedAt = getDate(obj, "created_at");
@@ -73,6 +74,7 @@ public class Status implements Parcelable{
             User = new User(getJSONObject(obj, "user"));
         }
         EntitySupport = new EntitySupport(Text, Entities);
+        SourceSupport = new SourceSupport(Source);
     }
 
     public Status(StatusItem item){
@@ -107,6 +109,7 @@ public class Status implements Parcelable{
             User = null;
         }
         EntitySupport = new EntitySupport(Text, Entities);
+        SourceSupport = new SourceSupport(Source);
     }
 
     public Status(Parcel in){
@@ -141,6 +144,7 @@ public class Status implements Parcelable{
             this.User = null;
         }
         EntitySupport = new EntitySupport(Text, Entities);
+        SourceSupport = new SourceSupport(Source);
     }
 
     @Override
