@@ -35,7 +35,7 @@ uploadArchives {
             repository url: "file://${projectDir}/repository"
             pom.groupId = 'meilcli'
             pom.artifactId = 'twitter4holo'
-            pom.version = '0.4.6'
+            pom.version = '0.4.7'
         }
     }
 }

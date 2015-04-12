@@ -102,7 +102,7 @@ public abstract class AbsOauth{
 
     protected RequestBody toBody(AbsPost param){
         RequestBody body;
-        if(param.fileSize() == 0 && param.size() != 0){
+        if(param.fileSize() == 0){
             StringBuilder builder = new StringBuilder();
             for(Map.Entry<String, String> e : param.getParam()){
                 builder.append(Utils.urlEncode(e.getKey()));
@@ -110,7 +110,9 @@ public abstract class AbsOauth{
                 builder.append(Utils.urlEncode(e.getValue()));
                 builder.append('&');
             }
-            builder.deleteCharAt(builder.length() - 1);
+            if(builder.length()>0){
+                builder.deleteCharAt(builder.length() - 1);
+            }
             body = RequestBody.create(MediaText, builder.toString());
         }else{
             MultipartBuilder multipartBuilder = new MultipartBuilder();
